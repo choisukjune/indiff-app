@@ -13,8 +13,8 @@
 :root{
   --bg:#000;
   --fg:#fff;
-  --dim:#8a8a8f;        /* 보조 글 — 검정 위 4.9:1 */
-  --dim2:#6a6a70;       /* 더 물러난 메타 */
+  --dim:#a3a3a8;        /* 보조 글 — 검정 위 7.4:1 */
+  --dim2:#87878e;       /* 메타 — 검정 위 5.5:1. 6a6a70(3.7:1)은 노트북 화면에서 안 보였다 */
   --line:#1f1f22;
   --line2:#2e2e33;
   --card:#0c0c0e;       /* 카드 — 검정에서 한 칸만 뜬다 */
@@ -39,7 +39,7 @@ body{
 }
 @font-face{
   font-family:'Pretendard Variable';
-  src:url('pretendard-subset.woff2?v=d0f7171d') format('woff2-variations');
+  src:url('pretendard-subset.woff2?v=9e25e7bd') format('woff2-variations');
   font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
@@ -66,11 +66,11 @@ kbd{font-family:var(--mono); font-size:.84em; line-height:1; padding:.22em .5em 
 
 .logo{display:inline-block; font-family:var(--serif); font-size:1.26em; line-height:1;
       letter-spacing:.005em; color:var(--fg); text-decoration:none}
-.label{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+.label{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
        color:var(--dim2); margin:0 0 1.4rem}
 .mono{font-family:var(--mono); font-size:12px; letter-spacing:.02em; color:var(--dim2)}
 .dim{color:var(--dim)}
-.note{font-family:var(--mono); font-size:11px; color:var(--dim2); margin-top:2rem; letter-spacing:.04em; max-width:46rem}
+.note{font-family:var(--mono); font-size:12px; color:var(--dim2); margin-top:2rem; letter-spacing:.04em; max-width:46rem}
 
 /* 섹션 머리 — 가운데로 모은다. 제품 랜딩의 호흡이고, 아래 격자가 넓어 보인다 */
 .sec-head{text-align:center; max-width:44rem; margin:0 auto 4.5rem}
@@ -81,7 +81,7 @@ kbd{font-family:var(--mono); font-size:.84em; line-height:1; padding:.22em .5em 
 .badge{
   display:inline-flex; align-items:center; gap:.6em; margin:0 0 2.4rem;
   padding:.45em 1.05em; border:1px solid var(--line2); border-radius:999px;
-  font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase;
   color:var(--dim);
 }
 .badge::before{content:""; width:5px; height:5px; border-radius:50%; background:var(--fg); opacity:.75}
@@ -98,8 +98,8 @@ kbd{font-family:var(--mono); font-size:.84em; line-height:1; padding:.22em .5em 
 .btn.ghost{background:transparent; color:var(--fg)}
 .btn.ghost:hover{background:var(--fg); color:var(--bg); opacity:1}
 .btn.sm{padding:.6em 1.25em; font-size:.85rem}
-.btn[aria-disabled="true"]{background:transparent; border-color:var(--line2); color:var(--dim2); cursor:default}
-.btn[aria-disabled="true"]:hover{transform:none; opacity:1; background:transparent; color:var(--dim2)}
+.btn[aria-disabled="true"]{background:transparent; border-color:var(--dim2); color:var(--dim); cursor:default}
+.btn[aria-disabled="true"]:hover{transform:none; opacity:1; background:transparent; color:var(--dim)}
 .cta{display:flex; align-items:center; gap:1rem; flex-wrap:wrap; margin:3rem 0 1.4rem}
 :focus-visible{outline:2px solid currentColor; outline-offset:3px}
 
@@ -134,7 +134,7 @@ header.top.solid{
 /* 포맷 띠 — 로고 줄이 설 자리에 우리가 여는 것을 늘어놓는다 */
 .strip{
   margin:3.2rem auto 0; padding-top:2.2rem; border-top:1px solid var(--line);
-  font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
   color:var(--dim2); max-width:46rem;
 }
 
@@ -152,11 +152,12 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
 .item{
   border:1px solid var(--line); border-radius:var(--r); background:var(--card);
   padding:2.2rem 2.2rem 2.4rem; transition:border-color .18s, transform .18s;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
 }
 .item:hover{border-color:var(--line2); transform:translateY(-2px)}
-.item .no{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--dim2); display:block; margin-bottom:1.3rem}
+.item .no{font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--dim2); display:block; margin-bottom:1.3rem}
 .item p{margin:.9rem 0 1rem; max-width:none}
-.item .why{font-family:var(--mono); font-size:11px; color:var(--dim2); margin:0; letter-spacing:.03em}
+.item .why{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; letter-spacing:.03em}
 /* 그림이 붙은 카드는 두 칸을 다 쓴다 — 창 하나를 반 칸에 욱여넣으면 안쪽 글자가 안 읽힌다 */
 .item:has(figure:not(:empty)){grid-column:1 / -1}
 .item:has(figure:not(:empty)){display:grid; grid-template-columns:minmax(0,22rem) minmax(0,1fr);
@@ -171,7 +172,7 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
 .stat > div{border:1px solid var(--line); border-radius:var(--r); background:var(--card); padding:2rem 2.2rem}
 .num{font-size:clamp(2.2rem,5.2vw,3.2rem); font-weight:300; letter-spacing:-.04em; line-height:1}
 .num.gone{color:var(--dim2)}
-.num small{display:block; font-family:var(--mono); font-size:11px; font-weight:400;
+.num small{display:block; font-family:var(--mono); font-size:12px; font-weight:400;
   letter-spacing:.12em; text-transform:uppercase; color:var(--dim2); margin-top:1.1em}
 .bar{height:4px; border-radius:999px; background:var(--line2); display:flex; margin:0 0 .9rem; max-width:46rem; overflow:hidden}
 .bar i{display:block; background:var(--fg)}
@@ -181,12 +182,12 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
 .row{display:grid; grid-template-columns:minmax(0,15rem) 1fr 1fr; gap:1.6rem;
   padding:1.9rem 2.1rem; align-items:baseline}
 .row + .row{border-top:1px solid var(--line)}
-.row .tag{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--dim2)}
+.row .tag{font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--dim2)}
 .row .before{color:var(--dim2)}
 .row .after{font-size:1.06rem}
 .rows.fmt .row{grid-template-columns:minmax(0,13rem) 1fr; padding:1.5rem 2.1rem; align-items:center}
 .rows.fmt .tag{font-size:12px; letter-spacing:.06em; text-transform:none; color:var(--fg)}
-.row .ms{display:block; font-family:var(--mono); font-size:11px; color:var(--dim2); margin-top:.6em; letter-spacing:.06em}
+.row .ms{display:block; font-family:var(--mono); font-size:12px; color:var(--dim2); margin-top:.6em; letter-spacing:.06em}
 
 /* ── 설치 ── */
 ol.steps{counter-reset:s; list-style:none; padding:0; margin:0 auto 2.4rem; max-width:44rem;
@@ -194,7 +195,7 @@ ol.steps{counter-reset:s; list-style:none; padding:0; margin:0 auto 2.4rem; max-
 ol.steps li{counter-increment:s; display:grid; grid-template-columns:3rem 1fr; gap:1.2rem;
   padding:1.5rem 2rem}
 ol.steps li + li{border-top:1px solid var(--line)}
-ol.steps li::before{content:"0" counter(s); font-family:var(--mono); font-size:11px;
+ol.steps li::before{content:"0" counter(s); font-family:var(--mono); font-size:12px;
   letter-spacing:.1em; color:var(--dim2); padding-top:.45em}
 .warn{border-left:2px solid var(--fg); padding:.1rem 0 .1rem 1.6rem; margin:0 auto 2rem; max-width:44rem}
 .warn p{margin:0}
@@ -207,7 +208,7 @@ ol.steps li::before{content:"0" counter(s); font-family:var(--mono); font-size:1
 /* ── 띠 · 마무리 · 푸터 ── */
 .band{background:var(--card)}
 .band .wrap{display:grid; grid-template-columns:1fr auto; gap:3rem; align-items:end}
-.band p{color:var(--fg)}
+.band p:not(.label):not(.mono){color:var(--fg)}
 .end{text-align:center; padding-block:9rem}
 .end h2{max-width:none}
 .end .cta{justify-content:center; margin-bottom:1.6rem}
@@ -215,7 +216,7 @@ ol.steps li::before{content:"0" counter(s); font-family:var(--mono); font-size:1
 footer{padding-block:3.4rem; background:var(--bg); color:var(--fg)}
 footer .wrap{display:flex; gap:1.2rem 2.6rem; flex-wrap:wrap; align-items:center}
 footer .logo{font-size:13px; color:var(--dim2)}
-footer p{font-family:var(--mono); font-size:11px; color:var(--dim2); margin:0; letter-spacing:.04em; max-width:none}
+footer p{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; letter-spacing:.04em; max-width:none}
 
 /* ── 스크롤에 맞춰 떠오르기 ──
    JS 가 html.anim 을 달아야 숨는다. 스크립트가 못 돌면 글은 그냥 보인다. */
