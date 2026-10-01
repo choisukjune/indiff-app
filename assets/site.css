@@ -1,34 +1,48 @@
 /* ───────────────────────────────────────────────────────────────
-   (indiff) — 검정 바탕 · 단색 · 점.
+   (indiff) — 검은 히어로에서 밝은 본문으로.
 
-   참고한 결(oxa.ai 브랜드 아이덴티티)의 규칙을 그대로 가져왔다.
-     · 바탕은 **검정 하나**. 색은 쓰지 않는다 — 흰색과 회색의 단계로만 말한다.
-     · 마크는 **점의 고리와 가운데 블록**. 우리 앱 아이콘이 이미 그 언어다.
-     · 워드마크는 **소문자 세리프**. 본문 산세리프와 갈라 두면 로고가 로고로 읽힌다.
-     · 여백이 주인공이다. 로고는 넓은 검정 안에 작게 놓인다.
+   참고한 결(Lyra AI)의 구조를 가져왔다 — "bold dark hero into a light, airy flow
+   as users scroll". 색은 여전히 **검정과 흰색 둘뿐**이다. 둘의 자리를 바꿔 가며 쓴다.
+     · 히어로·띠·마무리·푸터는 검정 바탕(.dark)
+     · 그 사이의 본문은 흰 바탕 — 스크린샷이 밝은 앱 화면이라 여기서 제 색으로 읽힌다
+     · 색 토큰을 .dark 에서 다시 정의한다. 컴포넌트 CSS 는 한 벌로 양쪽에서 돈다
 
-   앱의 강조색(#D97757)은 **안 쓴다** — 참고한 결이 단색이고, 색 하나를 들이는 순간
-   그 결이 깨진다. 강조가 필요한 자리는 **흰색과 굵기**로 푼다.
+   앱의 강조색(#D97757)은 안 쓴다. 강조가 필요한 자리는 **면을 뒤집어** 푼다.
    ─────────────────────────────────────────────────────────────── */
 :root{
-  --bg:#000;
-  --fg:#fff;
-  --dim:#8a8a8f;        /* 보조 글 — 검정 위 4.9:1 */
-  --dim2:#5c5c61;       /* 더 물러난 메타 */
-  --line:#1f1f22;       /* 규칙선 */
-  --line2:#2e2e33;
+  --bg:#fff;
+  --fg:#0b0b0c;
+  --dim:#5f6066;        /* 보조 글 — 흰 바탕 6.6:1 */
+  --dim2:#8b8c93;       /* 더 물러난 메타 — 4.5:1 */
+  --line:#e8e8eb;
+  --line2:#d9d9de;
+  --card:#fafafa;
+  --shadow:0 24px 70px -28px rgba(0,0,0,.28);
   --col:1180px;
   --gut:28px;
+  --r:16px;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Times New Roman',Georgia,serif;
 }
+/* 검은 구간. 토큰만 뒤집으면 아래 컴포넌트가 전부 따라온다 */
+.dark{
+  --bg:#000;
+  --fg:#fff;
+  --dim:#8a8a8f;
+  --dim2:#5c5c61;
+  --line:#1f1f22;
+  --line2:#2e2e33;
+  --card:#0d0d0f;
+  --shadow:0 24px 70px -28px rgba(0,0,0,.9);
+  color:var(--fg); background:var(--bg);
+}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%; background:var(--bg)}
+html{-webkit-text-size-adjust:100%; background:#fff; scroll-behavior:smooth}
 body{
   margin:0;
   font-family:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Noto Sans KR',
     -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  font-size:16px; line-height:1.8; font-weight:300;
+  font-size:16px; line-height:1.78; font-weight:300;
   color:var(--fg); background:var(--bg);
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
@@ -38,137 +52,193 @@ body{
   font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
-section{padding-block:7.5rem; border-top:1px solid var(--line)}
+section{padding-block:8rem; background:var(--bg); color:var(--fg)}
+section + section:not(.dark){border-top:1px solid var(--line)}
 
-/* ── 로고 ── */
-/* 워드마크는 글자다 — 글리프는 배경의 아스키가 맡는다 */
+/* ── 글자 ──
+   **굵기를 하나로 쓴다.** 제목도 본문도 가늘게(300), 강조는 면과 크기로 만든다. */
+h1,h2,h3{margin:0; font-weight:300; letter-spacing:-.033em; line-height:1.1}
+h1{font-size:clamp(2.6rem,7vw,5rem)}
+h2{font-size:clamp(2rem,4.4vw,3.2rem)}
+h3{font-size:1.12rem; font-weight:400; letter-spacing:-.012em; line-height:1.45}
+p{margin:0 0 1.1rem; max-width:38rem}
+b{font-weight:400; color:var(--fg)}
+a{color:inherit}
+
 .logo{display:inline-block; font-family:var(--serif); font-size:1.26em; line-height:1;
       letter-spacing:.005em; color:var(--fg); text-decoration:none}
-
-/* ── 작은 라벨 ── */
-.label{
-  font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--dim2); margin:0 0 2.2rem;
-}
+.label{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+       color:var(--dim2); margin:0 0 1.4rem}
 .mono{font-family:var(--mono); font-size:12px; letter-spacing:.02em; color:var(--dim2)}
 .dim{color:var(--dim)}
+.note{font-family:var(--mono); font-size:11px; color:var(--dim2); margin-top:2rem; letter-spacing:.04em; max-width:46rem}
 
-/* **굵기를 하나로 쓴다.** 제목도 본문도 가늘게(300) 두고, 강조는 **흰색과 크기**로 만든다 —
-   굵기를 섞는 순간 화면에 목소리가 둘이 된다(참고한 결이 그렇게 간다). */
-h1,h2,h3{margin:0; font-weight:300; letter-spacing:-.03em; line-height:1.12}
-h1{font-size:clamp(2.6rem,7vw,5rem)}
-h2{font-size:clamp(1.9rem,4.2vw,3rem); margin-bottom:2rem}
-h3{font-size:1.1rem; font-weight:400; letter-spacing:-.01em; line-height:1.5}
-p{margin:0 0 1.1rem; max-width:38rem}
-b{font-weight:400; color:var(--fg)}   /* 강조는 굵기가 아니라 흰색이다 */
+/* 섹션 머리 — 가운데로 모은다. 제품 랜딩의 호흡이고, 아래 격자가 넓어 보인다 */
+.sec-head{text-align:center; max-width:44rem; margin:0 auto 4.5rem}
+.sec-head p{margin-inline:auto}
+.sec-head .lead{color:var(--dim); font-size:1.06rem; margin-top:1.6rem}
 
-/* ── 상단 바 ── */
-header.top{position:relative; z-index:2}
-.top .wrap{display:flex; align-items:center; height:76px}
+/* ── 알약 배지 ── */
+.badge{
+  display:inline-flex; align-items:center; gap:.6em; margin:0 0 2.4rem;
+  padding:.45em 1.05em; border:1px solid var(--line2); border-radius:999px;
+  font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--dim);
+}
+.badge::before{content:""; width:5px; height:5px; border-radius:50%; background:var(--fg); opacity:.75}
+
+/* ── 단추 ── */
+.btn{
+  display:inline-flex; align-items:center; gap:.5em; padding:.95em 1.9em;
+  border:1px solid var(--fg); border-radius:999px;
+  background:var(--fg); color:var(--bg);
+  font:inherit; font-size:.95rem; font-weight:400; text-decoration:none; cursor:pointer;
+  transition:transform .14s ease, opacity .14s ease, background .14s, color .14s;
+}
+.btn:hover{transform:translateY(-1px); opacity:.88}
+.btn.ghost{background:transparent; color:var(--fg)}
+.btn.ghost:hover{background:var(--fg); color:var(--bg); opacity:1}
+.btn.sm{padding:.6em 1.25em; font-size:.85rem}
+.btn[aria-disabled="true"]{background:transparent; border-color:var(--line2); color:var(--dim2); cursor:default}
+.btn[aria-disabled="true"]:hover{transform:none; opacity:1; background:transparent; color:var(--dim2)}
+.cta{display:flex; align-items:center; gap:1rem; flex-wrap:wrap; margin:3rem 0 1.4rem}
+:focus-visible{outline:2px solid currentColor; outline-offset:3px}
+
+/* ── 상단 바: 따라오고, 본문에 들어서면 밝아진다 ── */
+header.top{position:sticky; top:0; z-index:50; transition:background .25s, border-color .25s}
+.top .wrap{display:flex; align-items:center; gap:1rem; height:72px}
 .top .logo{font-size:15px}
 .top .sp{flex:1}
-
-/* ── 히어로: 검정 벌판 + 점 입자 ── */
-.hero{position:relative; border-top:0; padding:0; min-height:86vh; display:flex; align-items:center}
-#field{position:absolute; inset:0; width:100%; height:100%; display:block; z-index:0; pointer-events:none}
-.hero .wrap{position:relative; z-index:1; padding-block:5rem}
-/* 히어로의 첫 줄. 괄호가 제 앞뒤로 여백을 들고 있어 왼쪽을 음수로 당겨야 글줄이 맞는다 */
-.lockup{margin:0 0 2.6rem -.055em; font-family:var(--serif); font-weight:300;
-        font-size:clamp(2.4rem,6.4vw,4.6rem); line-height:1; letter-spacing:-.012em}
-.hero h1{max-width:14em; font-size:clamp(2.2rem,5.4vw,3.9rem)}
-.hero .lede{font-size:1.1rem; color:var(--dim); margin-top:2rem; max-width:34rem}
-.cta{display:flex; align-items:center; gap:1.4rem; flex-wrap:wrap; margin:3rem 0 1rem}
-.btn{
-  display:inline-flex; align-items:center; gap:.5em; padding:.85em 1.7em;
-  border:1px solid var(--fg); background:transparent; color:var(--fg);
-  font:inherit; font-size:.95rem; font-weight:400; text-decoration:none; cursor:pointer;
-  transition:background .14s, color .14s;
+header.top.solid{
+  background:rgba(255,255,255,.82); border-bottom:1px solid var(--line);
+  -webkit-backdrop-filter:saturate(180%) blur(14px); backdrop-filter:saturate(180%) blur(14px);
 }
-.btn:hover{background:var(--fg); color:var(--bg)}
-.btn[aria-disabled="true"]{border-color:var(--line2); color:var(--dim2); cursor:default}
-.btn[aria-disabled="true"]:hover{background:transparent; color:var(--dim2)}
-:focus-visible{outline:1px solid var(--fg); outline-offset:3px}
+
+/* ── 히어로 ── */
+.hero{position:relative; padding:5rem 0 0; overflow:hidden}
+/* 첫 화면 높이까지만 깐다. 히어로 전체에 깔면 아래쪽 작은 글(포맷 띠·메타)이
+   마크의 빽빽한 자리와 겹쳐 둘 다 안 읽힌다. */
+#field{position:absolute; top:0; left:0; right:0; height:min(100vh,100%);
+       width:100%; display:block; z-index:0; pointer-events:none;
+       /* 아래로 갈수록 녹인다 — 안 그러면 마크의 빽빽한 자리가 포맷 띠 글자와 겹친다 */
+       -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 36%,transparent 70%);
+       mask-image:linear-gradient(to bottom,#000 0%,#000 36%,transparent 70%)}
+.hero .wrap{position:relative; z-index:1}
+.hero-mid{text-align:center; max-width:48rem; margin-inline:auto}
+.hero-mid p{margin-inline:auto}
+/* 괄호가 제 앞뒤로 여백을 들고 있다 */
+.lockup{margin:0 0 2.2rem; font-family:var(--serif); font-weight:300;
+        font-size:clamp(2.2rem,5.6vw,3.8rem); line-height:1; letter-spacing:-.012em}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem)}
+.hero .lede{font-size:1.12rem; color:var(--dim); margin-top:1.8rem; max-width:32rem}
+.hero .cta{justify-content:center}
+/* 포맷 띠 — 로고 줄이 설 자리에 우리가 여는 것을 늘어놓는다 */
+.strip{
+  margin:3.2rem auto 0; padding-top:2.2rem; border-top:1px solid var(--line);
+  font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--dim2); max-width:46rem;
+}
+
+/* ── 그림 ── */
+figure{margin:0}
+figure:empty{display:none}
+figure img{display:block; width:100%; height:auto; border:1px solid var(--line2);
+           border-radius:var(--r); background:var(--card); box-shadow:var(--shadow)}
+.shot-wide{margin-top:4.5rem; position:relative; z-index:1}
+.hero .shot-wide{margin-bottom:-6rem}      /* 다음 섹션 위로 걸치게 — 랜딩의 흔한 손짓 */
+.item figure{margin-top:1.8rem}
+
+/* ── 기능 카드 ── */
+.items{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.6rem}
+.item{
+  border:1px solid var(--line); border-radius:var(--r); background:var(--card);
+  padding:2.2rem 2.2rem 2.4rem; transition:border-color .18s, transform .18s;
+}
+.item:hover{border-color:var(--line2); transform:translateY(-2px)}
+.item .no{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--dim2); display:block; margin-bottom:1.3rem}
+.item p{margin:.9rem 0 1rem; color:var(--dim); max-width:none}
+.item .why{font-family:var(--mono); font-size:11px; color:var(--dim2); margin:0; letter-spacing:.03em}
+/* 그림이 붙은 카드는 두 칸을 다 쓴다 — 창 하나를 반 칸에 욱여넣으면 안쪽 글자가 안 읽힌다 */
+.item:has(figure:not(:empty)){grid-column:1 / -1}
+.item:has(figure:not(:empty)){display:grid; grid-template-columns:minmax(0,22rem) minmax(0,1fr);
+  gap:2.6rem; align-items:center; padding:2.4rem}
+.item:has(figure:not(:empty)) figure{margin-top:0}
 
 /* ── 숫자 ── */
-.cmp{display:flex; align-items:flex-end; gap:3.5rem; margin:3rem 0 1.4rem; flex-wrap:wrap}
-.num{font-size:clamp(2.2rem,5.5vw,3.4rem); font-weight:300; letter-spacing:-.04em; line-height:1}
+.stat{
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.6rem;
+  margin:3rem 0 1.6rem; max-width:46rem;
+}
+.stat > div{border:1px solid var(--line); border-radius:var(--r); background:var(--card); padding:2rem 2.2rem}
+.num{font-size:clamp(2.2rem,5.2vw,3.2rem); font-weight:300; letter-spacing:-.04em; line-height:1}
 .num.gone{color:var(--dim2)}
 .num small{display:block; font-family:var(--mono); font-size:11px; font-weight:400;
-  letter-spacing:.12em; text-transform:uppercase; color:var(--dim2); margin-top:1em}
-.bar{height:3px; background:var(--line2); display:flex; margin:2rem 0 .8rem; max-width:38rem}
+  letter-spacing:.12em; text-transform:uppercase; color:var(--dim2); margin-top:1.1em}
+.bar{height:4px; border-radius:999px; background:var(--line2); display:flex; margin:0 0 .9rem; max-width:46rem; overflow:hidden}
 .bar i{display:block; background:var(--fg)}
 
-/* ── 증거 ── */
-.rows{margin-top:1rem}
-.row{display:grid; grid-template-columns:minmax(0,14rem) 1fr 1fr; gap:1.6rem;
-  padding:2rem 0; border-top:1px solid var(--line); align-items:baseline}
+/* ── 증거 표 ── */
+.rows{border:1px solid var(--line); border-radius:var(--r); overflow:hidden; background:var(--card)}
+.row{display:grid; grid-template-columns:minmax(0,15rem) 1fr 1fr; gap:1.6rem;
+  padding:1.9rem 2.1rem; align-items:baseline}
+.row + .row{border-top:1px solid var(--line)}
 .row .tag{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--dim2)}
 .row .before{color:var(--dim2)}
 .row .after{font-size:1.06rem}
 .row .ms{display:block; font-family:var(--mono); font-size:11px; color:var(--dim2); margin-top:.6em; letter-spacing:.06em}
-.note{font-family:var(--mono); font-size:11px; color:var(--dim2); margin-top:2rem; letter-spacing:.04em}
-
-/* ── 할 수 있는 일 ── */
-.items{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:3.6rem 4rem; margin-top:1rem}
-.item{border-top:1px solid var(--line); padding-top:1.6rem}
-.item .no{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--dim2); display:block; margin-bottom:1.1rem}
-.item p{margin:.8rem 0 .9rem; color:var(--dim)}
-.item .why{font-family:var(--mono); font-size:11px; color:var(--dim2); margin:0; letter-spacing:.03em}
-
-/* ── 그림 자리: 비면 접힌다 ── */
-figure{margin:0}
-/* 아직 안 찍은 자리는 조용히 접힌다 — 빈 상자도 깨진 그림도 남으면 안 된다 */
-figure:empty{display:none}
-/* 둥근 모서리는 「앱의 것」이라는 신호다. 페이지 고유 요소는 각지고, 앱을 보여 주는 것만 둥글다 */
-figure img{display:block; width:100%; height:auto; border:1px solid var(--line2);
-           border-radius:.5rem; background:#0a0a0b}
-.shot-wide{margin-top:4rem}
-.item figure{margin-top:1.6rem}
-/* 그림이 붙은 항목은 두 칸을 다 쓴다 — 창 하나를 반 칸(≈735px)에 욱여넣으면
-   화면 속 글자가 57%로 줄어 아무것도 안 읽힌다. 읽히지 않는 그림은 넣으나 마나다. */
-.item:has(figure:not(:empty)){grid-column:1 / -1}
-.item:has(figure:not(:empty)) > p{max-width:46rem}
 
 /* ── 설치 ── */
-ol.steps{counter-reset:s; list-style:none; padding:0; margin:0 0 3rem; max-width:38rem}
+ol.steps{counter-reset:s; list-style:none; padding:0; margin:0 auto 2.4rem; max-width:44rem;
+  border:1px solid var(--line); border-radius:var(--r); background:var(--card)}
 ol.steps li{counter-increment:s; display:grid; grid-template-columns:3rem 1fr; gap:1.2rem;
-  padding:1.1rem 0; border-top:1px solid var(--line); color:var(--dim)}
+  padding:1.5rem 2rem; color:var(--dim)}
+ol.steps li + li{border-top:1px solid var(--line)}
 ol.steps li::before{content:"0" counter(s); font-family:var(--mono); font-size:11px;
   letter-spacing:.1em; color:var(--dim2); padding-top:.45em}
-.warn{border-left:1px solid var(--fg); padding:.1rem 0 .1rem 1.6rem; margin:0 0 2rem; max-width:38rem}
-.warn p{color:var(--dim)}
-.warn p:first-child{color:var(--fg)}
+.warn{border-left:2px solid var(--fg); padding:.1rem 0 .1rem 1.6rem; margin:0 auto 2rem; max-width:44rem}
+.warn p{color:var(--dim); margin:0}
 
-/* ── 못 하는 것 ── */
-.limits{max-width:44rem}
-.limits p{color:var(--dim); padding-left:1.6rem; position:relative}
-.limits p::before{content:""; position:absolute; left:0; top:.85em; width:7px; height:1px; background:var(--dim2)}
+/* ── 범위 ── */
+.limits{max-width:46rem; margin-inline:auto}
+.limits p{color:var(--dim); padding-left:1.7rem; position:relative; max-width:none}
+.limits p::before{content:""; position:absolute; left:0; top:.85em; width:8px; height:1px; background:var(--dim2)}
 
-/* ── 띠 ── */
+/* ── 띠 · 마무리 · 푸터 ── */
 .band .wrap{display:grid; grid-template-columns:1fr auto; gap:3rem; align-items:end}
 .band p{color:var(--dim)}
-
-/* ── 마무리 · 푸터 ── */
-.end{text-align:center}
+.end{text-align:center; padding-block:9rem}
 .end h2{max-width:none}
-.end .cta{justify-content:center}
+.end .cta{justify-content:center; margin-bottom:1.6rem}
 .end p{margin-inline:auto}
-footer{border-top:1px solid var(--line); padding-block:3.4rem}
+footer{padding-block:3.4rem; background:var(--bg); color:var(--fg)}
 footer .wrap{display:flex; gap:1.2rem 2.6rem; flex-wrap:wrap; align-items:center}
 footer .logo{font-size:13px; color:var(--dim2)}
-footer p{font-family:var(--mono); font-size:11px; color:var(--dim2); margin:0; letter-spacing:.04em}
+footer p{font-family:var(--mono); font-size:11px; color:var(--dim2); margin:0; letter-spacing:.04em; max-width:none}
+
+/* ── 스크롤에 맞춰 떠오르기 ──
+   JS 가 html.anim 을 달아야 숨는다. 스크립트가 못 돌면 글은 그냥 보인다. */
+.anim .rise{opacity:0; transform:translateY(16px)}
+.anim .rise.in{opacity:1; transform:none; transition:opacity .55s ease, transform .55s ease}
 
 /* ── 좁은 화면 ── */
 @media (max-width:900px){
-  .items{grid-template-columns:1fr; gap:2.6rem}
+  .items{grid-template-columns:1fr; gap:1.2rem}
+  .item:has(figure:not(:empty)){grid-template-columns:1fr; gap:1.8rem}
   .band .wrap{grid-template-columns:1fr; gap:1.6rem}
-  section{padding-block:5rem}
+  section{padding-block:5.5rem}
+  .hero .shot-wide{margin-bottom:-3rem}
 }
 @media (max-width:620px){
   :root{--gut:20px}
-  .row{grid-template-columns:1fr; gap:.6rem}
+  .row{grid-template-columns:1fr; gap:.6rem; padding:1.5rem 1.4rem}
   .row .tag{order:-1; margin-bottom:.4rem}
-  .cmp{gap:2rem}
-  .hero{min-height:76vh}
+  .stat{grid-template-columns:1fr; gap:1rem}
+  .item{padding:1.8rem 1.6rem}
+  ol.steps li{grid-template-columns:2.4rem 1fr; padding:1.3rem 1.4rem}
+  .end{padding-block:6rem}
 }
-@media (prefers-reduced-motion: reduce){ *{animation:none!important; transition:none!important} }
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important; transition:none!important}
+  .anim .rise{opacity:1; transform:none}
+}

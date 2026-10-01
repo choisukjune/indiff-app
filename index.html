@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>(indiff) — 흩어진 문서. 한 화면.</title>
-<meta name="description" content="한글(.hwp·.hwpx)도 PDF도 엑셀도 원본 그대로 열립니다. 같은 화면에서 고치고, 묻고, 터미널까지 띄웁니다. macOS 로컬 문서 작업공간.">
+<meta name="description" content="한글도 PDF도 엑셀도 변환 없이 원본 그대로. 읽고 고치고 묻는 일이 한 창에서 끝납니다. macOS 로컬 문서 작업공간.">
 <meta property="og:title" content="(indiff) — 흩어진 문서. 한 화면.">
-<meta property="og:description" content="한글(.hwp·.hwpx)도 PDF도 엑셀도 원본 그대로. 같은 화면에서 고치고, 묻고, 터미널까지 띄웁니다.">
+<meta property="og:description" content="한글도 PDF도 엑셀도 변환 없이 원본 그대로. 읽고 고치고 묻는 일이 한 창에서 끝납니다.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://choisukjune.github.io/indiff-app/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -14,24 +14,31 @@
 </head>
 <body>
 
-<header class="top">
-  <div class="wrap"><span class="logo">(indiff)</span></div>
+<header class="top dark" id="nav">
+  <div class="wrap">
+    <span class="logo">(indiff)</span>
+    <span class="sp"></span>
+    <span class="btn ghost sm" aria-disabled="true">Download</span>
+  </div>
 </header>
 
-<section class="hero">
+<section class="hero dark">
   <canvas id="field" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div>
+    <div class="hero-mid">
+      <p class="badge">v0.1.0 · 공개 준비 중</p>
       <p class="lockup">(indiff)</p>
       <h1>Every document.<br>One screen.</h1>
-      <p class="lede">한글(.hwp·.hwpx)도 PDF도 엑셀도 원본 그대로 열립니다.<br>
-         같은 화면에서 고치고, 묻고, 터미널까지 띄웁니다.</p>
+      <p class="lede">한글도 PDF도 엑셀도, 변환 없이 원본 그대로 열립니다.
+         읽고 고치고 묻는 일이 한 창에서 끝납니다.</p>
       <div class="cta">
         <span class="btn" aria-disabled="true">Download — 준비 중</span>
+        <a class="btn ghost" href="#what">무엇을 하는지 보기</a>
       </div>
       <p class="mono">macOS 12+ · Apple Silicon · 211MB · Free</p>
+      <p class="strip">.hwp &nbsp;·&nbsp; .hwpx &nbsp;·&nbsp; .docx &nbsp;·&nbsp; .pdf &nbsp;·&nbsp; .xlsx &nbsp;·&nbsp; .csv &nbsp;·&nbsp; .pptx &nbsp;·&nbsp; .md</p>
     </div>
-<figure class="shot-wide" data-shot="hero-full">
+<figure class="shot-wide rise" data-shot="hero-full">
 <picture>
   <source type="image/avif" srcset="assets/shots/hero-full.avif?v=dbf89e61 1x, assets/shots/hero-full@2x.avif?v=8aa9cb56 2x">
   <source type="image/webp" srcset="assets/shots/hero-full.webp?v=d087d5b5 1x, assets/shots/hero-full@2x.webp?v=ad0cfff4 2x">
@@ -41,18 +48,25 @@
   </div>
 </section>
 
-<section>
+<section id="what">
   <div class="wrap">
-    <p class="label">What it does</p>
-    <h2>원본 그대로.<br>그 자리에서.</h2>
+    <div class="sec-head rise">
+      <p class="label">What it does</p>
+      <h2>원본 그대로.<br>그 자리에서.</h2>
+      <p class="lead">열려고 다른 앱을 켜지 않습니다. 고치려고 내보내지 않습니다.
+         찾으려고 파일을 하나씩 열어 보지 않습니다.</p>
+    </div>
     <div class="items">
 
-      <div class="item">
-        <div class="no">01</div>
-        <div><h3>열기</h3>
+      <div class="item rise">
+        <div class="body">
+          <div class="no">01</div>
+          <h3>열기</h3>
           <p>한글 <b>.hwp</b>와 <b>.hwpx</b>, docx와 PDF가 원본 레이아웃 그대로 열립니다.
-             엑셀과 CSV는 열 문자와 행 번호가 붙은 격자로, 파워포인트는 글과 표로 펼쳐집니다.</p>
-          <p class="why">한 번 누르면 임시로, 두 번 눌러야 탭이 앉습니다</p></div>
+             엑셀과 CSV는 열 문자와 행 번호가 붙은 격자로, 파워포인트는 글과 표로 펼쳐집니다.
+             변환을 기다리는 시간도, 모양이 무너지는 일도 없습니다.</p>
+          <p class="why">한 번 누르면 임시로, 두 번 눌러야 탭이 앉습니다</p>
+        </div>
         <figure data-shot="preview-tab">
 <picture>
   <source type="image/avif" srcset="assets/shots/preview-tab.avif?v=440e9491 1x, assets/shots/preview-tab@2x.avif?v=5c568acf 2x">
@@ -62,12 +76,15 @@
 </figure>
       </div>
 
-      <div class="item">
-        <div class="no">02</div>
-        <div><h3>고치기</h3>
-          <p>마크다운은 열면 바로 고쳐집니다. 연필도, 저장 단추도 없습니다.
-             콜아웃과 토글, 표를 넣어도 파일에는 표준 표기로 남아 깃허브에서 그대로 보입니다.</p>
-          <p class="why">손대지 않은 문단은 원문 글자 그대로 남습니다</p></div>
+      <div class="item rise">
+        <div class="body">
+          <div class="no">02</div>
+          <h3>고치기</h3>
+          <p>마크다운은 열면 그대로 편집기입니다. 연필도, 저장 단추도 없습니다.
+             콜아웃과 토글, 표를 넣어도 파일에는 표준 표기로 남아
+             깃허브에서도 VS Code에서도 똑같이 보입니다.</p>
+          <p class="why">손대지 않은 문단은 원문 글자 그대로 남습니다</p>
+        </div>
         <figure data-shot="md-editor">
 <picture>
   <source type="image/avif" srcset="assets/shots/md-editor.avif?v=119d5071 1x, assets/shots/md-editor@2x.avif?v=a08cf163 2x">
@@ -77,48 +94,58 @@
 </figure>
       </div>
 
-      <div class="item">
-        <div class="no">03</div>
-        <div><h3>찾기</h3>
-          <p>⌘K로 열어 그 자리에서 고릅니다. grep이 못 읽는 hwpx와 docx, PDF 안쪽까지 찾고,
-             결과가 문서가 아니라 <b>그 문서의 섹션</b>을 가리킵니다.</p>
-          <p class="why">한글 두 글자 낱말도 잡힙니다</p></div>
+      <div class="item rise">
+        <div class="body">
+          <div class="no">03</div>
+          <h3>찾기</h3>
+          <p>⌘K로 열고 그 자리에서 고릅니다. grep이 못 읽는 hwpx와 docx, PDF 안쪽까지 들어가
+             <b>그 문서의 어느 섹션</b>인지까지 짚어 줍니다.</p>
+          <p class="why">한글 두 글자 낱말도 잡힙니다</p>
+        </div>
         <figure data-shot="search"></figure>
       </div>
 
-      <div class="item">
-        <div class="no">04</div>
-        <div><h3>노트</h3>
+      <div class="item rise">
+        <div class="body">
+          <div class="no">04</div>
+          <h3>노트</h3>
           <p>고른 대목에 쪽지를 답니다. 문서 파일은 건드리지 않습니다.
              따로 담아 두고, 문서가 바뀌어도 인용한 문장으로 그 자리를 다시 찾아냅니다.</p>
-          <p class="why">노트만 모아 보는 패널이 따로 섭니다</p></div>
+          <p class="why">노트만 모아 보는 패널이 따로 섭니다</p>
+        </div>
         <figure data-shot="note"></figure>
       </div>
 
-      <div class="item">
-        <div class="no">05</div>
-        <div><h3>내보내기</h3>
+      <div class="item rise">
+        <div class="body">
+          <div class="no">05</div>
+          <h3>내보내기</h3>
           <p>정리한 회의록을 한글 문서로 떨굽니다. 받는 쪽이 한글만 쓰는 조직이어도
-             파일 하나면 끝입니다.</p>
-          <p class="why">내보낸 뒤 되읽어 글자와 표가 살았는지 확인합니다</p></div>
+             파일 하나면 끝납니다.</p>
+          <p class="why">내보낸 뒤 되읽어 글자와 표가 살았는지 확인합니다</p>
+        </div>
         <figure data-shot="export"></figure>
       </div>
 
-      <div class="item">
-        <div class="no">06</div>
-        <div><h3>한 화면에</h3>
-          <p>패널을 갈라 문서와 웹, 터미널을 나란히 둡니다. 웹 탭은 ChatGPT와 Claude처럼
-             끼워 넣기를 막는 사이트도 열리고, ☆로 담아 두면 다음에 한 번에 엽니다.</p>
-          <p class="why">패널 구성은 껐다 켜도 그대로입니다</p></div>
+      <div class="item rise">
+        <div class="body">
+          <div class="no">06</div>
+          <h3>한 화면에</h3>
+          <p>패널을 갈라 문서와 웹, 터미널을 나란히 둡니다. 웹 탭은 끼워 넣기를 막는
+             사이트까지 열리고, ☆로 담아 두면 다음에 한 번에 돌아옵니다.</p>
+          <p class="why">패널 구성은 껐다 켜도 그대로입니다</p>
+        </div>
         <figure data-shot="panes"></figure>
       </div>
 
-      <div class="item">
-        <div class="no">07</div>
-        <div><h3>터미널</h3>
+      <div class="item rise">
+        <div class="body">
+          <div class="no">07</div>
+          <h3>터미널</h3>
           <p>새 탭으로 터미널이 열립니다. 시작 폴더는 지금 보고 있는 문서의 폴더입니다.
-             트리에서 파일을 끌어다 놓으면 경로가 입력됩니다.</p>
-          <p class="why">vim도, 색도, 크기 조절도 그대로 됩니다</p></div>
+             트리에서 파일을 끌어다 놓으면 경로가 그대로 입력됩니다.</p>
+          <p class="why">vim도, 색도, 크기 조절도 그대로 됩니다</p>
+        </div>
         <figure data-shot="terminal">
 <picture>
   <source type="image/avif" srcset="assets/shots/terminal.avif?v=d101babb 1x, assets/shots/terminal@2x.avif?v=f224ec22 2x">
@@ -134,85 +161,103 @@
 
 <section>
   <div class="wrap">
-    <p class="label">Works with Claude Code</p>
-    <h2>AI가 문서 안에<br>들어와 있습니다.</h2>
+    <div class="sec-head rise">
+      <p class="label">Works with Claude Code</p>
+      <h2>AI가 문서 안에<br>들어와 있습니다.</h2>
+      <p class="lead">문서를 복사해 채팅창에 붙여 넣는 일은 더 없습니다.
+         커서가 있는 자리가 곧 묻는 자리입니다.</p>
+    </div>
     <div class="items">
 
-      <div class="item">
-        <div class="no">01</div>
-        <div><h3>문서 안에 글이 자랍니다</h3>
+      <div class="item rise">
+        <div class="body">
+          <div class="no">01</div>
+          <h3>문서 안에 글이 자랍니다</h3>
           <p>빗금을 치고 할 일을 한 줄 적으면 커서 자리에 글이 자랍니다.
              문서 전문과 목차, 색인에서 찾은 옆 문서의 대목이 함께 갑니다.</p>
-          <p class="why">유지 · 버리기 · 다시 — 셋 중에 고릅니다</p></div>
+          <p class="why">유지 · 버리기 · 다시 — 셋 중에 고릅니다</p>
+        </div>
       </div>
 
-      <div class="item">
-        <div class="no">02</div>
-        <div><h3>받기 전까지 파일은 그대로입니다</h3>
+      <div class="item rise">
+        <div class="body">
+          <div class="no">02</div>
+          <h3>받기 전까지 파일은 그대로입니다</h3>
           <p>고쳐 달라고 하면 낱말 단위로 먼저 보여 줍니다. 지울 글은 붉게, 넣을 글은 초록으로.
              보는 동안 파일은 한 글자도 바뀌지 않고, 받을지는 사람이 고릅니다.</p>
-          <p class="why">블록 손잡이에서 그 블록만 맡길 수도 있습니다</p></div>
+          <p class="why">블록 손잡이에서 그 블록만 맡길 수도 있습니다</p>
+        </div>
       </div>
 
-      <div class="item">
-        <div class="no">03</div>
-        <div><h3>고른 대목만 두고 묻습니다</h3>
-          <p>읽다가 글을 고르면 알약이 뜹니다. 그 대목만 두고 묻고, 답은 복사하거나
-             채팅으로 이어서 갑니다.</p>
-          <p class="why">문서와 색인에 없으면 한 번 검색합니다</p></div>
+      <div class="item rise">
+        <div class="body">
+          <div class="no">03</div>
+          <h3>고른 대목만 두고 묻습니다</h3>
+          <p>읽다가 글을 고르면 알약이 뜹니다. 그 대목만 두고 묻고,
+             답은 복사하거나 채팅으로 이어서 갑니다.</p>
+          <p class="why">문서와 색인에 없으면 한 번 검색합니다</p>
+        </div>
         <figure data-shot="ask"></figure>
       </div>
 
-      <div class="item">
-        <div class="no">04</div>
-        <div><h3>창까지 맡길 수 있습니다</h3>
+      <div class="item rise">
+        <div class="body">
+          <div class="no">04</div>
+          <h3>창까지 맡길 수 있습니다</h3>
           <p>앱을 Claude Code에 도구 <b>스물세 개</b>로 등록합니다. 탭을 열고 읽고 누르는 일부터
              문서를 띄우고 패널을 가르는 일까지 시킵니다.</p>
-          <p class="why">오른쪽 패널에서 지난 대화를 이어받습니다</p></div>
+          <p class="why">오른쪽 패널에서 지난 대화를 이어받습니다</p>
+        </div>
       </div>
 
     </div>
-    <p class="note" style="margin-top:3rem">claude 명령이 있을 때만 켜집니다 · 없어도 열기와 고치기, 찾기와 노트, 내보내기는 모두 됩니다</p>
-    <p class="note" style="margin-top:.6rem">사용 한도에 막히면 리셋 시각까지 기다렸다가 알아서 이어 갑니다</p>
+    <div class="sec-head" style="margin:3.5rem auto 0">
+      <p class="note" style="margin:0">claude 명령이 있을 때만 켜집니다 · 없어도 열기와 고치기, 찾기와 노트, 내보내기는 모두 됩니다</p>
+      <p class="note" style="margin:.6rem 0 0">사용 한도에 막히면 리셋 시각까지 기다렸다가 알아서 이어 갑니다</p>
+    </div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <p class="label">Why it&rsquo;s different</p>
-    <h2>표가 살아서 열립니다.</h2>
-    <p>285KB 과업내용서에서 본문 문단만 뽑으면 12,407자. 원본은 102,000자입니다.
-       나머지 9만 자는 전부 표 안에 있었습니다. 문서의 38%가 표를 쓰고,
-       요구사항표와 일정표, 배점표 — 결론은 대개 표 안에 적혀 있습니다.</p>
-    <div class="cmp">
-      <div class="num gone">12,407자<small>본문 문단만</small></div>
-      <div class="num">102,000자<small>원본</small></div>
+    <div class="sec-head rise">
+      <p class="label">Why it&rsquo;s different</p>
+      <h2>표가 살아서<br>열립니다.</h2>
+      <p class="lead">공공 문서의 결론은 대개 표 안에 적혀 있습니다.
+         그런데 대부분의 도구가 바로 그 표를 버립니다.</p>
     </div>
-    <div class="bar"><i style="width:12%"></i><u></u></div>
-    <p class="mono">본문 12% · 표 안에 갇힌 88%</p>
 
-    <div class="rows" style="margin-top:3.5rem">
+    <div class="stat rise">
+      <div><div class="num gone">12,407자<small>본문 문단만 뽑으면</small></div></div>
+      <div><div class="num">102,000자<small>원본에 있던 글자</small></div></div>
+    </div>
+    <div class="bar rise" style="max-width:none"><i style="width:12%"></i></div>
+    <p class="mono rise" style="margin-bottom:3.5rem">285KB 과업내용서 · 본문 12% · 표 안에 갇힌 88%</p>
+
+    <div class="rows rise">
       <div class="row">
         <div class="tag">HWP · 285KB · 과업내용서</div>
         <div class="before">본문 문단 12,407자</div>
         <div class="after"><b>96,877자</b>, 원본의 95% · 표 <b>121개</b><span class="ms">159밀리초</span></div>
       </div>
-      <figure data-shot="hwp"></figure>
       <div class="row">
         <div class="tag">PDF · 163쪽 · 제안요청서</div>
         <div class="before">한글 63,423자 · 표 0개</div>
         <div class="after">글자 수는 그대로 · 표 <b>110개</b> · 병합칸 <b>299개</b><span class="ms">1.8초</span></div>
       </div>
-      <figure data-shot="pdf"></figure>
       <div class="row">
         <div class="tag">DOCX · 제안서</div>
         <div class="before">표가 사라집니다</div>
         <div class="after">표 <b>1,424줄</b>이 그대로</div>
       </div>
-      <figure data-shot="docx"></figure>
     </div>
+    <figure data-shot="hwp"></figure>
+    <figure data-shot="pdf"></figure>
+    <figure data-shot="docx"></figure>
     <p class="note">실제 사업 문서로 측정했습니다 · 2026년 9월. 문서마다 다를 수 있습니다.</p>
-    <p style="margin-top:1.8rem">표를 글로 풀면 칸의 소속이 사라집니다. &ldquo;3,000만원&rdquo;이 어느 항목의 값인지,
+
+    <p style="margin:2.4rem auto 0; max-width:44rem; text-align:center; color:var(--dim)">
+       표를 글로 풀면 칸의 소속이 사라집니다. &ldquo;3,000만원&rdquo;이 어느 항목의 값인지,
        &ldquo;미해당&rdquo;이 어느 요구사항의 답인지 알 수 없게 됩니다.
        (indiff)는 변환을 거치는 쪽을 택했습니다. 조금 느리지만, 칸이 남습니다.</p>
   </div>
@@ -220,28 +265,31 @@
 
 <section>
   <div class="wrap">
-    <p class="label">Your files, unchanged</p>
-    <h2>열어 봐도,<br>원본은 그대로입니다.</h2>
-    <p>서식 편집기로 문서를 열었다 닫으면, 예전에는 열 중 아홉이 조용히 다시 쓰였습니다.
-       글자를 잃는 것이 아니라 모양이 바뀌었습니다 — 접힌 줄이 한 줄로 합쳐지고,
-       목록 기호가 갈리고, 표 구분줄이 다시 짜였습니다.
-       지금은 손대지 않은 블록을 원문 글자 그대로 도로 넣습니다.</p>
-    <div class="cmp">
-      <div class="num gone">9.5%<small>통째로 다시 쓸 때</small></div>
-      <div class="num">87.2%<small>블록을 보존할 때</small></div>
+    <div class="sec-head rise">
+      <p class="label">Your files, unchanged</p>
+      <h2>열어 봐도,<br>원본은 그대로입니다.</h2>
+      <p class="lead">예전에는 서식 편집기로 열었다 닫기만 해도 열 중 아홉이 조용히 다시 쓰였습니다.
+         글자를 잃어서가 아니라 모양이 바뀌어서였습니다.
+         지금은 손대지 않은 블록을 원문 글자 그대로 도로 넣습니다.</p>
     </div>
-    <p class="mono">왕복해도 한 글자도 안 바뀐 문서 · 마크다운 792건 기준</p>
-    <p class="note">AI가 쓴 문서(211건)는 97.6%. 그 문서들이 안 열리던 진짜 이유는 손실이 아니라 표 재조판이었습니다.</p>
+    <div class="stat rise" style="margin-inline:auto">
+      <div><div class="num gone">9.5%<small>통째로 다시 쓸 때</small></div></div>
+      <div><div class="num">87.2%<small>블록을 보존할 때</small></div></div>
+    </div>
+    <p class="mono" style="max-width:46rem; margin-inline:auto">왕복해도 한 글자도 안 바뀐 문서 · 마크다운 792건 기준</p>
+    <p class="note" style="margin-inline:auto">AI가 쓴 문서(211건)는 97.6%. 그 문서들이 안 열리던 진짜 이유는 손실이 아니라 표 재조판이었습니다.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <p class="label">Install</p>
-    <h2>계정도, 로그인도<br>없습니다.</h2>
-    <p style="margin-bottom:2.4rem">받아서 넣고, 문서가 든 폴더 하나만 고르면 시작입니다.
-       그 다음부터는 전부 이 컴퓨터 안에서 돌아갑니다.</p>
-    <ol class="steps">
+    <div class="sec-head rise">
+      <p class="label">Install</p>
+      <h2>계정도, 로그인도<br>없습니다.</h2>
+      <p class="lead">받아서 넣고, 문서가 든 폴더 하나만 고르면 시작입니다.
+         그 다음부터는 전부 이 컴퓨터 안에서 돌아갑니다.</p>
+    </div>
+    <ol class="steps rise">
       <li>받은 파일을 열고 앱을 응용 프로그램 폴더에 넣습니다.</li>
       <li>앱을 우클릭하고 열기, 다시 한 번 열기를 누릅니다.</li>
       <li>처음 켜면 볼 폴더를 묻습니다. 문서가 든 폴더를 고르면 됩니다.</li>
@@ -249,14 +297,16 @@
     <div class="warn">
       <p>서명이 없어 첫 실행 때 macOS가 한 번 막습니다. 우클릭으로 열면 통과하고, 다음부터는 그냥 열립니다.</p>
     </div>
-    <p class="mono">Apple Silicon · 설치 후 약 622MB</p>
+    <p class="mono" style="max-width:44rem; margin-inline:auto">Apple Silicon · 설치 후 약 622MB</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <p class="label">Scope</p>
-    <h2>지금의 범위</h2>
+    <div class="sec-head rise">
+      <p class="label">Scope</p>
+      <h2>지금의 범위</h2>
+    </div>
     <div class="limits">
       <p>macOS 12 이상, Apple Silicon 전용입니다.</p>
       <p>옛 한글 문서(3.x)와 암호 걸린 문서, 옛 엑셀 형식(.xls)은 못 엽니다.</p>
@@ -266,7 +316,7 @@
   </div>
 </section>
 
-<section class="band">
+<section class="band dark">
   <div class="wrap">
     <div>
       <p class="label">Under the hood</p>
@@ -281,24 +331,23 @@
   </div>
 </section>
 
-<section class="end">
+<section class="end dark">
   <div class="wrap">
-    <h2>흩어진 문서를, 한 화면으로.</h2>
+    <h2>흩어진 문서를,<br>한 화면으로.</h2>
     <div class="cta">
       <span class="btn" aria-disabled="true">Download — 준비 중</span>
     </div>
-    <p class="mono">macOS 12 이상 · Apple Silicon · 211MB</p>
+    <p class="mono">macOS 12 이상 · Apple Silicon · 211MB · 무료</p>
   </div>
 </section>
 
-<footer>
+<footer class="dark">
   <div class="wrap"><span class="logo">(indiff)</span><p>0.1.0</p>
     <p>MIT License</p>
     <p>글꼴 Pretendard Variable — SIL OFL 1.1</p>
     <p>이 페이지에는 분석 스크립트도 쿠키도 없습니다.</p>
   </div>
 </footer>
-
 
 <script>
 /* 배경 — 로고를 아스키 문자로 그린다.
@@ -332,8 +381,8 @@
     W = c.clientWidth; H = c.clientHeight; if (!W || !H) return false;
     c.width = Math.round(W*dpr); c.height = Math.round(H*dpr);
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
-    var S = Math.min(H*1.18, W*0.64);
-    var f = Math.max(9, Math.min(15, S/58));
+    var S = Math.min(H*1.35, W*0.86);
+    var f = Math.max(9, Math.min(15, S/64));
     g.font = f + 'px ui-monospace, SFMono-Regular, Menlo, monospace';
     g.textBaseline = 'middle';
     cw = g.measureText('M').width;
@@ -349,11 +398,12 @@
     g.clearRect(0, 0, W, H);
 
     var wide = W >= 880;
-    var S  = Math.min(H*1.18, W*0.64);
+    var S  = Math.min(H*1.35, W*0.86);
     var sc = S/1024;
-    var ox = (wide ? W*0.76 : W*0.50), oy = H*(wide ? 0.50 : 0.58);
-    /* 좁은 화면에선 마크가 글 바로 뒤에 선다 — 비킬 자리가 없으니 결로만 남긴다 */
-    var dim = wide ? 1 : 0.34;
+    /* 히어로가 가운데 정렬이라 마크도 가운데 둔다. 옆으로 비키면 글과 겹쳐 둘 다 안 읽힌다.
+       대신 밝기를 눌러 **무늬**로 남긴다 — 글이 그 위에 떠야 한다. */
+    var ox = W*0.50, oy = H*0.34;
+    var dim = wide ? 0.40 : 0.24;
 
     /* 둘레가 도는 각 — 한 바퀴 74초 */
     var th = t*0.0849, cs = Math.cos(th), sn = Math.sin(th);
@@ -431,6 +481,59 @@
       run = on;
     }, { threshold: 0 }).observe(c);
   }
+})();
+</script>
+<script>
+/* 상단 바와 스크롤 — 작은 두 가지만 한다.
+
+   ① 히어로를 지나면 상단 바가 **밝아진다**. 검은 히어로 위에서는 흰 글씨로 떠 있다가,
+      흰 본문에 들어서면 반투명 흰 바탕을 깔고 검은 글씨가 된다. 한 창에서 바탕이 뒤집히므로
+      바가 그대로 있으면 글자가 사라진다.
+   ② 블록이 **조금 늦게 떠오른다**(14px · 0.55초). 한 번만 돈다 — 오르내릴 때마다 움직이면
+      읽는 사람이 스크롤을 못 믿는다.
+
+   둘 다 **글을 숨기는 쪽이 기본이 아니다.** html.anim 은 스크립트가 붙었을 때만 달린다 —
+   스크립트가 못 돌면 글은 그냥 보인다. */
+(function () {
+  var nav = document.getElementById('nav');
+  var hero = document.querySelector('.hero');
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* 상단 바는 **자기 밑에 깔린 구간**을 따라간다. 히어로만 보고 정하면 마지막 검은 구간에서
+     밝은 바가 검정 위에 떠 버린다(실측으로 그렇게 났다). 73px 선이 어느 구간 안에 있는지 본다. */
+  var darks = document.querySelectorAll('.hero, section.dark, footer.dark');
+  function paintNav() {
+    if (!nav) return;
+    var y = 73, on = false;
+    for (var i = 0; i < darks.length; i++) {
+      var r = darks[i].getBoundingClientRect();
+      if (r.top <= y && r.bottom > y) { on = true; break; }
+    }
+    nav.classList.toggle('dark', on);
+    nav.classList.toggle('solid', !on);
+  }
+  var tick = false;
+  addEventListener('scroll', function () {
+    if (tick) return;
+    tick = true;
+    requestAnimationFrame(function () { tick = false; paintNav(); });
+  }, { passive: true });
+  addEventListener('resize', paintNav);
+  paintNav();
+
+  if (still || !window.IntersectionObserver) return;
+  document.documentElement.classList.add('anim');
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  [].forEach.call(document.querySelectorAll('.rise'), function (el, i) {
+    el.style.transitionDelay = (Math.min(i, 3) * 60) + 'ms';
+    io.observe(el);
+  });
 })();
 </script>
 </body>
