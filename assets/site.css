@@ -39,7 +39,7 @@ body{
 }
 @font-face{
   font-family:'Pretendard Variable';
-  src:url('pretendard-subset.woff2?v=46e28f21') format('woff2-variations');
+  src:url('pretendard-subset.woff2?v=7e48cbdb') format('woff2-variations');
   font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
@@ -142,12 +142,6 @@ header.top.solid{
 .install-copy{flex:0 0 auto; font:inherit; font-size:12px; padding:.5em 1.1em; border-radius:999px; cursor:pointer;
   border:1px solid var(--line2); background:transparent; color:var(--fg)}
 .install-copy:hover, .install-copy.on{background:var(--fg); color:var(--bg); border-color:var(--fg)}
-/* 포맷 띠 — 로고 줄이 설 자리에 우리가 여는 것을 늘어놓는다 */
-.strip{
-  margin:3.2rem auto 0; padding-top:2.2rem; border-top:1px solid var(--line);
-  font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--dim2); max-width:46rem;
-}
 
 /* ── 그림 ── */
 figure{margin:0}
@@ -203,7 +197,7 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
 .term-bar span{flex:1; text-align:center; font-family:var(--mono); font-size:11px; color:var(--dim2)}
 .term-body{padding:1.3rem 1.5rem 1.6rem; font-family:var(--mono); font-size:13px; line-height:1.95; min-height:17.5rem}
 .term-body p{margin:0; max-width:none}
-.t-cmd{word-break:break-all}
+.t-cmd{font-size:12.5px; letter-spacing:-.01em}
 .t-cmd code{font-family:inherit; color:var(--fg)}
 .t-ps{color:var(--dim2)}
 .t-out{color:var(--dim); padding-left:1.1rem}

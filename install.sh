@@ -9,7 +9,7 @@
 # 시험용 손잡이: INDIFF_INSTALL_DIR(넣을 폴더) · INDIFF_NO_OPEN=1(다 넣고 열지 않기)
 set -eu
 
-REL="https://github.com/choisukjune/indiff-app/releases/latest/download"
+REL="https://github.com/choisukjune/indiff-releases/releases/latest/download"
 DMG="INDIFF-mac-arm64.dmg"
 DEST="${INDIFF_INSTALL_DIR:-/Applications}"
 
