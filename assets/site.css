@@ -39,7 +39,7 @@ body{
 }
 @font-face{
   font-family:'Pretendard Variable';
-  src:url('pretendard-subset.woff2?v=8add9f41') format('woff2-variations');
+  src:url('pretendard-subset.woff2?v=e0857a4c') format('woff2-variations');
   font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
@@ -223,14 +223,7 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
 .spec .k{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim2); margin:0 0 1.1rem}
 .spec p{max-width:none; margin-bottom:0}
 
-/* ── 띠 · 마무리 · 푸터 ── */
-.band{background:var(--card)}
-.facts{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); margin-top:3.6rem; border-top:1px solid var(--line2)}
-.facts div{padding:1.9rem 1.4rem 0 0}
-.facts div + div{padding-left:1.6rem; border-left:1px solid var(--line2)}
-.facts b{display:block; font-weight:300; font-size:clamp(1.5rem,3.2vw,2.5rem); letter-spacing:-.03em; line-height:1}
-.facts span{display:block; margin-top:.9rem; font-family:var(--mono); font-size:12px; letter-spacing:.06em; color:var(--dim2)}
-.band p:not(.label):not(.mono){color:var(--fg)}
+/* ── 마무리 · 푸터 ── */
 .end{text-align:center; padding-block:9rem 0; overflow:hidden}
 /* 맨 끝에 화면 폭만 한 로고 — 아래가 잘리게 걸쳐 둔다. 읽는 글이 아니라 무늬라 옅게 */
 .wordmark{margin:7rem 0 -.2em; max-width:none; font-family:var(--serif); font-weight:300; line-height:.8;
@@ -254,8 +247,6 @@ footer p{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; l
   .items{grid-template-columns:1fr; gap:1.2rem}
   .item:has(figure:not(:empty)){grid-template-columns:1fr; gap:1.8rem}
   .split{grid-template-columns:1fr; gap:3rem}
-  .facts{grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:2rem}
-  .facts div:nth-child(3){padding-left:0; border-left:0}
   .exts{grid-template-columns:repeat(3,minmax(0,1fr))}
   .shot-pair{grid-template-columns:1fr}
   section{padding-block:5.5rem}
