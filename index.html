@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>INDIFF</title>
+<meta name="description" content="흩어진 문서를 한 화면에 모아 두고, 그 자리에서 읽고 고치고 묻는다. macOS 로컬 문서 작업공간.">
+<meta property="og:title" content="INDIFF">
+<meta property="og:description" content="흩어진 문서를 한 화면에 모아 두고, 그 자리에서 읽고 고치고 묻는다.">
+<meta property="og:type" content="website">
+<style>
+  /* shadcn zinc — 앱과 같은 토큰을 쓴다 */
+  :root{
+    --bg:0 0% 100%; --fg:240 10% 3.9%; --mut:240 3.8% 46.1%; --bd:240 5.9% 90%;
+    --accent:#D97757; --radius:.5rem;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:240 10% 3.9%; --fg:0 0% 98%; --mut:240 5% 64.9%; --bd:240 3.7% 15.9%; }
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; display:grid; place-items:center; padding:2rem;
+    font-family:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Noto Sans KR',
+      -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:15px; line-height:1.7;
+    color:hsl(var(--fg)); background:hsl(var(--bg));
+    -webkit-font-smoothing:antialiased;
+  }
+  main{width:min(100%,34rem)}
+  .eyebrow{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:11px; letter-spacing:.09em; text-transform:uppercase;
+    color:hsl(var(--mut)); display:flex; align-items:center; gap:.55em; margin:0 0 1.6rem;
+  }
+  .eyebrow::before{content:''; width:6px; height:6px; background:var(--accent); flex:0 0 auto}
+  h1{margin:0 0 .5rem; font-size:1.9rem; font-weight:700; letter-spacing:-.02em}
+  p{margin:0 0 1rem; max-width:30rem}
+  .mut{color:hsl(var(--mut))}
+  hr{border:0; border-top:1px dashed hsl(var(--bd)); margin:1.8rem 0}
+  .meta{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:12px; color:hsl(var(--mut)); margin:0;
+  }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Local document workspace / macOS</p>
+  <h1>INDIFF</h1>
+  <p>흩어진 문서를 한 화면에 모아 두고, 그 자리에서 읽고 고치고 묻는다.</p>
+  <p class="mut">한 폴더 아래의 hwpx · hwp · docx · pdf · xlsx · csv · md 를 원본 모양 그대로 읽고,
+     같은 화면에서 고치고, 터미널까지 띄운다.</p>
+  <hr>
+  <p class="meta">소개 페이지와 내려받기는 준비 중이다. · macOS 12 이상 · Apple Silicon · MIT</p>
+</main>
+</body>
+</html>
