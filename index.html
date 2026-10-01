@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>(indiff) — 흩어진 문서. 한 화면.</title>
-<meta name="description" content="한글도, PDF도, 엑셀도. 열면 원본 그대로입니다. 읽고 고치고 묻는 일이 한 창에서 끝나는 macOS 로컬 문서 작업공간.">
+<meta name="description" content="한글도, PDF도, 엑셀도. 열면 원본 그대로입니다. 띄워 둔 문서를 그대로 두고 Claude Code에게 묻는, macOS 로컬 문서 작업공간.">
 <meta property="og:title" content="(indiff) — 흩어진 문서. 한 화면.">
-<meta property="og:description" content="한글도, PDF도, 엑셀도. 열면 원본 그대로입니다.">
+<meta property="og:description" content="한글도, PDF도, 엑셀도. 열면 원본 그대로. 띄워 둔 문서를 그대로 두고 물어봅니다.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://choisukjune.github.io/indiff-app/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/site.css?v=6ced2def">
+<link rel="stylesheet" href="assets/site.css?v=5e375361">
 </head>
 <body>
 
@@ -29,7 +29,8 @@
       <p class="badge">v0.1.0 · 공개 준비 중</p>
       <p class="lockup">(indiff)</p>
       <h1>Every document.<br>One screen.</h1>
-      <p class="lede">한글도, PDF도, 엑셀도.<br>열면 원본 그대로입니다.</p>
+      <p class="lede">한글도, PDF도, 엑셀도. 열면 원본 그대로입니다.<br>
+         그 문서를 띄워 둔 채, 그대로 물어봅니다.</p>
       <div class="cta">
         <span class="btn" aria-disabled="true">Download — 준비 중</span>
         <a class="btn ghost" href="#what">무엇을 하는지 보기</a>
@@ -160,7 +161,7 @@
     <div class="sec-head rise">
       <p class="label">Works with Claude Code</p>
       <h2>AI가 문서 안에<br>있습니다.</h2>
-      <p class="lead">문서는 이미 읽혀 있습니다.<br>물어보기만 하면 됩니다.</p>
+      <p class="lead">띄워 둔 문서를 그대로 두고 묻습니다.<br>어떤 문서인지 설명할 필요가 없습니다.</p>
     </div>
     <div class="items">
 
@@ -216,44 +217,53 @@
 <section>
   <div class="wrap">
     <div class="sec-head rise">
-      <p class="label">Why it&rsquo;s different</p>
-      <h2>표까지 통째로.</h2>
-      <p class="lead">결론은 표 안에 적혀 있습니다.<br>그런데 대부분의 도구가 그 표를 버립니다.</p>
+      <p class="label">Formats</p>
+      <h2>웬만한 건<br>그냥 열립니다.</h2>
+      <p class="lead">받은 파일이 무엇이든, 열어 볼 앱을 찾으러 가지 않습니다.</p>
     </div>
 
-    <div class="stat rise">
-      <div><div class="num gone">12,407자<small>본문 문단만 뽑으면</small></div></div>
-      <div><div class="num">102,000자<small>원본에 있던 글자</small></div></div>
-    </div>
-    <div class="bar rise" style="max-width:none"><i style="width:12%"></i></div>
-    <p class="mono rise" style="margin-bottom:3.5rem">285KB 과업내용서 · 본문 12% · 표 안에 갇힌 88%</p>
-
-    <div class="rows rise">
+    <div class="rows fmt rise">
       <div class="row">
-        <div class="tag">HWP · 285KB · 과업내용서</div>
-        <div class="before">본문 문단 12,407자</div>
-        <div class="after"><b>96,877자</b>, 원본의 95% · 표 <b>121개</b><span class="ms">159밀리초</span></div>
+        <div class="tag">.hwp &nbsp;.hwpx</div>
+        <div class="after">원본 레이아웃 그대로. 글만 보는 탭이 따로 서고, 글자의 95%가 검색에 걸립니다.</div>
       </div>
       <div class="row">
-        <div class="tag">PDF · 163쪽 · 제안요청서</div>
-        <div class="before">한글 63,423자 · 표 0개</div>
-        <div class="after">글자 수는 그대로 · 표 <b>110개</b> · 병합칸 <b>299개</b><span class="ms">1.8초</span></div>
+        <div class="tag">.docx</div>
+        <div class="after">원본 레이아웃 그대로. 쪽 단위로 끊어 보여 줍니다.</div>
       </div>
       <div class="row">
-        <div class="tag">DOCX · 제안서</div>
-        <div class="before">표가 사라집니다</div>
-        <div class="after">표 <b>1,424줄</b>이 그대로</div>
+        <div class="tag">.pdf</div>
+        <div class="after">쪽 그대로. 문서 안에 북마크가 있으면 그것이 목차가 됩니다.</div>
+      </div>
+      <div class="row">
+        <div class="tag">.xlsx &nbsp;.csv</div>
+        <div class="after">열 문자와 행 번호가 붙은 격자. 병합칸까지 자리를 지킵니다.</div>
+      </div>
+      <div class="row">
+        <div class="tag">.pptx</div>
+        <div class="after">글과 표를 뽑아 보여 줍니다.</div>
+      </div>
+      <div class="row">
+        <div class="tag">.md</div>
+        <div class="after">열면 바로 편집기. 치는 대로 파일에 남습니다.</div>
+      </div>
+      <div class="row">
+        <div class="tag">.html</div>
+        <div class="after">프로토타입이든 다이어그램이든 그려서 보여 줍니다.</div>
+      </div>
+      <div class="row">
+        <div class="tag">그림 여덟 가지</div>
+        <div class="after">png · jpg · gif · webp · svg · heic · bmp 가 트리에 함께 섭니다.</div>
       </div>
     </div>
     <figure data-shot="hwp"></figure>
     <figure data-shot="pdf"></figure>
     <figure data-shot="docx"></figure>
-    <p class="note">실제 사업 문서로 측정했습니다 · 2026년 9월. 문서마다 다를 수 있습니다.</p>
 
-    <p style="margin:2.4rem auto 0; max-width:44rem; text-align:center; color:var(--dim)">
-       표를 글로 풀면 칸의 소속이 사라집니다.
-       &ldquo;3,000만원&rdquo;이 어느 항목의 값인지, &ldquo;미해당&rdquo;이 어느 요구사항의 답인지.<br>
-       그래서 변환하는 쪽을 택했습니다. 조금 느려도, 칸이 남으니까.</p>
+    <p style="margin:3rem auto 0; max-width:46rem; text-align:center">
+       그리고 <b>표가 남습니다.</b> 163쪽짜리 제안요청서에서 표 110개와 병합칸 299개를 되살렸습니다.
+       같은 파일에서 글만 뽑으면 표는 0개입니다.</p>
+    <p class="note" style="text-align:center">실제 사업 문서로 측정했습니다 · 2026년 9월. 문서마다 다를 수 있습니다.</p>
   </div>
 </section>
 
