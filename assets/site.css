@@ -46,6 +46,9 @@ body{
 section{padding-block:8rem; background:var(--bg); color:var(--fg)}
 section + section{border-top:1px solid var(--line)}
 
+/* 본문은 **흰색 하나**다. 회색은 메타(라벨·모노·밑줄)와 전후 비교의 '버려지는 쪽'에만 남긴다 —
+   본문 안에서 색이 갈리면 어떤 문장은 중요하고 어떤 문장은 덜한 것처럼 보인다. */
+
 /* ── 글자 ──
    **굵기를 하나로 쓴다.** 제목도 본문도 가늘게(300), 강조는 면과 크기로 만든다. */
 h1,h2,h3{margin:0; font-weight:300; letter-spacing:-.033em; line-height:1.1}
@@ -53,6 +56,8 @@ h1{font-size:clamp(2.6rem,7vw,5rem)}
 h2{font-size:clamp(2rem,4.4vw,3.2rem)}
 h3{font-size:1.12rem; font-weight:400; letter-spacing:-.012em; line-height:1.45}
 p{margin:0 0 1.1rem; max-width:38rem}
+/* 산문에서는 굵기를 섞지 않는다 — 한 문장 안에 300 과 400 이 같이 있으면 글이 얼룩진다.
+   굵은 글씨는 숫자 표(.rows .after)에만 남긴다. 거기선 데이터로 읽힌다. */
 b{font-weight:400; color:var(--fg)}
 a{color:inherit}
 
@@ -67,7 +72,7 @@ a{color:inherit}
 /* 섹션 머리 — 가운데로 모은다. 제품 랜딩의 호흡이고, 아래 격자가 넓어 보인다 */
 .sec-head{text-align:center; max-width:44rem; margin:0 auto 4.5rem}
 .sec-head p{margin-inline:auto}
-.sec-head .lead{color:var(--dim); font-size:1.06rem; margin-top:1.6rem}
+.sec-head .lead{font-size:1.06rem; margin-top:1.6rem}
 
 /* ── 알약 배지 ── */
 .badge{
@@ -121,7 +126,7 @@ header.top.solid{
 .lockup{margin:0 0 2.2rem; font-family:var(--serif); font-weight:300;
         font-size:clamp(2.2rem,5.6vw,3.8rem); line-height:1; letter-spacing:-.012em}
 .hero h1{font-size:clamp(2.4rem,6vw,4.4rem)}
-.hero .lede{font-size:1.12rem; color:var(--dim); margin-top:1.8rem; max-width:32rem}
+.hero .lede{font-size:1.12rem; margin-top:1.8rem; max-width:32rem}
 .hero .cta{justify-content:center}
 /* 포맷 띠 — 로고 줄이 설 자리에 우리가 여는 것을 늘어놓는다 */
 .strip{
@@ -147,7 +152,7 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
 }
 .item:hover{border-color:var(--line2); transform:translateY(-2px)}
 .item .no{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--dim2); display:block; margin-bottom:1.3rem}
-.item p{margin:.9rem 0 1rem; color:var(--dim); max-width:none}
+.item p{margin:.9rem 0 1rem; max-width:none}
 .item .why{font-family:var(--mono); font-size:11px; color:var(--dim2); margin:0; letter-spacing:.03em}
 /* 그림이 붙은 카드는 두 칸을 다 쓴다 — 창 하나를 반 칸에 욱여넣으면 안쪽 글자가 안 읽힌다 */
 .item:has(figure:not(:empty)){grid-column:1 / -1}
@@ -182,22 +187,22 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
 ol.steps{counter-reset:s; list-style:none; padding:0; margin:0 auto 2.4rem; max-width:44rem;
   border:1px solid var(--line); border-radius:var(--r); background:var(--card)}
 ol.steps li{counter-increment:s; display:grid; grid-template-columns:3rem 1fr; gap:1.2rem;
-  padding:1.5rem 2rem; color:var(--dim)}
+  padding:1.5rem 2rem}
 ol.steps li + li{border-top:1px solid var(--line)}
 ol.steps li::before{content:"0" counter(s); font-family:var(--mono); font-size:11px;
   letter-spacing:.1em; color:var(--dim2); padding-top:.45em}
 .warn{border-left:2px solid var(--fg); padding:.1rem 0 .1rem 1.6rem; margin:0 auto 2rem; max-width:44rem}
-.warn p{color:var(--dim); margin:0}
+.warn p{margin:0}
 
 /* ── 범위 ── */
 .limits{max-width:46rem; margin-inline:auto}
-.limits p{color:var(--dim); padding-left:1.7rem; position:relative; max-width:none}
+.limits p{padding-left:1.7rem; position:relative; max-width:none}
 .limits p::before{content:""; position:absolute; left:0; top:.85em; width:8px; height:1px; background:var(--dim2)}
 
 /* ── 띠 · 마무리 · 푸터 ── */
 .band{background:var(--card)}
 .band .wrap{display:grid; grid-template-columns:1fr auto; gap:3rem; align-items:end}
-.band p{color:var(--dim)}
+.band p{color:var(--fg)}
 .end{text-align:center; padding-block:9rem}
 .end h2{max-width:none}
 .end .cta{justify-content:center; margin-bottom:1.6rem}
