@@ -104,7 +104,9 @@ kbd{font-family:var(--mono); font-size:.84em; line-height:1; padding:.22em .5em 
 :focus-visible{outline:2px solid currentColor; outline-offset:3px}
 
 /* ── 상단 바: 따라오고, 본문에 들어서면 밝아진다 ── */
-header.top{position:sticky; top:0; z-index:50; transition:background .25s, border-color .25s}
+/* 히어로 위에 얹는다(아래 칸을 72px 끌어올린다) — 따로 서면 오로라 위에 검은 띠가 남는다 */
+header.top{position:sticky; top:0; z-index:50; margin-bottom:-72px; transition:background .25s, border-color .25s}
+header.top.dark{background:transparent}
 .top .wrap{display:flex; align-items:center; gap:1rem; height:72px}
 .top .logo{font-size:15px}
 .top .sp{flex:1}
@@ -114,7 +116,7 @@ header.top.solid{
 }
 
 /* ── 히어로 ── */
-.hero{position:relative; padding:5rem 0 0; overflow:hidden}
+.hero{position:relative; padding:calc(5rem + 72px) 0 0; overflow:hidden}
 /* 첫 화면 높이까지만 깐다. 히어로 전체에 깔면 아래쪽 작은 글(포맷 띠·메타)이
    마크의 빽빽한 자리와 겹쳐 둘 다 안 읽힌다. */
 #field{position:absolute; top:0; left:0; right:0; height:min(100vh,100%);
@@ -123,6 +125,15 @@ header.top.solid{
        -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 36%,transparent 70%);
        mask-image:linear-gradient(to bottom,#000 0%,#000 36%,transparent 70%)}
 .hero .wrap{position:relative; z-index:1}
+/* 오로라 — 마크 뒤에 옅은 빛 두 덩이. 아주 느리게 자리를 바꾼다 */
+.hero::before{content:""; position:absolute; inset:-10% -10% auto; height:110vh; z-index:0; pointer-events:none;
+  background:radial-gradient(38% 32% at 30% 30%, rgba(255,79,163,.20), transparent 70%),
+             radial-gradient(36% 30% at 72% 36%, rgba(52,214,255,.16), transparent 70%),
+             radial-gradient(30% 26% at 50% 62%, rgba(139,108,255,.14), transparent 70%);
+  filter:blur(30px); animation:aurora 26s ease-in-out infinite alternate}
+@keyframes aurora{to{transform:translate3d(3%,4%,0) scale(1.08)}}
+/* 배경이 화려해진 만큼 글자 뒤에 그늘을 깐다 — 글은 늘 무늬 위에 떠야 한다 */
+.hero-mid h1, .hero-mid .lede, .hero-mid .lockup{text-shadow:0 0 28px #000, 0 0 10px rgba(0,0,0,.85)}
 .hero-mid{text-align:center; max-width:48rem; margin-inline:auto}
 .hero-mid p{margin-inline:auto}
 /* 괄호가 제 앞뒤로 여백을 들고 있다 */
@@ -267,5 +278,6 @@ footer p{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; l
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   *{animation:none!important; transition:none!important}
+  .hero::before{animation:none}
   .anim .rise{opacity:1; transform:none}
 }
