@@ -131,6 +131,16 @@ header.top.solid{
 .hero h1{font-size:clamp(2.4rem,6vw,4.4rem)}
 .hero .lede{font-size:1.12rem; margin-top:1.8rem; max-width:32rem}
 .hero .cta{justify-content:center}
+/* 터미널로 설치 — 한 줄과 복사 단추. 줄이 넘치면 그 칸 안에서만 가로로 민다 */
+.install{display:flex; align-items:center; gap:.9rem; max-width:47rem; margin:0 auto 1.4rem;
+  padding:.5rem .5rem .5rem 1.2rem; border:1px solid var(--line2); border-radius:999px; background:var(--card); text-align:left}
+.install-k{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--dim2); white-space:nowrap}
+.install code{flex:1; min-width:0; overflow-x:auto; white-space:nowrap; scrollbar-width:none;
+  font-family:var(--mono); font-size:13px; color:var(--fg)}
+.install code::-webkit-scrollbar{display:none}
+.install-copy{flex:0 0 auto; font:inherit; font-size:12px; padding:.5em 1.1em; border-radius:999px; cursor:pointer;
+  border:1px solid var(--line2); background:transparent; color:var(--fg)}
+.install-copy:hover, .install-copy.on{background:var(--fg); color:var(--bg); border-color:var(--fg)}
 /* 포맷 띠 — 로고 줄이 설 자리에 우리가 여는 것을 늘어놓는다 */
 .strip{
   margin:3.2rem auto 0; padding-top:2.2rem; border-top:1px solid var(--line);
@@ -223,6 +233,7 @@ footer p{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; l
 @media (max-width:620px){
   :root{--gut:20px}
   .stat{grid-template-columns:1fr; gap:1rem}
+  .install-k{display:none}
   .exts{grid-template-columns:repeat(2,minmax(0,1fr))}
   .item{padding:1.8rem 1.6rem}
   .end{padding-block:6rem}

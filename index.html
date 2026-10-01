@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://choisukjune.github.io/indiff-app/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/site.css?v=0ef3d211">
+<link rel="stylesheet" href="assets/site.css?v=3d796ac3">
 </head>
 <body>
 
@@ -34,6 +34,11 @@
       <div class="cta">
         <a class="btn" href="https://github.com/choisukjune/indiff-app/releases/latest/download/INDIFF-mac-arm64.dmg">Download for Mac</a>
         <a class="btn ghost" href="#what">무엇을 하는지 보기</a>
+      </div>
+      <div class="install">
+        <span class="install-k">터미널로 설치</span>
+        <code>curl -fsSL https://choisukjune.github.io/indiff-app/install.sh | sh</code>
+        <button type="button" class="install-copy" data-copy="curl -fsSL https://choisukjune.github.io/indiff-app/install.sh | sh">복사</button>
       </div>
       <p class="mono">macOS 12+ · Apple Silicon · 211MB · Free · <a href="https://github.com/choisukjune/indiff-app/releases">릴리스 노트</a></p>
       <p class="strip">.hwp &nbsp;·&nbsp; .hwpx &nbsp;·&nbsp; .docx &nbsp;·&nbsp; .pdf &nbsp;·&nbsp; .xlsx &nbsp;·&nbsp; .csv &nbsp;·&nbsp; .pptx &nbsp;·&nbsp; .md</p>
@@ -338,6 +343,11 @@
     <div class="cta">
       <a class="btn" href="https://github.com/choisukjune/indiff-app/releases/latest/download/INDIFF-mac-arm64.dmg">Download for Mac</a>
     </div>
+    <div class="install">
+      <span class="install-k">터미널로 설치</span>
+      <code>curl -fsSL https://choisukjune.github.io/indiff-app/install.sh | sh</code>
+      <button type="button" class="install-copy" data-copy="curl -fsSL https://choisukjune.github.io/indiff-app/install.sh | sh">복사</button>
+    </div>
     <p class="mono">macOS 12 이상 · Apple Silicon · 211MB · 무료</p>
   </div>
 </section>
@@ -528,6 +538,37 @@
   [].forEach.call(document.querySelectorAll('.rise'), function (el, i) {
     el.style.transitionDelay = (Math.min(i, 3) * 60) + 'ms';
     io.observe(el);
+  });
+})();
+</script>
+<script>
+/* 설치 한 줄 복사. 붙여 넣을 글은 data-copy 에 따로 둔다 — 화면의 <code> 는 좁은 화면에서
+   줄이 넘쳐 가로로 밀리므로 그 글자를 긁지 않는다. 클립보드 API 가 막힌 곳(http·오래된 사파리)은
+   숨긴 textarea 로 한 번 더 시도하고, 그것도 안 되면 줄을 골라 둔 채 「⌘C」를 띄운다. */
+(function () {
+  [].forEach.call(document.querySelectorAll('.install-copy'), function (b) {
+    var label = b.textContent;
+    function done(t) {
+      b.textContent = t; b.classList.add('on');
+      clearTimeout(b._t); b._t = setTimeout(function () { b.textContent = label; b.classList.remove('on'); }, 1600);
+    }
+    function fallback(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      if (ok) return done('복사됨');
+      var code = b.parentNode.querySelector('code'), r = document.createRange();
+      r.selectNodeContents(code); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      done('⌘C');
+    }
+    b.addEventListener('click', function () {
+      var text = b.getAttribute('data-copy');
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { done('복사됨'); }, function () { fallback(text); });
+      } else fallback(text);
+    });
   });
 })();
 </script>
