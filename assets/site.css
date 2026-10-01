@@ -157,3 +157,6 @@ footer p{font-family:var(--mono); font-size:11.5px; color:hsl(var(--mut)); margi
 @media (prefers-reduced-motion: reduce){
   *{animation:none!important; transition:none!important}
 }
+
+/* 워드마크 — 괄호를 살린 소문자. 괄호는 한 겹 물러나 보이게 */
+.wordmark{font-weight:700; letter-spacing:-.01em; font-size:1.02rem}
