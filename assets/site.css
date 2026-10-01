@@ -39,7 +39,7 @@ body{
 }
 @font-face{
   font-family:'Pretendard Variable';
-  src:url('pretendard-subset.woff2?v=4b719dc5') format('woff2-variations');
+  src:url('pretendard-subset.woff2?v=d0f7171d') format('woff2-variations');
   font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
@@ -60,6 +60,9 @@ p{margin:0 0 1.1rem; max-width:38rem}
    굵은 글씨는 숫자 표(.rows .after)에만 남긴다. 거기선 데이터로 읽힌다. */
 b{font-weight:400; color:var(--fg)}
 a{color:inherit}
+/* 화면에 있는 키는 「빗금」이 아니라 / 다. 글로 풀어 쓰지 않고 그 모양 그대로 보인다 */
+kbd{font-family:var(--mono); font-size:.84em; line-height:1; padding:.22em .5em .28em;
+    border:1px solid var(--line2); border-radius:7px; color:var(--fg); white-space:nowrap}
 
 .logo{display:inline-block; font-family:var(--serif); font-size:1.26em; line-height:1;
       letter-spacing:.005em; color:var(--fg); text-decoration:none}
