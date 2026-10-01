@@ -57,7 +57,7 @@ h2{font-size:clamp(2rem,4.4vw,3.2rem)}
 h3{font-size:1.12rem; font-weight:400; letter-spacing:-.012em; line-height:1.45}
 p{margin:0 0 1.1rem; max-width:38rem}
 /* 산문에서는 굵기를 섞지 않는다 — 한 문장 안에 300 과 400 이 같이 있으면 글이 얼룩진다.
-   굵은 글씨는 숫자 표(.rows .after)에만 남긴다. 거기선 데이터로 읽힌다. */
+   <b> 도 같은 굵기로 둔다 — 강조는 색으로만. */
 b{font-weight:400; color:var(--fg)}
 a{color:inherit}
 /* 화면에 있는 키는 「빗금」이 아니라 / 다. 글로 풀어 쓰지 않고 그 모양 그대로 보인다 */
@@ -144,7 +144,9 @@ figure:empty{display:none}
 figure img{display:block; width:100%; height:auto; border:1px solid var(--line2);
            border-radius:var(--r); background:var(--card)}
 .shot-wide{margin-top:4.5rem; position:relative; z-index:1}
-.hero .shot-wide{margin-bottom:-6rem}      /* 다음 섹션 위로 걸치게 — 랜딩의 흔한 손짓 */
+.hero .shot-wide{margin-bottom:-6rem}
+/* 두 장을 나란히 — 글 카드 사이에 그림이 끼면 카드 하나가 반 줄에 혼자 남는다 */
+.shot-pair{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:4.5rem; align-items:start}      /* 다음 섹션 위로 걸치게 — 랜딩의 흔한 손짓 */
 .item figure{margin-top:1.8rem}
 
 /* ── 기능 카드 ── */
@@ -177,17 +179,12 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
 .bar{height:4px; border-radius:999px; background:var(--line2); display:flex; margin:0 0 .9rem; max-width:46rem; overflow:hidden}
 .bar i{display:block; background:var(--fg)}
 
-/* ── 증거 표 ── */
-.rows{border:1px solid var(--line); border-radius:var(--r); overflow:hidden; background:var(--card)}
-.row{display:grid; grid-template-columns:minmax(0,15rem) 1fr 1fr; gap:1.6rem;
-  padding:1.9rem 2.1rem; align-items:baseline}
-.row + .row{border-top:1px solid var(--line)}
-.row .tag{font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--dim2)}
-.row .before{color:var(--dim2)}
-.row .after{font-size:1.06rem}
-.rows.fmt .row{grid-template-columns:minmax(0,13rem) 1fr; padding:1.5rem 2.1rem; align-items:center}
-.rows.fmt .tag{font-size:12px; letter-spacing:.06em; text-transform:none; color:var(--fg)}
-.row .ms{display:block; font-family:var(--mono); font-size:12px; color:var(--dim2); margin-top:.6em; letter-spacing:.06em}
+/* ── 포맷 — 확장자만 카드로 ── */
+.exts{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px}
+.ext{aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--line); border-radius:var(--r); background:var(--card);
+  font-family:var(--mono); font-size:clamp(1.05rem,2vw,1.5rem); letter-spacing:.02em; color:var(--fg)}
+.ext.img{font-size:12px; line-height:1.9; letter-spacing:.06em; color:var(--dim); text-align:center}
 
 /* ── 설치 ── */
 ol.steps{counter-reset:s; list-style:none; padding:0; margin:0 auto 2.4rem; max-width:44rem;
@@ -228,14 +225,15 @@ footer p{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; l
   .items{grid-template-columns:1fr; gap:1.2rem}
   .item:has(figure:not(:empty)){grid-template-columns:1fr; gap:1.8rem}
   .band .wrap{grid-template-columns:1fr; gap:1.6rem}
+  .exts{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .shot-pair{grid-template-columns:1fr}
   section{padding-block:5.5rem}
   .hero .shot-wide{margin-bottom:-3rem}
 }
 @media (max-width:620px){
   :root{--gut:20px}
-  .row{grid-template-columns:1fr; gap:.6rem; padding:1.5rem 1.4rem}
-  .row .tag{order:-1; margin-bottom:.4rem}
   .stat{grid-template-columns:1fr; gap:1rem}
+  .exts{grid-template-columns:repeat(2,minmax(0,1fr))}
   .item{padding:1.8rem 1.6rem}
   ol.steps li{grid-template-columns:2.4rem 1fr; padding:1.3rem 1.4rem}
   .end{padding-block:6rem}
