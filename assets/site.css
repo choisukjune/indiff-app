@@ -117,10 +117,17 @@ header.top{position:relative; z-index:2}
 
 /* ── 그림 자리: 비면 접힌다 ── */
 figure{margin:0}
+/* 아직 안 찍은 자리는 조용히 접힌다 — 빈 상자도 깨진 그림도 남으면 안 된다 */
 figure:empty{display:none}
-figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)}
+/* 둥근 모서리는 「앱의 것」이라는 신호다. 페이지 고유 요소는 각지고, 앱을 보여 주는 것만 둥글다 */
+figure img{display:block; width:100%; height:auto; border:1px solid var(--line2);
+           border-radius:.5rem; background:#0a0a0b}
 .shot-wide{margin-top:4rem}
-.item figure{margin-top:1.4rem}
+.item figure{margin-top:1.6rem}
+/* 그림이 붙은 항목은 두 칸을 다 쓴다 — 창 하나를 반 칸(≈735px)에 욱여넣으면
+   화면 속 글자가 57%로 줄어 아무것도 안 읽힌다. 읽히지 않는 그림은 넣으나 마나다. */
+.item:has(figure:not(:empty)){grid-column:1 / -1}
+.item:has(figure:not(:empty)) > p{max-width:46rem}
 
 /* ── 설치 ── */
 ol.steps{counter-reset:s; list-style:none; padding:0; margin:0 0 3rem; max-width:38rem}
