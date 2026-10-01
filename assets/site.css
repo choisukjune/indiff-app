@@ -1,43 +1,34 @@
 /* ───────────────────────────────────────────────────────────────
-   (indiff) — 검은 히어로에서 밝은 본문으로.
+   (indiff) — 검정 하나.
 
-   참고한 결(Lyra AI)의 구조를 가져왔다 — "bold dark hero into a light, airy flow
-   as users scroll". 색은 여전히 **검정과 흰색 둘뿐**이다. 둘의 자리를 바꿔 가며 쓴다.
-     · 히어로·띠·마무리·푸터는 검정 바탕(.dark)
-     · 그 사이의 본문은 흰 바탕 — 스크린샷이 밝은 앱 화면이라 여기서 제 색으로 읽힌다
-     · 색 토큰을 .dark 에서 다시 정의한다. 컴포넌트 CSS 는 한 벌로 양쪽에서 돈다
+   한때 검은 히어로에서 흰 본문으로 넘기는 구성을 썼다. 되돌렸다 — 한 창 안에서 바탕이
+   뒤집히면 두 페이지를 이어 붙인 것처럼 읽히고, 경계마다 눈이 한 번씩 멈춘다.
+   **바탕은 검정 하나**로 두고, 면을 나누는 일은 카드(--card)와 규칙선(--line)이 맡는다.
 
-   앱의 강조색(#D97757)은 안 쓴다. 강조가 필요한 자리는 **면을 뒤집어** 푼다.
+   참고한 결(Lyra AI)에서 가져온 것은 색이 아니라 **구성**이다 — 가운데 모은 히어로,
+   알약 배지, 카드 격자, 따라오는 상단 바, 스크롤에 맞춰 떠오르는 블록.
+
+   색은 흰색과 회색의 단계로만 말한다. 앱의 강조색(#D97757)은 쓰지 않는다.
    ─────────────────────────────────────────────────────────────── */
 :root{
-  --bg:#fff;
-  --fg:#0b0b0c;
-  --dim:#5f6066;        /* 보조 글 — 흰 바탕 6.6:1 */
-  --dim2:#8b8c93;       /* 더 물러난 메타 — 4.5:1 */
-  --line:#e8e8eb;
-  --line2:#d9d9de;
-  --card:#fafafa;
-  --shadow:0 24px 70px -28px rgba(0,0,0,.28);
+  --bg:#000;
+  --fg:#fff;
+  --dim:#8a8a8f;        /* 보조 글 — 검정 위 4.9:1 */
+  --dim2:#6a6a70;       /* 더 물러난 메타 */
+  --line:#1f1f22;
+  --line2:#2e2e33;
+  --card:#0c0c0e;       /* 카드 — 검정에서 한 칸만 뜬다 */
+  --shadow:none;
   --col:1180px;
   --gut:28px;
   --r:16px;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Times New Roman',Georgia,serif;
 }
-/* 검은 구간. 토큰만 뒤집으면 아래 컴포넌트가 전부 따라온다 */
-.dark{
-  --bg:#000;
-  --fg:#fff;
-  --dim:#8a8a8f;
-  --dim2:#5c5c61;
-  --line:#1f1f22;
-  --line2:#2e2e33;
-  --card:#0d0d0f;
-  --shadow:0 24px 70px -28px rgba(0,0,0,.9);
-  color:var(--fg); background:var(--bg);
-}
+/* .dark 는 이제 바탕과 같다 — 표식은 남겨 둔다(상단 바가 그 이름을 쓴다) */
+.dark{color:var(--fg); background:var(--bg)}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%; background:#fff; scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%; background:var(--bg); scroll-behavior:smooth}
 body{
   margin:0;
   font-family:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Noto Sans KR',
@@ -53,7 +44,7 @@ body{
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
 section{padding-block:8rem; background:var(--bg); color:var(--fg)}
-section + section:not(.dark){border-top:1px solid var(--line)}
+section + section{border-top:1px solid var(--line)}
 
 /* ── 글자 ──
    **굵기를 하나로 쓴다.** 제목도 본문도 가늘게(300), 강조는 면과 크기로 만든다. */
@@ -110,8 +101,8 @@ header.top{position:sticky; top:0; z-index:50; transition:background .25s, borde
 .top .logo{font-size:15px}
 .top .sp{flex:1}
 header.top.solid{
-  background:rgba(255,255,255,.82); border-bottom:1px solid var(--line);
-  -webkit-backdrop-filter:saturate(180%) blur(14px); backdrop-filter:saturate(180%) blur(14px);
+  background:rgba(0,0,0,.72); border-bottom:1px solid var(--line);
+  -webkit-backdrop-filter:saturate(150%) blur(14px); backdrop-filter:saturate(150%) blur(14px);
 }
 
 /* ── 히어로 ── */
@@ -143,7 +134,7 @@ header.top.solid{
 figure{margin:0}
 figure:empty{display:none}
 figure img{display:block; width:100%; height:auto; border:1px solid var(--line2);
-           border-radius:var(--r); background:var(--card); box-shadow:var(--shadow)}
+           border-radius:var(--r); background:var(--card)}
 .shot-wide{margin-top:4.5rem; position:relative; z-index:1}
 .hero .shot-wide{margin-bottom:-6rem}      /* 다음 섹션 위로 걸치게 — 랜딩의 흔한 손짓 */
 .item figure{margin-top:1.8rem}
@@ -204,6 +195,7 @@ ol.steps li::before{content:"0" counter(s); font-family:var(--mono); font-size:1
 .limits p::before{content:""; position:absolute; left:0; top:.85em; width:8px; height:1px; background:var(--dim2)}
 
 /* ── 띠 · 마무리 · 푸터 ── */
+.band{background:var(--card)}
 .band .wrap{display:grid; grid-template-columns:1fr auto; gap:3rem; align-items:end}
 .band p{color:var(--dim)}
 .end{text-align:center; padding-block:9rem}
