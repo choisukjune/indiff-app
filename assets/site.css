@@ -28,7 +28,7 @@ body{
   margin:0;
   font-family:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Noto Sans KR',
     -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  font-size:16px; line-height:1.8; font-weight:350;
+  font-size:16px; line-height:1.8; font-weight:300;
   color:var(--fg); background:var(--bg);
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
@@ -41,8 +41,8 @@ body{
 section{padding-block:7.5rem; border-top:1px solid var(--line)}
 
 /* ── 로고 ── */
-.logo{display:inline-flex; align-items:center; gap:.62em; color:var(--fg); text-decoration:none}
-.logo .mark{width:1.5em; height:1.5em; flex:0 0 auto}
+.logo{display:inline-flex; align-items:center; gap:.42em; color:var(--fg); text-decoration:none}
+.logo .mark{width:1.45em; height:1.45em; flex:0 0 auto}
 .logo .word{font-family:var(--serif); font-size:1.26em; line-height:1; letter-spacing:.005em}
 
 /* ── 작은 라벨 ── */
@@ -53,12 +53,14 @@ section{padding-block:7.5rem; border-top:1px solid var(--line)}
 .mono{font-family:var(--mono); font-size:12px; letter-spacing:.02em; color:var(--dim2)}
 .dim{color:var(--dim)}
 
-h1,h2,h3{margin:0; font-weight:350; letter-spacing:-.025em; line-height:1.14}
+/* **굵기를 하나로 쓴다.** 제목도 본문도 가늘게(300) 두고, 강조는 **흰색과 크기**로 만든다 —
+   굵기를 섞는 순간 화면에 목소리가 둘이 된다(참고한 결이 그렇게 간다). */
+h1,h2,h3{margin:0; font-weight:300; letter-spacing:-.03em; line-height:1.12}
 h1{font-size:clamp(2.6rem,7vw,5rem)}
 h2{font-size:clamp(1.9rem,4.2vw,3rem); margin-bottom:2rem}
-h3{font-size:1.06rem; font-weight:600; letter-spacing:-.01em; line-height:1.5}
+h3{font-size:1.1rem; font-weight:400; letter-spacing:-.01em; line-height:1.5}
 p{margin:0 0 1.1rem; max-width:38rem}
-b{font-weight:600}
+b{font-weight:400; color:var(--fg)}   /* 강조는 굵기가 아니라 흰색이다 */
 
 /* ── 상단 바 ── */
 header.top{position:relative; z-index:2}
@@ -70,13 +72,17 @@ header.top{position:relative; z-index:2}
 .hero{position:relative; border-top:0; padding:0; min-height:86vh; display:flex; align-items:center}
 #field{position:absolute; inset:0; width:100%; height:100%; display:block; z-index:0; pointer-events:none}
 .hero .wrap{position:relative; z-index:1; padding-block:5rem}
-.hero h1{max-width:14em}
-.hero .lede{font-size:1.18rem; color:var(--dim); margin-top:2rem; max-width:32rem}
+/* 괄호가 제 앞뒤로 공백을 들고 있어 gap 을 좁혀야 한 덩이로 읽힌다 */
+.lockup{display:flex; align-items:center; gap:.3em; margin:0 0 3rem; font-size:clamp(1.8rem,4.6vw,3.2rem)}
+.lockup .mark{width:1.22em; height:1.22em; flex:0 0 auto}
+.lockup .word{font-family:var(--serif); line-height:1; letter-spacing:.004em}
+.hero h1{max-width:14em; font-size:clamp(2.2rem,5.4vw,3.9rem)}
+.hero .lede{font-size:1.1rem; color:var(--dim); margin-top:2rem; max-width:34rem}
 .cta{display:flex; align-items:center; gap:1.4rem; flex-wrap:wrap; margin:3rem 0 1rem}
 .btn{
   display:inline-flex; align-items:center; gap:.5em; padding:.85em 1.7em;
   border:1px solid var(--fg); background:transparent; color:var(--fg);
-  font:inherit; font-size:.95rem; font-weight:500; text-decoration:none; cursor:pointer;
+  font:inherit; font-size:.95rem; font-weight:400; text-decoration:none; cursor:pointer;
   transition:background .14s, color .14s;
 }
 .btn:hover{background:var(--fg); color:var(--bg)}
@@ -86,7 +92,7 @@ header.top{position:relative; z-index:2}
 
 /* ── 숫자 ── */
 .cmp{display:flex; align-items:flex-end; gap:3.5rem; margin:3rem 0 1.4rem; flex-wrap:wrap}
-.num{font-size:clamp(2.2rem,5.5vw,3.4rem); font-weight:300; letter-spacing:-.04em; line-height:1}
+.num{font-size:clamp(2.2rem,5.5vw,3.4rem); font-weight:200; letter-spacing:-.04em; line-height:1}
 .num.gone{color:var(--dim2)}
 .num small{display:block; font-family:var(--mono); font-size:11px; font-weight:400;
   letter-spacing:.12em; text-transform:uppercase; color:var(--dim2); margin-top:1em}
