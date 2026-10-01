@@ -119,11 +119,11 @@ header.top.solid{
 .hero{position:relative; padding:calc(5rem + 72px) 0 0; overflow:hidden}
 /* 첫 화면 높이까지만 깐다. 히어로 전체에 깔면 아래쪽 작은 글(포맷 띠·메타)이
    마크의 빽빽한 자리와 겹쳐 둘 다 안 읽힌다. */
-#field{position:absolute; top:0; left:0; right:0; height:min(100vh,100%);
+#field{position:absolute; top:0; left:0; right:0; height:min(100svh,100%);
        width:100%; display:block; z-index:0; pointer-events:none;
        /* 아래로 갈수록 녹인다 — 안 그러면 마크의 빽빽한 자리가 포맷 띠 글자와 겹친다 */
-       -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 36%,transparent 70%);
-       mask-image:linear-gradient(to bottom,#000 0%,#000 36%,transparent 70%)}
+       -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 80%,transparent 100%);
+       mask-image:linear-gradient(to bottom,#000 0%,#000 80%,transparent 100%)}
 .hero .wrap{position:relative; z-index:1}
 /* 오로라 — 마크 뒤에 옅은 빛 두 덩이. 아주 느리게 자리를 바꾼다 */
 .hero::before{content:""; position:absolute; inset:-10% -10% auto; height:110vh; z-index:0; pointer-events:none;
