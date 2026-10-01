@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>(indiff) — 흩어진 문서. 한 화면.</title>
-<meta name="description" content="hwpx도, PDF도, 엑셀도 원본 그대로 열립니다. 같은 화면에서 고치고, 물어보고, 터미널까지 띄웁니다. macOS 로컬 문서 작업공간.">
+<meta name="description" content="한글(.hwp·.hwpx)도 PDF도 엑셀도 원본 그대로 열립니다. 같은 화면에서 고치고, 묻고, 터미널까지 띄웁니다. macOS 로컬 문서 작업공간.">
 <meta property="og:title" content="(indiff) — 흩어진 문서. 한 화면.">
-<meta property="og:description" content="hwpx도, PDF도, 엑셀도 원본 그대로 열립니다. 같은 화면에서 고치고, 물어보고, 터미널까지 띄웁니다.">
+<meta property="og:description" content="한글(.hwp·.hwpx)도 PDF도 엑셀도 원본 그대로. 같은 화면에서 고치고, 묻고, 터미널까지 띄웁니다.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://choisukjune.github.io/indiff-app/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -15,10 +15,7 @@
 <body>
 
 <header class="top">
-  <div class="wrap"><span class="logo">(indiff)</span>
-    <span class="sp"></span>
-    <span class="mono">Download — 준비 중</span>
-  </div>
+  <div class="wrap"><span class="logo">(indiff)</span></div>
 </header>
 
 <section class="hero">
@@ -27,8 +24,8 @@
     <div>
       <p class="lockup">(indiff)</p>
       <h1>Every document.<br>One screen.</h1>
-      <p class="lede">흩어진 문서를 한 화면에. hwpx도, PDF도, 엑셀도 원본 그대로 열립니다.<br>
-         같은 화면에서 고치고, 물어보고, 터미널까지 띄웁니다.</p>
+      <p class="lede">한글(.hwp·.hwpx)도 PDF도 엑셀도 원본 그대로 열립니다.<br>
+         같은 화면에서 고치고, 묻고, 터미널까지 띄웁니다.</p>
       <div class="cta">
         <span class="btn" aria-disabled="true">Download — 준비 중</span>
       </div>
@@ -46,27 +43,155 @@
 
 <section>
   <div class="wrap">
-    <p class="label">The problem</p>
-    <h2>눈에 보이는 건 12%뿐입니다.</h2>
+    <p class="label">What it does</p>
+    <h2>열고. 고치고. 찾습니다.</h2>
+    <div class="items">
+
+      <div class="item">
+        <div class="no">01</div>
+        <div><h3>열기</h3>
+          <p>한글 <b>.hwp</b>와 <b>.hwpx</b>, docx와 PDF가 원본 레이아웃 그대로 열립니다.
+             엑셀과 CSV는 열 문자와 행 번호가 붙은 격자로, 파워포인트는 글과 표로 펼쳐집니다.</p>
+          <p class="why">한 번 누르면 임시로, 두 번 눌러야 탭이 앉습니다</p></div>
+        <figure data-shot="preview-tab">
+<picture>
+  <source type="image/avif" srcset="assets/shots/preview-tab.avif?v=440e9491 1x, assets/shots/preview-tab@2x.avif?v=5c568acf 2x">
+  <source type="image/webp" srcset="assets/shots/preview-tab.webp?v=a4159512 1x, assets/shots/preview-tab@2x.webp?v=03d40c0e 2x">
+  <img src="assets/shots/preview-tab.webp?v=a4159512" width="1200" height="712" alt="트리에서 문서를 한 번 눌러 생긴 임시 보기 탭. 탭 제목이 기울임으로 보이고, 그 문서의 요구사항 표가 열려 있다." loading="lazy" decoding="async">
+</picture>
+</figure>
+      </div>
+
+      <div class="item">
+        <div class="no">02</div>
+        <div><h3>고치기</h3>
+          <p>마크다운은 열면 바로 고쳐집니다. 연필도, 저장 단추도 없습니다.
+             콜아웃과 토글, 표를 넣어도 파일에는 표준 표기로 남아 깃허브에서 그대로 보입니다.</p>
+          <p class="why">손대지 않은 문단은 원문 글자 그대로 남습니다</p></div>
+        <figure data-shot="md-editor">
+<picture>
+  <source type="image/avif" srcset="assets/shots/md-editor.avif?v=119d5071 1x, assets/shots/md-editor@2x.avif?v=a08cf163 2x">
+  <source type="image/webp" srcset="assets/shots/md-editor.webp?v=fa8d07c9 1x, assets/shots/md-editor@2x.webp?v=fe56cdf3 2x">
+  <img src="assets/shots/md-editor.webp?v=fa8d07c9" width="1200" height="820" alt="회의록을 서식 그대로 고치는 화면. 체크리스트 아래에서 빗금(/) 메뉴가 열려 제목·목록·표 같은 블록 고르기가 떠 있다." loading="lazy" decoding="async">
+</picture>
+</figure>
+      </div>
+
+      <div class="item">
+        <div class="no">03</div>
+        <div><h3>찾기</h3>
+          <p>⌘K로 열어 그 자리에서 고릅니다. grep이 못 읽는 hwpx와 docx, PDF 안쪽까지 찾고,
+             결과가 문서가 아니라 <b>그 문서의 섹션</b>을 가리킵니다.</p>
+          <p class="why">한글 두 글자 낱말도 잡힙니다</p></div>
+        <figure data-shot="search"></figure>
+      </div>
+
+      <div class="item">
+        <div class="no">04</div>
+        <div><h3>노트</h3>
+          <p>고른 대목에 쪽지를 답니다. 문서 파일은 건드리지 않습니다.
+             따로 담아 두고, 문서가 바뀌어도 인용한 문장으로 그 자리를 다시 찾아냅니다.</p>
+          <p class="why">노트만 모아 보는 패널이 따로 섭니다</p></div>
+        <figure data-shot="note"></figure>
+      </div>
+
+      <div class="item">
+        <div class="no">05</div>
+        <div><h3>내보내기</h3>
+          <p>정리한 회의록을 한글 문서로 떨굽니다. 받는 쪽이 한글만 쓰는 조직이어도
+             파일 하나면 끝입니다.</p>
+          <p class="why">내보낸 뒤 되읽어 글자와 표가 살았는지 확인합니다</p></div>
+        <figure data-shot="export"></figure>
+      </div>
+
+      <div class="item">
+        <div class="no">06</div>
+        <div><h3>한 화면에</h3>
+          <p>패널을 갈라 문서와 웹, 터미널을 나란히 둡니다. 웹 탭은 ChatGPT와 Claude처럼
+             끼워 넣기를 막는 사이트도 열리고, ☆로 담아 두면 다음에 한 번에 엽니다.</p>
+          <p class="why">패널 구성은 껐다 켜도 그대로입니다</p></div>
+        <figure data-shot="panes"></figure>
+      </div>
+
+      <div class="item">
+        <div class="no">07</div>
+        <div><h3>터미널</h3>
+          <p>새 탭으로 터미널이 열립니다. 시작 폴더는 지금 보고 있는 문서의 폴더입니다.
+             트리에서 파일을 끌어다 놓으면 경로가 입력됩니다.</p>
+          <p class="why">vim도, 색도, 크기 조절도 그대로 됩니다</p></div>
+        <figure data-shot="terminal">
+<picture>
+  <source type="image/avif" srcset="assets/shots/terminal.avif?v=d101babb 1x, assets/shots/terminal@2x.avif?v=f224ec22 2x">
+  <source type="image/webp" srcset="assets/shots/terminal.webp?v=e0864514 1x, assets/shots/terminal@2x.webp?v=0a3d748f 2x">
+  <img src="assets/shots/terminal.webp?v=e0864514" width="1200" height="712" alt="왼쪽에 문서, 오른쪽에 터미널. 터미널의 시작 폴더가 보던 문서의 폴더(03_산출물)다." loading="lazy" decoding="async">
+</picture>
+</figure>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="label">Works with Claude Code</p>
+    <h2>묻는 자리가 셋,<br>맡기는 자리가 하나.</h2>
+    <div class="items">
+
+      <div class="item">
+        <div class="no">01</div>
+        <div><h3>문서 안에 글이 자랍니다</h3>
+          <p>빗금을 치고 할 일을 한 줄 적으면 커서 자리에 글이 자랍니다.
+             문서 전문과 목차, 색인에서 찾은 옆 문서의 대목이 함께 갑니다.</p>
+          <p class="why">유지 · 버리기 · 다시 — 셋 중에 고릅니다</p></div>
+      </div>
+
+      <div class="item">
+        <div class="no">02</div>
+        <div><h3>받기 전까지 파일은 그대로입니다</h3>
+          <p>고쳐 달라고 하면 낱말 단위로 먼저 보여 줍니다. 지울 글은 붉게, 넣을 글은 초록으로.
+             보는 동안 파일은 한 글자도 바뀌지 않고, 받을지는 사람이 고릅니다.</p>
+          <p class="why">블록 손잡이에서 그 블록만 맡길 수도 있습니다</p></div>
+      </div>
+
+      <div class="item">
+        <div class="no">03</div>
+        <div><h3>고른 대목을 그 자리에서</h3>
+          <p>읽다가 글을 고르면 알약이 뜹니다. 그 대목만 두고 묻고, 답은 복사하거나
+             채팅으로 이어서 갑니다.</p>
+          <p class="why">문서와 색인에 없으면 한 번 검색합니다</p></div>
+        <figure data-shot="ask"></figure>
+      </div>
+
+      <div class="item">
+        <div class="no">04</div>
+        <div><h3>창까지 맡길 수 있습니다</h3>
+          <p>앱을 Claude Code에 도구 <b>스물세 개</b>로 등록합니다. 탭을 열고 읽고 누르는 일부터
+             문서를 띄우고 패널을 가르는 일까지 시킵니다.</p>
+          <p class="why">오른쪽 패널에서 지난 대화를 이어받습니다</p></div>
+      </div>
+
+    </div>
+    <p class="note" style="margin-top:3rem">claude 명령이 있을 때만 켜집니다 · 없어도 열기와 고치기, 찾기와 노트, 내보내기는 모두 됩니다</p>
+    <p class="note" style="margin-top:.6rem">사용 한도에 막히면 리셋 시각까지 기다렸다가 알아서 이어 갑니다</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="label">Why it&rsquo;s different</p>
+    <h2>표가 살아서 열립니다.</h2>
     <p>285KB 과업내용서에서 본문 문단만 뽑으면 12,407자. 원본은 102,000자입니다.
-       나머지 9만 자는 전부 표 안에 있었습니다. 검색에도, 복사에도, AI에게 물을 때도
-       그 9만 자는 없는 셈이 됩니다.</p>
+       나머지 9만 자는 전부 표 안에 있었습니다. 문서의 38%가 표를 쓰고,
+       요구사항표와 일정표, 배점표 — 결론은 대개 표 안에 적혀 있습니다.</p>
     <div class="cmp">
       <div class="num gone">12,407자<small>본문 문단만</small></div>
       <div class="num">102,000자<small>원본</small></div>
     </div>
     <div class="bar"><i style="width:12%"></i><u></u></div>
     <p class="mono">본문 12% · 표 안에 갇힌 88%</p>
-    <p>문서의 38%가 표를 씁니다. 요구사항표, 일정표, 배점표.
-       결론은 대개 표 안에 적혀 있습니다.</p>
-  </div>
-</section>
 
-<section>
-  <div class="wrap">
-    <p class="label">Evidence</p>
-    <h2>같은 파일. 다른 결과.</h2>
-    <div class="rows">
+    <div class="rows" style="margin-top:3.5rem">
       <div class="row">
         <div class="tag">HWP · 285KB · 과업내용서</div>
         <div class="before">본문 문단 12,407자</div>
@@ -95,76 +220,18 @@
 
 <section>
   <div class="wrap">
-    <p class="label">What it does</p>
-    <h2>읽고. 고치고. 묻고.</h2>
-    <div class="items">
-      <div class="item">
-        <div class="no">01</div>
-        <div><h3>읽기</h3>
-          <p>트리에서 고르면 탭으로 열립니다. hwpx와 docx, PDF는 원본 레이아웃 그대로.
-             엑셀과 CSV는 열 문자와 행 번호가 붙은 격자로.</p>
-          <p class="why">한 번 누르면 임시로, 두 번 눌러야 탭이 앉습니다</p></div>
-        <figure data-shot="preview-tab">
-<picture>
-  <source type="image/avif" srcset="assets/shots/preview-tab.avif?v=440e9491 1x, assets/shots/preview-tab@2x.avif?v=5c568acf 2x">
-  <source type="image/webp" srcset="assets/shots/preview-tab.webp?v=a4159512 1x, assets/shots/preview-tab@2x.webp?v=03d40c0e 2x">
-  <img src="assets/shots/preview-tab.webp?v=a4159512" width="1200" height="712" alt="트리에서 문서를 한 번 눌러 생긴 임시 보기 탭. 탭 제목이 기울임으로 보이고, 그 문서의 요구사항 표가 열려 있다." loading="lazy" decoding="async">
-</picture>
-</figure>
-      </div>
-      <div class="item">
-        <div class="no">02</div>
-        <div><h3>고치기</h3>
-          <p>마크다운은 열면 바로 고쳐집니다. 연필도, 저장 단추도 없습니다.
-             치는 대로 저장됩니다.</p>
-          <p class="why">손대지 않은 문단은 원문 글자 그대로 남습니다</p></div>
-        <figure data-shot="md-editor">
-<picture>
-  <source type="image/avif" srcset="assets/shots/md-editor.avif?v=119d5071 1x, assets/shots/md-editor@2x.avif?v=a08cf163 2x">
-  <source type="image/webp" srcset="assets/shots/md-editor.webp?v=fa8d07c9 1x, assets/shots/md-editor@2x.webp?v=fe56cdf3 2x">
-  <img src="assets/shots/md-editor.webp?v=fa8d07c9" width="1200" height="820" alt="회의록을 서식 그대로 고치는 화면. 체크리스트 아래에서 빗금(/) 메뉴가 열려 제목·목록·표 같은 블록 고르기가 떠 있다." loading="lazy" decoding="async">
-</picture>
-</figure>
-      </div>
-      <div class="item">
-        <div class="no">03</div>
-        <div><h3>묻기</h3>
-          <p>문서를 고른 채 물으면 그 자리에서 답합니다.
-             빗금을 치면 커서 자리에 글이 자랍니다. Claude Code가 그 일을 합니다.</p>
-          <p class="why">claude 명령이 있을 때만 켜집니다</p></div>
-        <figure data-shot="ask"></figure>
-      </div>
-      <div class="item">
-        <div class="no">04</div>
-        <div><h3>내보내기</h3>
-          <p>정리한 회의록을 한글 문서로 떨굽니다.
-             받는 쪽이 한글만 쓰는 조직이어도 파일 하나면 끝입니다.</p>
-          <p class="why">8,385자와 표 28개가 그대로 돌아왔습니다</p></div>
-        <figure data-shot="export"></figure>
-      </div>
-      <div class="item">
-        <div class="no">05</div>
-        <div><h3>찾기</h3>
-          <p>grep이 못 읽는 hwpx와 docx, PDF 안쪽까지 찾습니다.
-             화면에 그릴 때 쓰는 변환기를 그대로 태워 색인하므로 낱말 안쪽도 잡힙니다.</p>
-          <p class="why">816건, 9,141청크를 9.5초에</p></div>
-        <figure data-shot="search"></figure>
-      </div>
-      <div class="item">
-        <div class="no">06</div>
-        <div><h3>터미널</h3>
-          <p>새 탭으로 터미널이 열립니다. 시작 폴더는 지금 보고 있는 문서의 폴더입니다.
-             트리에서 파일을 끌어다 놓으면 경로가 입력됩니다.</p>
-          <p class="why">vim도, 색도, 크기 조절도 그대로 됩니다</p></div>
-        <figure data-shot="terminal">
-<picture>
-  <source type="image/avif" srcset="assets/shots/terminal.avif?v=d101babb 1x, assets/shots/terminal@2x.avif?v=f224ec22 2x">
-  <source type="image/webp" srcset="assets/shots/terminal.webp?v=e0864514 1x, assets/shots/terminal@2x.webp?v=0a3d748f 2x">
-  <img src="assets/shots/terminal.webp?v=e0864514" width="1200" height="712" alt="왼쪽에 문서, 오른쪽에 터미널. 터미널의 시작 폴더가 보던 문서의 폴더(03_산출물)다." loading="lazy" decoding="async">
-</picture>
-</figure>
-      </div>
+    <p class="label">Your files, unchanged</p>
+    <h2>열었다는 이유만으로<br>문서가 바뀌지 않습니다.</h2>
+    <p>서식 편집기로 문서를 열었다 닫으면, 예전에는 열 중 아홉이 조용히 다시 쓰였습니다.
+       글자를 잃는 것이 아니라 모양이 바뀌었습니다 — 접힌 줄이 한 줄로 합쳐지고,
+       목록 기호가 갈리고, 표 구분줄이 다시 짜였습니다.
+       지금은 손대지 않은 블록을 원문 글자 그대로 도로 넣습니다.</p>
+    <div class="cmp">
+      <div class="num gone">9.5%<small>통째로 다시 쓸 때</small></div>
+      <div class="num">87.2%<small>블록을 보존할 때</small></div>
     </div>
+    <p class="mono">왕복해도 한 글자도 안 바뀐 문서 · 마크다운 792건 기준</p>
+    <p class="note">AI가 쓴 문서(211건)는 97.6%. 그 문서들이 안 열리던 진짜 이유는 손실이 아니라 표 재조판이었습니다.</p>
   </div>
 </section>
 
@@ -178,29 +245,21 @@
       <li>처음 켜면 볼 폴더를 묻습니다. 문서가 든 폴더를 고르면 됩니다.</li>
     </ol>
     <div class="warn">
-      <p><b>처음 한 번은 &ldquo;확인되지 않은 개발자&rdquo;가 뜹니다.</b></p>
-      <p>이 빌드에는 애플 코드 서명이 없습니다. 그래서 macOS가 첫 실행을 한 번 막습니다.
-         우클릭으로 열면 통과하고, 다음부터는 그냥 열립니다. 두 번 묻지 않습니다.</p>
+      <p>서명이 없어 첫 실행 때 macOS가 한 번 막습니다. 우클릭으로 열면 통과하고, 다음부터는 그냥 열립니다.</p>
     </div>
-    <p class="mono">Apple Silicon · 설치 후 약 622MB · SHA-256은 공개할 때 적습니다</p>
-    <p class="mut">묻기는 claude 명령이 있을 때만 켜집니다.
-       없어도 읽기와 고치기, 내보내기와 찾기는 모두 됩니다.</p>
+    <p class="mono">Apple Silicon · 설치 후 약 622MB</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <p class="label">Limits</p>
-    <h2>안 되는 것도 적습니다.</h2>
+    <p class="label">Scope</p>
+    <h2>지금의 범위</h2>
     <div class="limits">
-      <p>macOS 전용입니다. 터미널이 macOS의 기능에 기대고 있습니다. Apple Silicon만 받습니다.</p>
-      <p>서버는 내 컴퓨터에만 붙습니다. 터미널이 명령을 실행하므로 바깥에 여는 것을 기본값으로 두지 않았습니다.</p>
-      <p>옛 한글 문서(3.x)와 암호 걸린 문서는 못 엽니다. 파워포인트는 글과 표만 가져옵니다.
-         옛 엑셀 형식(.xls)은 지원하지 않습니다.</p>
-      <p>서식 편집에서 밑줄과 글자색, 형광펜과 수식은 사라집니다. 마크다운에 그 표기가 없습니다.
-         그런 것이 든 문서는 원문 모드로 고칩니다.</p>
-      <p>날 HTML이 든 마크다운은 서식 화면에 보이지 않습니다. 원문 모드가 그 자리입니다.</p>
-      <p>코드 서명과 공증이 없습니다. 위 설치 항목을 보세요.</p>
+      <p>macOS 12 이상, Apple Silicon 전용입니다.</p>
+      <p>옛 한글 문서(3.x)와 암호 걸린 문서, 옛 엑셀 형식(.xls)은 못 엽니다.</p>
+      <p>서식 편집은 마크다운이 표현하는 범위까지입니다. 밑줄과 글자색, 수식이 든 문서는 원문 모드로 고칩니다.</p>
+      <p>터미널에서 띄우는 Claude Code는 승인을 건너뛰고 뜹니다. 내 컴퓨터의 파일을 바로 고칠 수 있습니다.</p>
     </div>
   </div>
 </section>
@@ -211,10 +270,10 @@
       <p class="label">Under the hood</p>
       <p>서버 파일 하나와 Electron 껍데기. 빌드 단계가 없습니다.
          문서는 디스크의 파일이 정본이고, 색인은 지워도 다시 만들어집니다.
-         클라우드로 올라가는 것이 없습니다.</p>
+         서버는 내 컴퓨터에만 붙습니다. 클라우드로 올라가는 것이 없습니다.</p>
     </div>
     <div>
-      <p class="mono">검사 파일 70개 · 검사 1,219회</p>
+      <p class="mono">검사 파일 70개 · 검사 1,300여 회</p>
       <p class="mono">MIT 라이선스</p>
     </div>
   </div>
@@ -237,7 +296,6 @@
     <p>이 페이지에는 분석 스크립트도 쿠키도 없습니다.</p>
   </div>
 </footer>
-
 
 
 <script>
