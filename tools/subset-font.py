@@ -24,6 +24,8 @@ def page_text():
 chars = set(page_text())
 chars |= set(chr(c) for c in range(0x20, 0x7F))
 chars |= set("0123456789%·—–…「」『』《》〈〉“”‘’→←↑↓✓×±≤≥°₩")
+# 스크립트가 띄우는 글 — HTML 에 없어 위에서 못 줍는다(복사 단추의 「복사됨」이 시스템 글꼴로 그려졌다)
+chars |= set("복사됨⌘")
 text = "".join(sorted(chars))
 
 if not os.path.exists(SRC):

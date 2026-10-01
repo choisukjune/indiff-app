@@ -39,7 +39,7 @@ body{
 }
 @font-face{
   font-family:'Pretendard Variable';
-  src:url('pretendard-subset.woff2?v=e0857a4c') format('woff2-variations');
+  src:url('pretendard-subset.woff2?v=3ac99b35') format('woff2-variations');
   font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
@@ -143,16 +143,25 @@ header.top.solid{
 .hero .lede{font-size:1.12rem; margin-top:1.8rem; max-width:32rem}
 .hero .cta{justify-content:center; margin-top:1.3rem}
 .hero-mid .install{margin-top:3rem}
-/* 터미널로 설치 — 한 줄과 복사 단추. 줄이 넘치면 그 칸 안에서만 가로로 민다 */
+/* 터미널로 설치 — 흰 바탕 단추 한 줄. 어디를 눌러도 복사되고, 복사되면 검은 바탕에 흰 선만 남아
+   「눌렸다」가 보인다. 줄이 넘치면 그 칸 안에서만 가로로 민다 */
 .install{display:flex; align-items:center; gap:.9rem; max-width:47rem; margin:0 auto 1.4rem;
-  padding:.5rem .5rem .5rem 1.2rem; border:1px solid var(--line2); border-radius:999px; background:var(--card); text-align:left}
-.install-k{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--dim2); white-space:nowrap}
+  padding:.5rem .5rem .5rem 1.3rem; border:1px solid #fff; border-radius:999px; background:#fff; color:#0a0a0b;
+  text-align:left; cursor:pointer; user-select:none;
+  transition:background .18s, color .18s, box-shadow .18s, transform .12s}
+.install:hover{box-shadow:0 0 0 5px rgba(255,255,255,.14)}
+.install:active{transform:scale(.99)}
+.install-k{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:#6e6e76; white-space:nowrap; transition:color .18s}
 .install code{flex:1; min-width:0; overflow-x:auto; white-space:nowrap; scrollbar-width:none;
-  font-family:var(--mono); font-size:13px; color:var(--fg)}
+  font-family:var(--mono); font-size:13px; color:inherit}
 .install code::-webkit-scrollbar{display:none}
 .install-copy{flex:0 0 auto; font:inherit; font-size:12px; padding:.5em 1.1em; border-radius:999px; cursor:pointer;
-  border:1px solid var(--line2); background:transparent; color:var(--fg)}
+  border:1px solid var(--line2); background:transparent; color:var(--fg); transition:background .18s, color .18s, border-color .18s}
 .install-copy:hover, .install-copy.on{background:var(--fg); color:var(--bg); border-color:var(--fg)}
+.install .install-copy{background:#0a0a0b; color:#fff; border-color:#0a0a0b}
+.install.copied{background:#0a0a0b; color:#fff; box-shadow:none}
+.install.copied .install-k{color:var(--dim2)}
+.install.copied .install-copy{background:#fff; color:#0a0a0b; border-color:#fff}
 
 /* ── 그림 ── */
 figure{margin:0}

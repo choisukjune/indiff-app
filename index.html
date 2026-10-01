@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://choisukjune.github.io/indiff-app/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/site.css?v=b4cc2234">
+<link rel="stylesheet" href="assets/site.css?v=f47438b1">
 </head>
 <body>
 
@@ -625,8 +625,9 @@
   [].forEach.call(document.querySelectorAll('.install-copy'), function (b) {
     var label = b.textContent;
     function done(t) {
-      b.textContent = t; b.classList.add('on');
-      clearTimeout(b._t); b._t = setTimeout(function () { b.textContent = label; b.classList.remove('on'); }, 1600);
+      var box = b.closest('.install');
+      b.textContent = t; b.classList.add('on'); if (box) box.classList.add('copied');
+      clearTimeout(b._t); b._t = setTimeout(function () { b.textContent = label; b.classList.remove('on'); if (box) box.classList.remove('copied'); }, 1600);
     }
     function fallback(text) {
       var ta = document.createElement('textarea');
@@ -638,6 +639,17 @@
       var code = b.parentNode.querySelector('code'), r = document.createRange();
       r.selectNodeContents(code); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
       done('⌘C');
+    }
+    /* 단추만이 아니라 줄 전체가 누르는 자리다 — 키보드로도 닿게 역할과 차례를 준다 */
+    var box = b.closest('.install');
+    if (box) {
+      box.setAttribute('role', 'button'); box.setAttribute('tabindex', '0');
+      box.setAttribute('aria-label', '설치 명령 복사');
+      box.addEventListener('click', function (e) { if (e.target !== b) b.click(); });
+      box.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); b.click(); }
+      });
+      b.tabIndex = -1;
     }
     b.addEventListener('click', function () {
       var text = b.getAttribute('data-copy');
