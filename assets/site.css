@@ -92,7 +92,7 @@ header.top{position:relative; z-index:2}
 
 /* ── 숫자 ── */
 .cmp{display:flex; align-items:flex-end; gap:3.5rem; margin:3rem 0 1.4rem; flex-wrap:wrap}
-.num{font-size:clamp(2.2rem,5.5vw,3.4rem); font-weight:200; letter-spacing:-.04em; line-height:1}
+.num{font-size:clamp(2.2rem,5.5vw,3.4rem); font-weight:300; letter-spacing:-.04em; line-height:1}
 .num.gone{color:var(--dim2)}
 .num small{display:block; font-family:var(--mono); font-size:11px; font-weight:400;
   letter-spacing:.12em; text-transform:uppercase; color:var(--dim2); margin-top:1em}
