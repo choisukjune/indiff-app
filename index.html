@@ -15,7 +15,7 @@
 <body>
 
 <header class="top">
-  <div class="wrap"><span class="logo"><svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" role="img" aria-label="INDIFF">  <rect x="415" y="206" width="40" height="41" rx="20"/>  <rect x="568" y="206" width="40" height="41" rx="20"/>  <rect x="291" y="288" width="70" height="112" rx="35"/>  <rect x="477" y="289" width="69" height="69" rx="34.5"/>  <rect x="623" y="289" width="110" height="71" rx="35.5"/>  <rect x="774" y="414" width="40" height="42" rx="20"/>  <rect x="209" y="415" width="41" height="41" rx="20.5"/>  <rect x="434" y="433" width="156" height="157" rx="34"/>  <rect x="291" y="476" width="70" height="71" rx="35"/>  <rect x="663" y="476" width="70" height="70" rx="35"/>  <rect x="209" y="569" width="41" height="41" rx="20.5"/>  <rect x="774" y="569" width="40" height="41" rx="20"/>  <rect x="663" y="622" width="70" height="113" rx="35"/>  <rect x="291" y="665" width="110" height="71" rx="35.5"/>  <rect x="477" y="665" width="70" height="71" rx="35"/>  <rect x="414" y="777" width="42" height="42" rx="21"/>  <rect x="568" y="777" width="41" height="42" rx="20.5"/></svg><span class="word">(indiff)</span></span>
+  <div class="wrap"><span class="logo">(indiff)</span>
     <span class="sp"></span>
     <span class="mono">Download — 준비 중</span>
   </div>
@@ -25,7 +25,7 @@
   <canvas id="field" aria-hidden="true"></canvas>
   <div class="wrap">
     <div>
-      <div class="lockup"><svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" role="img" aria-label="INDIFF">  <rect x="415" y="206" width="40" height="41" rx="20"/>  <rect x="568" y="206" width="40" height="41" rx="20"/>  <rect x="291" y="288" width="70" height="112" rx="35"/>  <rect x="477" y="289" width="69" height="69" rx="34.5"/>  <rect x="623" y="289" width="110" height="71" rx="35.5"/>  <rect x="774" y="414" width="40" height="42" rx="20"/>  <rect x="209" y="415" width="41" height="41" rx="20.5"/>  <rect x="434" y="433" width="156" height="157" rx="34"/>  <rect x="291" y="476" width="70" height="71" rx="35"/>  <rect x="663" y="476" width="70" height="70" rx="35"/>  <rect x="209" y="569" width="41" height="41" rx="20.5"/>  <rect x="774" y="569" width="40" height="41" rx="20"/>  <rect x="663" y="622" width="70" height="113" rx="35"/>  <rect x="291" y="665" width="110" height="71" rx="35.5"/>  <rect x="477" y="665" width="70" height="71" rx="35"/>  <rect x="414" y="777" width="42" height="42" rx="21"/>  <rect x="568" y="777" width="41" height="42" rx="20.5"/></svg><span class="word">(indiff)</span></div>
+      <p class="lockup">(indiff)</p>
       <h1>Every document.<br>One screen.</h1>
       <p class="lede">흩어진 문서를 한 화면에. hwpx도, PDF도, 엑셀도 원본 그대로 열립니다.<br>
          같은 화면에서 고치고, 물어보고, 터미널까지 띄웁니다.</p>
@@ -207,7 +207,7 @@
 </section>
 
 <footer>
-  <div class="wrap"><span class="logo"><svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" role="img" aria-label="INDIFF">  <rect x="415" y="206" width="40" height="41" rx="20"/>  <rect x="568" y="206" width="40" height="41" rx="20"/>  <rect x="291" y="288" width="70" height="112" rx="35"/>  <rect x="477" y="289" width="69" height="69" rx="34.5"/>  <rect x="623" y="289" width="110" height="71" rx="35.5"/>  <rect x="774" y="414" width="40" height="42" rx="20"/>  <rect x="209" y="415" width="41" height="41" rx="20.5"/>  <rect x="434" y="433" width="156" height="157" rx="34"/>  <rect x="291" y="476" width="70" height="71" rx="35"/>  <rect x="663" y="476" width="70" height="70" rx="35"/>  <rect x="209" y="569" width="41" height="41" rx="20.5"/>  <rect x="774" y="569" width="40" height="41" rx="20"/>  <rect x="663" y="622" width="70" height="113" rx="35"/>  <rect x="291" y="665" width="110" height="71" rx="35.5"/>  <rect x="477" y="665" width="70" height="71" rx="35"/>  <rect x="414" y="777" width="42" height="42" rx="21"/>  <rect x="568" y="777" width="41" height="42" rx="20.5"/></svg><span class="word">(indiff)</span></span><p>0.1.0</p>
+  <div class="wrap"><span class="logo">(indiff)</span><p>0.1.0</p>
     <p>MIT License</p>
     <p>글꼴 Pretendard Variable — SIL OFL 1.1</p>
     <p>이 페이지에는 분석 스크립트도 쿠키도 없습니다.</p>
@@ -217,42 +217,136 @@
 
 
 <script>
-/* 점 입자 구 — 참고한 결(oxa.ai)의 그림을 캔버스로 옮긴 것.
-   구면에 점을 **고르게** 뿌리고 정사영하면 가장자리가 저절로 빽빽해진다(limb). 빛은 오른쪽 위에서
-   오고, 거기에 흰 띠가 선다. 어두운 쪽도 희미하게 남긴다 — 그래야 공이 공으로 읽힌다.
-   씨앗을 고정해 새로 고쳐도 같은 그림이 나온다. */
+/* 배경 — 로고를 아스키 문자로 그린다.
+
+   아이콘은 둥근 사각 17개다(가운데 한 덩이 + 둘레 16). 그 열일곱 개의 **부호 있는 거리**를
+   문자 격자마다 재서, 가까울수록 빽빽한 글자(.:-=+*#%@)를 찍는다 — 픽셀이 아니라 글자가 농담이다.
+   움직임은 둘. 둘레 16개가 가운데를 축으로 아주 느리게 돈다(한 바퀴 74초). 그리고 대각선으로
+   밝기 물결이 지나간다. 격자는 고정이라 도형이 움직이면 글자가 저절로 다시 양자화되고,
+   그 떨림이 아스키 특유의 결을 만든다.
+
+   읽는 글이 아니므로 캔버스에 그린다 — 글자마다 투명도를 달리 줘야 배경으로 가라앉는다. */
 (function(){
-  var c=document.getElementById('field'); if(!c||!c.getContext) return;
-  var x=c.getContext('2d');
-  function rnd(s){ return function(){ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; }; }
-  function draw(){
-    var dpr=Math.min(window.devicePixelRatio||1,2);
-    var W=c.clientWidth, H=c.clientHeight; if(!W||!H) return;
-    c.width=W*dpr; c.height=H*dpr; x.setTransform(dpr,0,0,dpr,0,0);
-    x.clearRect(0,0,W,H);
-    var R=Math.min(W,H)*0.78, cx=W*0.80, cy=H*0.50;
-    var r=rnd(20260101), n=62000;
-    var lx=0.30, ly=-0.84, lz=0.45;
-    x.fillStyle='#fff';
-    for(var i=0;i<n;i++){
-      var u=r()*2-1, t=r()*6.283185, s=Math.sqrt(1-u*u);
-      var px=s*Math.cos(t), py=u, pz=s*Math.sin(t);
-      if(pz<0) continue;
-      var sx=cx+px*R, sy=cy+py*R;
-      if(sx<-3||sx>W+3||sy<-3||sy>H+3) continue;
-      var d=px*lx+py*ly+pz*lz;
-      var lit=d>0?d:0;
-      var rim=Math.pow(1-pz,2.2);
-      var a=0.09 + 0.95*Math.pow(lit,1.15) + 0.85*rim*Math.pow(lit,0.6);
-      if(a<0.06) continue;
-      var w = a>0.72 ? 2 : 1;
-      x.globalAlpha = a>1?1:a;
-      x.fillRect(sx|0, sy|0, w, w);
-    }
-    x.globalAlpha=1;
+  var c = document.getElementById('field'); if (!c || !c.getContext) return;
+  var g = c.getContext('2d');
+
+  /* assets/mark.svg 와 같은 좌표계(1024). [중심x, 중심y, 반폭, 반높이, 모서리] */
+  var SH = [[415,206,40,41],[568,206,40,41],[291,288,70,112],[477,289,69,69],[623,289,110,71],
+            [774,414,40,42],[209,415,41,41],[434,433,156,157],[291,476,70,71],[663,476,70,70],
+            [209,569,41,41],[774,569,40,41],[663,622,70,113],[291,665,110,71],[477,665,70,71],
+            [414,777,42,42],[568,777,41,42]].map(function(r){
+    return { cx:r[0]+r[2]/2, cy:r[1]+r[3]/2, hx:r[2]/2, hy:r[3]/2, r:Math.min(r[2],r[3])/2 };
+  });
+  var CORE = 7;                       /* 가운데 큰 사각 — 이것만 안 돈다 */
+  var RAMP = '.:-=+*#%@';
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var cw = 0, ch = 0, W = 0, H = 0, cols = 0, rows = 0, run = true;
+
+  function metrics(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = c.clientWidth; H = c.clientHeight; if (!W || !H) return false;
+    c.width = Math.round(W*dpr); c.height = Math.round(H*dpr);
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var S = Math.min(H*1.18, W*0.64);
+    var f = Math.max(9, Math.min(15, S/58));
+    g.font = f + 'px ui-monospace, SFMono-Regular, Menlo, monospace';
+    g.textBaseline = 'middle';
+    cw = g.measureText('M').width;
+    ch = Math.round(cw/0.52);
+    cols = Math.ceil(W/cw) + 1; rows = Math.ceil(H/ch) + 1;
+    return true;
   }
-  draw();
-  var t; addEventListener('resize', function(){ clearTimeout(t); t=setTimeout(draw,180); });
+
+  function draw(t){
+    if (!cw && !metrics()) return;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.clearRect(0, 0, W, H);
+
+    var wide = W >= 880;
+    var S  = Math.min(H*1.18, W*0.64);
+    var sc = S/1024;
+    var ox = (wide ? W*0.76 : W*0.50), oy = H*(wide ? 0.50 : 0.58);
+    /* 좁은 화면에선 마크가 글 바로 뒤에 선다 — 비킬 자리가 없으니 결로만 남긴다 */
+    var dim = wide ? 1 : 0.34;
+
+    /* 둘레가 도는 각 — 한 바퀴 74초 */
+    var th = t*0.0849, cs = Math.cos(th), sn = Math.sin(th);
+    var P = SH.map(function(s, i){
+      if (i === CORE) return s;
+      var dx = s.cx - 512, dy = s.cy - 512;
+      return { cx: 512 + dx*cs - dy*sn, cy: 512 + dx*sn + dy*cs, hx: s.hx, hy: s.hy, r: s.r };
+    });
+
+    var lv = []; for (var k = 0; k < RAMP.length; k++) lv.push([]);
+
+    for (var j = 0; j < rows; j++) {
+      var sy = j*ch + ch/2;
+      var py = (sy - oy)/sc + 512;
+      for (var i = 0; i < cols; i++) {
+        var sx = i*cw + cw/2;
+        var px = (sx - ox)/sc + 512;
+        var qx = px - 512, qy = py - 512;
+        var b;
+        if (qx*qx + qy*qy > 230400) {                /* 도형이 닿지 않는 바깥 — 성긴 별 */
+          var h = Math.sin(i*127.1 + j*311.7)*43758.5453; h -= Math.floor(h);
+          if (h > 0.014) continue;
+          b = 0.10 + 0.14*(0.5 + 0.5*Math.sin(t*1.7 + i*0.9 + j*1.3));
+        } else {
+          var d = 1e9;
+          for (var m = 0; m < P.length; m++) {
+            var s2 = P[m];
+            var ax = Math.abs(px - s2.cx) - (s2.hx - s2.r);
+            var ay = Math.abs(py - s2.cy) - (s2.hy - s2.r);
+            var mx = ax > 0 ? ax : 0, my = ay > 0 ? ay : 0;
+            var in2 = (ax > ay ? ax : ay); if (in2 > 0) in2 = 0;
+            var dd = Math.sqrt(mx*mx + my*my) + in2 - s2.r;
+            if (dd < d) d = dd;
+          }
+          b = (13 - d)/33; if (b <= 0) continue; if (b > 1) b = 1;
+          var wv = 0.5 + 0.5*Math.sin((px + py)*0.0128 - t*1.25);
+          b *= 0.70 + 0.30*wv;
+        }
+        var idx = (b*RAMP.length)|0; if (idx > RAMP.length-1) idx = RAMP.length-1;
+        if (idx < 0) continue;
+        lv[idx].push(sx, sy);
+      }
+    }
+
+    g.fillStyle = '#fff';
+    for (var q = 0; q < lv.length; q++) {
+      var a = (0.10 + 0.66*Math.pow((q+1)/lv.length, 1.15))*dim;
+      var pts = lv[q]; if (!pts.length) continue;
+      g.globalAlpha = a;
+      var chr = RAMP.charAt(q);
+      for (var n = 0; n < pts.length; n += 2) g.fillText(chr, pts[n], pts[n+1]);
+    }
+    g.globalAlpha = 1;
+  }
+
+  var t0 = 0, last = -1;
+  function loop(ms){
+    if (!run) return;
+    if (!t0) t0 = ms;
+    if (ms - last >= 55) { last = ms; draw((ms - t0)/1000); }   /* 18fps — 아스키는 조금 끊겨야 아스키다 */
+    requestAnimationFrame(loop);
+  }
+
+  function boot(){ if (metrics()) { if (still) draw(0); else requestAnimationFrame(loop); } }
+  boot();
+
+  var rt; addEventListener('resize', function(){
+    clearTimeout(rt); rt = setTimeout(function(){ if (metrics()) draw(still ? 0 : (performance.now()-t0)/1000); }, 160);
+  });
+
+  if (!still && window.IntersectionObserver) {          /* 안 보이면 안 돈다 */
+    new IntersectionObserver(function(e){
+      var on = e[0].isIntersecting;
+      if (on && !run) { run = true; last = -1; requestAnimationFrame(loop); }
+      run = on;
+    }, { threshold: 0 }).observe(c);
+  }
 })();
 </script>
 </body>
