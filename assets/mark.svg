@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" role="img" aria-label="INDIFF">
+  <rect x="415" y="206" width="40" height="41" rx="20"/>
+  <rect x="568" y="206" width="40" height="41" rx="20"/>
+  <rect x="291" y="288" width="70" height="112" rx="35"/>
+  <rect x="477" y="289" width="69" height="69" rx="34.5"/>
+  <rect x="623" y="289" width="110" height="71" rx="35.5"/>
+  <rect x="774" y="414" width="40" height="42" rx="20"/>
+  <rect x="209" y="415" width="41" height="41" rx="20.5"/>
+  <rect x="434" y="433" width="156" height="157" rx="34"/>
+  <rect x="291" y="476" width="70" height="71" rx="35"/>
+  <rect x="663" y="476" width="70" height="70" rx="35"/>
+  <rect x="209" y="569" width="41" height="41" rx="20.5"/>
+  <rect x="774" y="569" width="40" height="41" rx="20"/>
+  <rect x="663" y="622" width="70" height="113" rx="35"/>
+  <rect x="291" y="665" width="110" height="71" rx="35.5"/>
+  <rect x="477" y="665" width="70" height="71" rx="35"/>
+  <rect x="414" y="777" width="42" height="42" rx="21"/>
+  <rect x="568" y="777" width="41" height="42" rx="20.5"/>
+</svg>

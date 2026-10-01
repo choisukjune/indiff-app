@@ -3,56 +3,222 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>INDIFF</title>
-<meta name="description" content="흩어진 문서를 한 화면에 모아 두고, 그 자리에서 읽고 고치고 묻는다. macOS 로컬 문서 작업공간.">
-<meta property="og:title" content="INDIFF">
+<title>INDIFF — 표가 살아서 열린다</title>
+<meta name="description" content="흩어진 문서를 한 화면에 모아 두고, 그 자리에서 읽고 고치고 묻는다. hwpx·hwp·docx·pdf·xlsx·md 를 원본 모양 그대로 읽는 macOS 로컬 문서 작업공간.">
+<meta property="og:title" content="INDIFF — 표가 살아서 열린다">
 <meta property="og:description" content="흩어진 문서를 한 화면에 모아 두고, 그 자리에서 읽고 고치고 묻는다.">
 <meta property="og:type" content="website">
-<style>
-  /* shadcn zinc — 앱과 같은 토큰을 쓴다 */
-  :root{
-    --bg:0 0% 100%; --fg:240 10% 3.9%; --mut:240 3.8% 46.1%; --bd:240 5.9% 90%;
-    --accent:#D97757; --radius:.5rem;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{ --bg:240 10% 3.9%; --fg:0 0% 98%; --mut:240 5% 64.9%; --bd:240 3.7% 15.9%; }
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; display:grid; place-items:center; padding:2rem;
-    font-family:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Noto Sans KR',
-      -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    font-size:15px; line-height:1.7;
-    color:hsl(var(--fg)); background:hsl(var(--bg));
-    -webkit-font-smoothing:antialiased;
-  }
-  main{width:min(100%,34rem)}
-  .eyebrow{
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    font-size:11px; letter-spacing:.09em; text-transform:uppercase;
-    color:hsl(var(--mut)); display:flex; align-items:center; gap:.55em; margin:0 0 1.6rem;
-  }
-  .eyebrow::before{content:''; width:6px; height:6px; background:var(--accent); flex:0 0 auto}
-  h1{margin:0 0 .5rem; font-size:1.9rem; font-weight:700; letter-spacing:-.02em}
-  p{margin:0 0 1rem; max-width:30rem}
-  .mut{color:hsl(var(--mut))}
-  hr{border:0; border-top:1px dashed hsl(var(--bd)); margin:1.8rem 0}
-  .meta{
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    font-size:12px; color:hsl(var(--mut)); margin:0;
-  }
-</style>
+<meta property="og:url" content="https://choisukjune.github.io/indiff-app/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<main>
-  <p class="eyebrow">Local document workspace / macOS</p>
-  <h1>INDIFF</h1>
-  <p>흩어진 문서를 한 화면에 모아 두고, 그 자리에서 읽고 고치고 묻는다.</p>
-  <p class="mut">한 폴더 아래의 hwpx · hwp · docx · pdf · xlsx · csv · md 를 원본 모양 그대로 읽고,
-     같은 화면에서 고치고, 터미널까지 띄운다.</p>
-  <hr>
-  <p class="meta">소개 페이지와 내려받기는 준비 중이다. · macOS 12 이상 · Apple Silicon · MIT</p>
-</main>
+
+<header class="top">
+  <div class="wrap">
+    <svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" role="img" aria-label="INDIFF">  <rect x="415" y="206" width="40" height="41" rx="20"/>  <rect x="568" y="206" width="40" height="41" rx="20"/>  <rect x="291" y="288" width="70" height="112" rx="35"/>  <rect x="477" y="289" width="69" height="69" rx="34.5"/>  <rect x="623" y="289" width="110" height="71" rx="35.5"/>  <rect x="774" y="414" width="40" height="42" rx="20"/>  <rect x="209" y="415" width="41" height="41" rx="20.5"/>  <rect x="434" y="433" width="156" height="157" rx="34"/>  <rect x="291" y="476" width="70" height="71" rx="35"/>  <rect x="663" y="476" width="70" height="70" rx="35"/>  <rect x="209" y="569" width="41" height="41" rx="20.5"/>  <rect x="774" y="569" width="40" height="41" rx="20"/>  <rect x="663" y="622" width="70" height="113" rx="35"/>  <rect x="291" y="665" width="110" height="71" rx="35.5"/>  <rect x="477" y="665" width="70" height="71" rx="35"/>  <rect x="414" y="777" width="42" height="42" rx="21"/>  <rect x="568" y="777" width="41" height="42" rx="20.5"/></svg> <b>INDIFF</b>
+    <span class="sp"></span>
+    <span class="mono">내려받기 준비 중</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Local document workspace / macOS</p>
+        <h1>표가 살아서 열린다.</h1>
+        <p class="lede">흩어진 문서를 한 화면에 모아 두고, 그 자리에서 읽고 고치고 묻는다.</p>
+        <p class="mut">한 폴더 아래의 hwpx · hwp · docx · pdf · xlsx · csv · md 를 원본 모양 그대로 읽고,
+           같은 화면에서 고치고, 터미널까지 띄운다.</p>
+        <div class="cta">
+          <span class="btn" aria-disabled="true">내려받기 준비 중</span>
+        </div>
+        <p class="mono">macOS 12 이상 · Apple Silicon · 211MB · MIT</p>
+      </div>
+      <svg class="mark-big" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" role="img" aria-label="INDIFF">  <rect x="415" y="206" width="40" height="41" rx="20"/>  <rect x="568" y="206" width="40" height="41" rx="20"/>  <rect x="291" y="288" width="70" height="112" rx="35"/>  <rect x="477" y="289" width="69" height="69" rx="34.5"/>  <rect x="623" y="289" width="110" height="71" rx="35.5"/>  <rect x="774" y="414" width="40" height="42" rx="20"/>  <rect x="209" y="415" width="41" height="41" rx="20.5"/>  <rect x="434" y="433" width="156" height="157" rx="34"/>  <rect x="291" y="476" width="70" height="71" rx="35"/>  <rect x="663" y="476" width="70" height="70" rx="35"/>  <rect x="209" y="569" width="41" height="41" rx="20.5"/>  <rect x="774" y="569" width="40" height="41" rx="20"/>  <rect x="663" y="622" width="70" height="113" rx="35"/>  <rect x="291" y="665" width="110" height="71" rx="35.5"/>  <rect x="477" y="665" width="70" height="71" rx="35"/>  <rect x="414" y="777" width="42" height="42" rx="21"/>  <rect x="568" y="777" width="41" height="42" rx="20.5"/></svg>
+    </div>
+    <hr class="rule">
+    <figure class="shot-wide" data-shot="hero-full"></figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">01 — The problem</p>
+    <h2>공공 문서는 본문보다 표가 길다.</h2>
+    <p>285KB 과업내용서에서 본문 문단만 긁으면 12,407자가 나온다. 원본은 약 102,000자다.
+       나머지 9만 자는 전부 표 안에 있었다. 검색에도, 복사에도, AI 에게 물을 때도 그 9만 자는
+       없는 셈이 된다.</p>
+    <div class="cmp">
+      <div class="num gone">12,407자<small>본문 문단만</small></div>
+      <div class="num">102,000자<small>원본</small></div>
+    </div>
+    <div class="bar"><i style="width:12%"></i><u></u></div>
+    <p class="mono">본문 12% · 표 안에 갇힌 88%</p>
+    <p>워크스페이스의 .md 762건 중 38%가 표를 쓴다. 요구사항표 · 일정표 · 배점표 —
+       이 일에서 결론은 대개 표 안에 적혀 있다.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">02 — Evidence</p>
+    <h2>같은 파일, 다른 결과.</h2>
+    <div class="rows">
+      <div class="row">
+        <div class="tag">HWP · 285KB · 과업내용서</div>
+        <div class="before">본문 문단 12,407자</div>
+        <div class="after"><b>96,877자</b>(원본의 95%) · 표 <b>121개</b><span class="ms">159ms</span></div>
+      </div>
+      <figure data-shot="hwp"></figure>
+      <div class="row">
+        <div class="tag">PDF · 163쪽 · 제안요청서</div>
+        <div class="before">한글 63,423자 · 표 0개</div>
+        <div class="after">같은 글자 수 · 표 <b>110개</b> · 병합칸 <b>299개</b><span class="ms">1.8초</span></div>
+      </div>
+      <figure data-shot="pdf"></figure>
+      <div class="row">
+        <div class="tag">DOCX · 제안서</div>
+        <div class="before">표가 사라진다</div>
+        <div class="after">GFM 표 <b>1,424줄</b></div>
+      </div>
+      <figure data-shot="docx"></figure>
+    </div>
+    <p class="note">측정: 실제 사업 문서 · 2026-09. 재현 가능한 변환 결과이고, 문서마다 다를 수 있다.</p>
+    <p style="margin-top:1.8rem">표를 글로 풀면 칸의 소속이 사라진다. &ldquo;3,000만원&rdquo;이 어느 항목의 값인지,
+       &ldquo;미해당&rdquo;이 어느 요구사항의 답인지 알 수 없게 된다. INDIFF 는 변환을 거치는 쪽을 택했다 —
+       느리지만 칸이 남는다.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">03 — What it does</p>
+    <h2>여섯 가지.</h2>
+    <div class="items">
+      <div class="item">
+        <div class="no">01</div>
+        <div><h3>읽는다</h3>
+          <p>트리에서 고르면 탭으로 열린다. hwpx · docx · pdf 는 원본 레이아웃 그대로,
+             xlsx · csv 는 열 문자와 행 번호가 붙은 격자로.</p>
+          <p class="why">한 번 누르면 임시로 열리고, 두 번 눌러야 탭이 앉는다</p></div>
+        <figure data-shot="preview-tab"></figure>
+      </div>
+      <div class="item">
+        <div class="no">02</div>
+        <div><h3>고친다</h3>
+          <p>.md 는 열면 바로 고쳐진다. 연필도 저장 단추도 없고, 치는 대로 저장된다.
+             손 안 댄 문단은 원문 글자 그대로 남는다.</p>
+          <p class="why">읽는 화면과 고치는 화면이 같은 화면이다</p></div>
+        <figure data-shot="md-editor"></figure>
+      </div>
+      <div class="item">
+        <div class="no">03</div>
+        <div><h3>묻는다</h3>
+          <p>문서를 고른 채 물으면 그 자리에서 답하고, 빗금(/)을 치면 커서 자리에 글이 자란다.
+             Claude Code 가 그 일을 한다.</p>
+          <p class="why">claude CLI 가 PATH 에 있을 때만 켜진다</p></div>
+        <figure data-shot="ask"></figure>
+      </div>
+      <div class="item">
+        <div class="no">04</div>
+        <div><h3>내보낸다</h3>
+          <p>마크다운으로 정리한 회의록을 hwpx 로 떨군다. 받는 쪽이 한글만 쓰는 조직이어도
+             파일 하나로 끝난다.</p>
+          <p class="why">8,385자 · 표 28개가 그대로 되읽혔다 · 0.1초</p></div>
+        <figure data-shot="export"></figure>
+      </div>
+      <div class="item">
+        <div class="no">05</div>
+        <div><h3>찾는다</h3>
+          <p>grep 이 못 읽는 hwpx · docx · pdf 안쪽까지 찾는다. 화면에 그릴 때 쓰는 변환기를
+             그대로 태워 색인하므로 낱말 안쪽도 잡힌다.</p>
+          <p class="why">문서 816건 · 9,141청크를 9.5초에</p></div>
+        <figure data-shot="search"></figure>
+      </div>
+      <div class="item">
+        <div class="no">06</div>
+        <div><h3>띄운다</h3>
+          <p>새 탭으로 터미널이 열린다. 시작 폴더는 지금 보고 있는 문서의 폴더다.
+             트리에서 파일을 끌어다 놓으면 경로가 입력된다.</p>
+          <p class="why">vim · 색 · 리사이즈가 정상 동작한다</p></div>
+        <figure data-shot="terminal"></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">04 — Install</p>
+    <h2>세 걸음.</h2>
+    <ol class="steps">
+      <li>INDIFF-0.1.0-arm64.dmg 를 받아 INDIFF.app 을 응용 프로그램 폴더에 넣는다.</li>
+      <li>앱을 우클릭(또는 Control+클릭)하고 열기 → 다시 한 번 열기.</li>
+      <li>처음 켜면 볼 폴더를 묻는다. 문서가 든 폴더를 고르면 된다.</li>
+    </ol>
+    <div class="warn">
+      <p><b>처음 한 번은 &ldquo;확인되지 않은 개발자&rdquo; 라고 뜬다.</b></p>
+      <p>이 빌드에는 애플 코드 서명이 없다. 그래서 macOS 가 첫 실행을 한 번 막는다 —
+         우클릭 → 열기로 통과하면 다음부터 그냥 열린다. 두 번 묻지 않는다.</p>
+    </div>
+    <p class="mono">Apple Silicon(arm64) · 설치 후 약 622MB · SHA-256 은 공개할 때 적는다</p>
+    <p class="mut">묻기 기능은 claude CLI 가 PATH 에 있을 때만 단추가 선다.
+       없어도 읽기 · 고치기 · 내보내기 · 검색은 다 된다.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">05 — Limits</p>
+    <h2>안 되는 것은 안 된다고 적는다.</h2>
+    <div class="limits">
+      <p>macOS 전용이다. 터미널이 macOS 의 script(1) 에 기대고 있다. Apple Silicon 만 받는다.</p>
+      <p>서버는 127.0.0.1 에만 붙는다. 터미널이 임의 명령을 실행하므로 LAN 노출을 기본값으로 두지 않았다.</p>
+      <p>.hwp 3.x 와 암호 걸린 문서는 못 연다. pptx 는 글과 표만 가져온다. .xls(옛 BIFF)는 지원하지 않는다.</p>
+      <p>서식 편집에서 밑줄 · 글자색 · 형광펜 · 수식은 사라진다 — 마크다운에 그 표기가 없다.
+         그런 것이 든 문서는 원문 모드로 고친다.</p>
+      <p>날 HTML 이 든 마크다운은 서식 화면에 안 보인다(이 워크스페이스 .md 의 18%). 원문 모드가 그 자리다.</p>
+      <p>코드 서명과 공증이 없다. 위 설치 항목을 보라.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">06 — Under the hood</p>
+      <p>단일 파일 서버 하나와 Electron 껍데기. 빌드 단계가 없다.
+         문서는 디스크의 파일이 정본이고, 색인은 지워도 다시 만들어지는 파생물이다.
+         클라우드로 올라가는 것이 없다.</p>
+    </div>
+    <div>
+      <p class="mono">검사 파일 70개 · 검사 호출 1,219회</p>
+      <p class="mono">MIT 라이선스</p>
+    </div>
+  </div>
+</section>
+
+<section class="end">
+  <div class="wrap">
+    <h2>표가 어디로 갔는지 더 찾지 않아도 된다.</h2>
+    <div class="cta">
+      <span class="btn" aria-disabled="true">내려받기 준비 중</span>
+    </div>
+    <p class="mono">macOS 12 이상 · Apple Silicon · 211MB</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" role="img" aria-label="INDIFF">  <rect x="415" y="206" width="40" height="41" rx="20"/>  <rect x="568" y="206" width="40" height="41" rx="20"/>  <rect x="291" y="288" width="70" height="112" rx="35"/>  <rect x="477" y="289" width="69" height="69" rx="34.5"/>  <rect x="623" y="289" width="110" height="71" rx="35.5"/>  <rect x="774" y="414" width="40" height="42" rx="20"/>  <rect x="209" y="415" width="41" height="41" rx="20.5"/>  <rect x="434" y="433" width="156" height="157" rx="34"/>  <rect x="291" y="476" width="70" height="71" rx="35"/>  <rect x="663" y="476" width="70" height="70" rx="35"/>  <rect x="209" y="569" width="41" height="41" rx="20.5"/>  <rect x="774" y="569" width="40" height="41" rx="20"/>  <rect x="663" y="622" width="70" height="113" rx="35"/>  <rect x="291" y="665" width="110" height="71" rx="35.5"/>  <rect x="477" y="665" width="70" height="71" rx="35"/>  <rect x="414" y="777" width="42" height="42" rx="21"/>  <rect x="568" y="777" width="41" height="42" rx="20.5"/></svg>
+    <p>INDIFF 0.1.0</p>
+    <p>MIT License</p>
+    <p>글꼴 Pretendard Variable — SIL OFL 1.1</p>
+    <p>이 페이지에는 분석 스크립트도 쿠키도 없다.</p>
+  </div>
+</footer>
+
 </body>
 </html>
