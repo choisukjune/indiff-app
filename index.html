@@ -15,18 +15,17 @@
 <body>
 
 <header class="top">
-  <div class="wrap">
-    <svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" role="img" aria-label="INDIFF">  <rect x="415" y="206" width="40" height="41" rx="20"/>  <rect x="568" y="206" width="40" height="41" rx="20"/>  <rect x="291" y="288" width="70" height="112" rx="35"/>  <rect x="477" y="289" width="69" height="69" rx="34.5"/>  <rect x="623" y="289" width="110" height="71" rx="35.5"/>  <rect x="774" y="414" width="40" height="42" rx="20"/>  <rect x="209" y="415" width="41" height="41" rx="20.5"/>  <rect x="434" y="433" width="156" height="157" rx="34"/>  <rect x="291" y="476" width="70" height="71" rx="35"/>  <rect x="663" y="476" width="70" height="70" rx="35"/>  <rect x="209" y="569" width="41" height="41" rx="20.5"/>  <rect x="774" y="569" width="40" height="41" rx="20"/>  <rect x="663" y="622" width="70" height="113" rx="35"/>  <rect x="291" y="665" width="110" height="71" rx="35.5"/>  <rect x="477" y="665" width="70" height="71" rx="35"/>  <rect x="414" y="777" width="42" height="42" rx="21"/>  <rect x="568" y="777" width="41" height="42" rx="20.5"/></svg> <b class="wordmark">(indiff)</b>
+  <div class="wrap"><span class="logo"><svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" role="img" aria-label="INDIFF">  <rect x="415" y="206" width="40" height="41" rx="20"/>  <rect x="568" y="206" width="40" height="41" rx="20"/>  <rect x="291" y="288" width="70" height="112" rx="35"/>  <rect x="477" y="289" width="69" height="69" rx="34.5"/>  <rect x="623" y="289" width="110" height="71" rx="35.5"/>  <rect x="774" y="414" width="40" height="42" rx="20"/>  <rect x="209" y="415" width="41" height="41" rx="20.5"/>  <rect x="434" y="433" width="156" height="157" rx="34"/>  <rect x="291" y="476" width="70" height="71" rx="35"/>  <rect x="663" y="476" width="70" height="70" rx="35"/>  <rect x="209" y="569" width="41" height="41" rx="20.5"/>  <rect x="774" y="569" width="40" height="41" rx="20"/>  <rect x="663" y="622" width="70" height="113" rx="35"/>  <rect x="291" y="665" width="110" height="71" rx="35.5"/>  <rect x="477" y="665" width="70" height="71" rx="35"/>  <rect x="414" y="777" width="42" height="42" rx="21"/>  <rect x="568" y="777" width="41" height="42" rx="20.5"/></svg><span class="word">(indiff)</span></span>
     <span class="sp"></span>
     <span class="mono">다운로드 준비 중</span>
   </div>
 </header>
 
 <section class="hero">
+  <canvas id="field" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <p class="eyebrow">macOS 문서 작업공간</p>
+    <div>
+        <p class="label">macOS 문서 작업공간</p>
         <h1>흩어진 문서.<br>한 화면.</h1>
         <p class="lede">hwpx도, PDF도, 엑셀도 원본 그대로 열립니다.<br>
            같은 화면에서 고치고, 물어보고, 터미널까지 띄웁니다.</p>
@@ -34,17 +33,14 @@
           <span class="btn" aria-disabled="true">다운로드 준비 중</span>
         </div>
         <p class="mono">macOS 12 이상 · Apple Silicon · 211MB · 무료</p>
-      </div>
-      <svg class="mark-big" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" role="img" aria-label="INDIFF">  <rect x="415" y="206" width="40" height="41" rx="20"/>  <rect x="568" y="206" width="40" height="41" rx="20"/>  <rect x="291" y="288" width="70" height="112" rx="35"/>  <rect x="477" y="289" width="69" height="69" rx="34.5"/>  <rect x="623" y="289" width="110" height="71" rx="35.5"/>  <rect x="774" y="414" width="40" height="42" rx="20"/>  <rect x="209" y="415" width="41" height="41" rx="20.5"/>  <rect x="434" y="433" width="156" height="157" rx="34"/>  <rect x="291" y="476" width="70" height="71" rx="35"/>  <rect x="663" y="476" width="70" height="70" rx="35"/>  <rect x="209" y="569" width="41" height="41" rx="20.5"/>  <rect x="774" y="569" width="40" height="41" rx="20"/>  <rect x="663" y="622" width="70" height="113" rx="35"/>  <rect x="291" y="665" width="110" height="71" rx="35.5"/>  <rect x="477" y="665" width="70" height="71" rx="35"/>  <rect x="414" y="777" width="42" height="42" rx="21"/>  <rect x="568" y="777" width="41" height="42" rx="20.5"/></svg>
     </div>
-    <hr class="rule">
-    <figure class="shot-wide" data-shot="hero-full"></figure>
+<figure class="shot-wide" data-shot="hero-full"></figure>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <p class="eyebrow">왜 만들었나</p>
+    <p class="label">왜 만들었나</p>
     <h2>눈에 보이는 건 12%뿐입니다.</h2>
     <p>285KB 과업내용서에서 본문 문단만 뽑으면 12,407자. 원본은 102,000자입니다.
        나머지 9만 자는 전부 표 안에 있었습니다. 검색에도, 복사에도, AI에게 물을 때도
@@ -62,7 +58,7 @@
 
 <section>
   <div class="wrap">
-    <p class="eyebrow">증거</p>
+    <p class="label">증거</p>
     <h2>같은 파일. 다른 결과.</h2>
     <div class="rows">
       <div class="row">
@@ -93,7 +89,7 @@
 
 <section>
   <div class="wrap">
-    <p class="eyebrow">할 수 있는 일</p>
+    <p class="label">할 수 있는 일</p>
     <h2>읽고. 고치고. 묻고.</h2>
     <div class="items">
       <div class="item">
@@ -150,7 +146,7 @@
 
 <section>
   <div class="wrap">
-    <p class="eyebrow">설치</p>
+    <p class="label">설치</p>
     <h2>세 걸음이면 됩니다.</h2>
     <ol class="steps">
       <li>받은 파일을 열고 앱을 응용 프로그램 폴더에 넣습니다.</li>
@@ -170,7 +166,7 @@
 
 <section>
   <div class="wrap">
-    <p class="eyebrow">솔직하게</p>
+    <p class="label">솔직하게</p>
     <h2>안 되는 것도 적습니다.</h2>
     <div class="limits">
       <p>macOS 전용입니다. 터미널이 macOS의 기능에 기대고 있습니다. Apple Silicon만 받습니다.</p>
@@ -188,7 +184,7 @@
 <section class="band">
   <div class="wrap">
     <div>
-      <p class="eyebrow">만든 방식</p>
+      <p class="label">만든 방식</p>
       <p>서버 파일 하나와 Electron 껍데기. 빌드 단계가 없습니다.
          문서는 디스크의 파일이 정본이고, 색인은 지워도 다시 만들어집니다.
          클라우드로 올라가는 것이 없습니다.</p>
@@ -211,14 +207,53 @@
 </section>
 
 <footer>
-  <div class="wrap">
-    <svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" role="img" aria-label="INDIFF">  <rect x="415" y="206" width="40" height="41" rx="20"/>  <rect x="568" y="206" width="40" height="41" rx="20"/>  <rect x="291" y="288" width="70" height="112" rx="35"/>  <rect x="477" y="289" width="69" height="69" rx="34.5"/>  <rect x="623" y="289" width="110" height="71" rx="35.5"/>  <rect x="774" y="414" width="40" height="42" rx="20"/>  <rect x="209" y="415" width="41" height="41" rx="20.5"/>  <rect x="434" y="433" width="156" height="157" rx="34"/>  <rect x="291" y="476" width="70" height="71" rx="35"/>  <rect x="663" y="476" width="70" height="70" rx="35"/>  <rect x="209" y="569" width="41" height="41" rx="20.5"/>  <rect x="774" y="569" width="40" height="41" rx="20"/>  <rect x="663" y="622" width="70" height="113" rx="35"/>  <rect x="291" y="665" width="110" height="71" rx="35.5"/>  <rect x="477" y="665" width="70" height="71" rx="35"/>  <rect x="414" y="777" width="42" height="42" rx="21"/>  <rect x="568" y="777" width="41" height="42" rx="20.5"/></svg>
-    <p>(indiff) 0.1.0</p>
+  <div class="wrap"><span class="logo"><svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" role="img" aria-label="INDIFF">  <rect x="415" y="206" width="40" height="41" rx="20"/>  <rect x="568" y="206" width="40" height="41" rx="20"/>  <rect x="291" y="288" width="70" height="112" rx="35"/>  <rect x="477" y="289" width="69" height="69" rx="34.5"/>  <rect x="623" y="289" width="110" height="71" rx="35.5"/>  <rect x="774" y="414" width="40" height="42" rx="20"/>  <rect x="209" y="415" width="41" height="41" rx="20.5"/>  <rect x="434" y="433" width="156" height="157" rx="34"/>  <rect x="291" y="476" width="70" height="71" rx="35"/>  <rect x="663" y="476" width="70" height="70" rx="35"/>  <rect x="209" y="569" width="41" height="41" rx="20.5"/>  <rect x="774" y="569" width="40" height="41" rx="20"/>  <rect x="663" y="622" width="70" height="113" rx="35"/>  <rect x="291" y="665" width="110" height="71" rx="35.5"/>  <rect x="477" y="665" width="70" height="71" rx="35"/>  <rect x="414" y="777" width="42" height="42" rx="21"/>  <rect x="568" y="777" width="41" height="42" rx="20.5"/></svg><span class="word">(indiff)</span></span><p>0.1.0</p>
     <p>MIT License</p>
     <p>글꼴 Pretendard Variable — SIL OFL 1.1</p>
     <p>이 페이지에는 분석 스크립트도 쿠키도 없습니다.</p>
   </div>
 </footer>
 
+
+
+<script>
+/* 점 입자 구 — 참고한 결(oxa.ai)의 그림을 캔버스로 옮긴 것.
+   구면에 점을 **고르게** 뿌리고 정사영하면 가장자리가 저절로 빽빽해진다(limb). 빛은 오른쪽 위에서
+   오고, 거기에 흰 띠가 선다. 어두운 쪽도 희미하게 남긴다 — 그래야 공이 공으로 읽힌다.
+   씨앗을 고정해 새로 고쳐도 같은 그림이 나온다. */
+(function(){
+  var c=document.getElementById('field'); if(!c||!c.getContext) return;
+  var x=c.getContext('2d');
+  function rnd(s){ return function(){ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; }; }
+  function draw(){
+    var dpr=Math.min(window.devicePixelRatio||1,2);
+    var W=c.clientWidth, H=c.clientHeight; if(!W||!H) return;
+    c.width=W*dpr; c.height=H*dpr; x.setTransform(dpr,0,0,dpr,0,0);
+    x.clearRect(0,0,W,H);
+    var R=Math.min(W,H)*0.78, cx=W*0.80, cy=H*0.50;
+    var r=rnd(20260101), n=62000;
+    var lx=0.30, ly=-0.84, lz=0.45;
+    x.fillStyle='#fff';
+    for(var i=0;i<n;i++){
+      var u=r()*2-1, t=r()*6.283185, s=Math.sqrt(1-u*u);
+      var px=s*Math.cos(t), py=u, pz=s*Math.sin(t);
+      if(pz<0) continue;
+      var sx=cx+px*R, sy=cy+py*R;
+      if(sx<-3||sx>W+3||sy<-3||sy>H+3) continue;
+      var d=px*lx+py*ly+pz*lz;
+      var lit=d>0?d:0;
+      var rim=Math.pow(1-pz,2.2);
+      var a=0.09 + 0.95*Math.pow(lit,1.15) + 0.85*rim*Math.pow(lit,0.6);
+      if(a<0.06) continue;
+      var w = a>0.72 ? 2 : 1;
+      x.globalAlpha = a>1?1:a;
+      x.fillRect(sx|0, sy|0, w, w);
+    }
+    x.globalAlpha=1;
+  }
+  draw();
+  var t; addEventListener('resize', function(){ clearTimeout(t); t=setTimeout(draw,180); });
+})();
+</script>
 </body>
 </html>

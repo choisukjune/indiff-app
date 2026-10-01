@@ -1,162 +1,162 @@
 /* ───────────────────────────────────────────────────────────────
-   INDIFF 소개 페이지 — 앱과 같은 토큰(shadcn zinc), 강조색은 하나뿐.
+   (indiff) — 검정 바탕 · 단색 · 점.
 
-   모서리 규칙: **페이지 고유 요소는 0**(라벨·규칙선·구분), **앱을 보여 주는 것만 .5rem**
-   (스크린샷 틀·내려받기 단추). 둥근 것이 곧 「앱의 것」이라는 신호가 되어 두 언어가 안 싸운다.
+   참고한 결(oxa.ai 브랜드 아이덴티티)의 규칙을 그대로 가져왔다.
+     · 바탕은 **검정 하나**. 색은 쓰지 않는다 — 흰색과 회색의 단계로만 말한다.
+     · 마크는 **점의 고리와 가운데 블록**. 우리 앱 아이콘이 이미 그 언어다.
+     · 워드마크는 **소문자 세리프**. 본문 산세리프와 갈라 두면 로고가 로고로 읽힌다.
+     · 여백이 주인공이다. 로고는 넓은 검정 안에 작게 놓인다.
 
-   강조색 #D97757 은 흰 바탕에서 대비 3.1:1 이라 **라이트에서 본문 글자색으로 쓰지 않는다** —
-   선·면·단추 배경·굵은 큰 글자에만. 어두운 바탕에서는 5.4:1 이라 작은 글자에도 쓸 수 있다.
+   앱의 강조색(#D97757)은 **안 쓴다** — 참고한 결이 단색이고, 색 하나를 들이는 순간
+   그 결이 깨진다. 강조가 필요한 자리는 **흰색과 굵기**로 푼다.
    ─────────────────────────────────────────────────────────────── */
 :root{
-  --bg:0 0% 100%;        --fg:240 10% 3.9%;
-  --mut:240 3.8% 46.1%;  --bd:240 5.9% 90%;
-  --band:240 4.8% 97%;
-  --accent:#D97757;
-  --r-app:.5rem;
-  --col:1120px;
-  --gut:24px;
+  --bg:#000;
+  --fg:#fff;
+  --dim:#8a8a8f;        /* 보조 글 — 검정 위 4.9:1 */
+  --dim2:#5c5c61;       /* 더 물러난 메타 */
+  --line:#1f1f22;       /* 규칙선 */
+  --line2:#2e2e33;
+  --col:1180px;
+  --gut:28px;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:240 10% 3.9%;   --fg:0 0% 98%;
-    --mut:240 5% 64.9%;  --bd:240 3.7% 15.9%;
-    --band:240 6% 8%;
-  }
-}
-@font-face{
-  font-family:'Pretendard Variable';
-  src:url('pretendard-subset.woff2') format('woff2-variations');
-  font-weight:400 800; font-style:normal; font-display:swap;
+  --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Times New Roman',Georgia,serif;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%; background:var(--bg)}
 body{
   margin:0;
   font-family:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Noto Sans KR',
     -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  font-size:16px; line-height:1.75;
-  color:hsl(var(--fg)); background:hsl(var(--bg));
-  -webkit-font-smoothing:antialiased;
+  font-size:16px; line-height:1.8; font-weight:350;
+  color:var(--fg); background:var(--bg);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+@font-face{
+  font-family:'Pretendard Variable';
+  src:url('pretendard-subset.woff2') format('woff2-variations');
+  font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
-section{padding-block:5rem}
-section + section{border-top:1px solid hsl(var(--bd))}
+section{padding-block:7.5rem; border-top:1px solid var(--line)}
 
-/* ── 메타 라벨: 모노 대문자 + 강조색 네모 ── */
-.eyebrow{
-  font-family:var(--mono); font-size:11px; letter-spacing:.09em; text-transform:uppercase;
-  color:hsl(var(--mut)); display:flex; align-items:center; gap:.6em; margin:0 0 1.6rem;
+/* ── 로고 ── */
+.logo{display:inline-flex; align-items:center; gap:.62em; color:var(--fg); text-decoration:none}
+.logo .mark{width:1.5em; height:1.5em; flex:0 0 auto}
+.logo .word{font-family:var(--serif); font-size:1.26em; line-height:1; letter-spacing:.005em}
+
+/* ── 작은 라벨 ── */
+.label{
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--dim2); margin:0 0 2.2rem;
 }
-.eyebrow::before{content:''; width:6px; height:6px; background:var(--accent); flex:0 0 auto}
-.mono{font-family:var(--mono); font-size:12.5px; color:hsl(var(--mut))}
-.mut{color:hsl(var(--mut))}
+.mono{font-family:var(--mono); font-size:12px; letter-spacing:.02em; color:var(--dim2)}
+.dim{color:var(--dim)}
 
-h1,h2,h3{letter-spacing:-.02em; margin:0}
-h1{font-size:clamp(2.1rem,5.2vw,3.1rem); font-weight:800; line-height:1.2}
-h2{font-size:clamp(1.5rem,3.4vw,2rem); font-weight:700; line-height:1.3; margin-bottom:1.2rem}
-h3{font-size:1.05rem; font-weight:700}
-p{margin:0 0 1rem; max-width:40rem}
+h1,h2,h3{margin:0; font-weight:350; letter-spacing:-.025em; line-height:1.14}
+h1{font-size:clamp(2.6rem,7vw,5rem)}
+h2{font-size:clamp(1.9rem,4.2vw,3rem); margin-bottom:2rem}
+h3{font-size:1.06rem; font-weight:600; letter-spacing:-.01em; line-height:1.5}
+p{margin:0 0 1.1rem; max-width:38rem}
+b{font-weight:600}
 
 /* ── 상단 바 ── */
-header.top{border-bottom:1px solid hsl(var(--bd))}
-.top .wrap{display:flex; align-items:center; gap:.6rem; height:56px}
-.top .mark{width:20px; height:20px; color:hsl(var(--fg)); flex:0 0 auto}
-.top b{font-weight:700; letter-spacing:.04em}
+header.top{position:relative; z-index:2}
+.top .wrap{display:flex; align-items:center; height:76px}
+.top .logo{font-size:15px}
 .top .sp{flex:1}
 
-/* ── 히어로 ── */
-.hero{padding-top:4rem}
-.hero-grid{display:grid; grid-template-columns:1fr 240px; gap:3rem; align-items:start}
-.hero .mark-big{width:240px; height:240px; color:hsl(var(--fg)); opacity:.92}
-.lede{font-size:1.15rem; margin-top:1.2rem}
-.cta{display:flex; align-items:center; gap:1rem; flex-wrap:wrap; margin:2rem 0 .7rem}
+/* ── 히어로: 검정 벌판 + 점 입자 ── */
+.hero{position:relative; border-top:0; padding:0; min-height:86vh; display:flex; align-items:center}
+#field{position:absolute; inset:0; width:100%; height:100%; display:block; z-index:0; pointer-events:none}
+.hero .wrap{position:relative; z-index:1; padding-block:5rem}
+.hero h1{max-width:14em}
+.hero .lede{font-size:1.18rem; color:var(--dim); margin-top:2rem; max-width:32rem}
+.cta{display:flex; align-items:center; gap:1.4rem; flex-wrap:wrap; margin:3rem 0 1rem}
 .btn{
-  display:inline-flex; align-items:center; gap:.5em;
-  padding:.72em 1.3em; border-radius:var(--r-app); border:1px solid transparent;
-  background:var(--accent); color:#fff; font:inherit; font-weight:700; font-size:.95rem;
-  text-decoration:none; cursor:pointer;
+  display:inline-flex; align-items:center; gap:.5em; padding:.85em 1.7em;
+  border:1px solid var(--fg); background:transparent; color:var(--fg);
+  font:inherit; font-size:.95rem; font-weight:500; text-decoration:none; cursor:pointer;
+  transition:background .14s, color .14s;
 }
-.btn:hover{background:#c66442}
-.btn[aria-disabled="true"]{background:transparent; color:hsl(var(--mut)); border-color:hsl(var(--bd)); cursor:default; font-weight:600}
-.btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
-.rule{border:0; border-top:1px dashed hsl(var(--bd)); margin:3rem 0 0}
+.btn:hover{background:var(--fg); color:var(--bg)}
+.btn[aria-disabled="true"]{border-color:var(--line2); color:var(--dim2); cursor:default}
+.btn[aria-disabled="true"]:hover{background:transparent; color:var(--dim2)}
+:focus-visible{outline:1px solid var(--fg); outline-offset:3px}
 
-/* ── 숫자 대비(문제 섹션) ── */
-.cmp{display:flex; align-items:flex-end; gap:2.4rem; margin:2rem 0 1rem; flex-wrap:wrap}
-.cmp .num{font-size:clamp(1.8rem,4.4vw,2.6rem); font-weight:800; letter-spacing:-.03em; line-height:1.1}
-.cmp .num small{display:block; font-size:12px; font-weight:500; letter-spacing:.06em;
-  font-family:var(--mono); color:hsl(var(--mut)); margin-top:.5em}
-.cmp .gone{color:hsl(var(--mut))}
-.bar{height:14px; border:1px solid hsl(var(--bd)); display:flex; margin:1.4rem 0 .6rem; max-width:40rem}
-.bar i{display:block; background:hsl(var(--fg))}
-.bar u{display:block; flex:1; text-decoration:none;
-  background:repeating-linear-gradient(135deg,hsl(var(--bd)) 0 1px,transparent 1px 7px)}
+/* ── 숫자 ── */
+.cmp{display:flex; align-items:flex-end; gap:3.5rem; margin:3rem 0 1.4rem; flex-wrap:wrap}
+.num{font-size:clamp(2.2rem,5.5vw,3.4rem); font-weight:300; letter-spacing:-.04em; line-height:1}
+.num.gone{color:var(--dim2)}
+.num small{display:block; font-family:var(--mono); font-size:11px; font-weight:400;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--dim2); margin-top:1em}
+.bar{height:3px; background:var(--line2); display:flex; margin:2rem 0 .8rem; max-width:38rem}
+.bar i{display:block; background:var(--fg)}
 
-/* ── 증거: 선과 여백으로만 ── */
-.rows{border-top:1px dashed hsl(var(--bd))}
-.row{display:grid; grid-template-columns:minmax(0,13rem) 1fr 1fr; gap:1.4rem;
-  padding:1.5rem 0; border-bottom:1px dashed hsl(var(--bd)); align-items:baseline}
-.row .tag{font-family:var(--mono); font-size:11.5px; color:hsl(var(--mut)); letter-spacing:.03em}
-.row .before{color:hsl(var(--mut))}
-.row .after b{font-weight:700; box-shadow:inset 0 -2px 0 var(--accent)}
-.row .ms{font-family:var(--mono); font-size:11.5px; color:hsl(var(--mut)); display:block; margin-top:.3em}
-.note{font-family:var(--mono); font-size:11.5px; color:hsl(var(--mut)); margin-top:1.2rem}
+/* ── 증거 ── */
+.rows{margin-top:1rem}
+.row{display:grid; grid-template-columns:minmax(0,14rem) 1fr 1fr; gap:1.6rem;
+  padding:2rem 0; border-top:1px solid var(--line); align-items:baseline}
+.row .tag{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--dim2)}
+.row .before{color:var(--dim2)}
+.row .after{font-size:1.06rem}
+.row .ms{display:block; font-family:var(--mono); font-size:11px; color:var(--dim2); margin-top:.6em; letter-spacing:.06em}
+.note{font-family:var(--mono); font-size:11px; color:var(--dim2); margin-top:2rem; letter-spacing:.04em}
 
-/* ── 무엇을 하나 ── */
-.items{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2.6rem 3rem; margin-top:.5rem}
-.item{display:grid; grid-template-columns:2.6rem 1fr; gap:.2rem 1rem}
-.item .no{font-family:var(--mono); font-size:13px; font-weight:700; color:var(--accent); padding-top:.25em}
-.item p{margin:.35rem 0 .5rem}
-.item .why{font-family:var(--mono); font-size:11.5px; color:hsl(var(--mut)); margin:0}
+/* ── 할 수 있는 일 ── */
+.items{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:3.6rem 4rem; margin-top:1rem}
+.item{border-top:1px solid var(--line); padding-top:1.6rem}
+.item .no{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--dim2); display:block; margin-bottom:1.1rem}
+.item p{margin:.8rem 0 .9rem; color:var(--dim)}
+.item .why{font-family:var(--mono); font-size:11px; color:var(--dim2); margin:0; letter-spacing:.03em}
 
-/* ── 그림 자리: 비면 조용히 접힌다 (나중에 샷이 들어온다) ── */
+/* ── 그림 자리: 비면 접힌다 ── */
 figure{margin:0}
 figure:empty{display:none}
-figure img{display:block; width:100%; height:auto; border:1px solid hsl(var(--bd)); border-radius:var(--r-app)}
-.shot-wide{margin-top:2.4rem}
-.item figure{grid-column:2; margin-top:.8rem; max-width:480px}
+figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)}
+.shot-wide{margin-top:4rem}
+.item figure{margin-top:1.4rem}
 
 /* ── 설치 ── */
-ol.steps{counter-reset:s; list-style:none; padding:0; margin:0 0 2rem; max-width:40rem}
-ol.steps li{counter-increment:s; display:grid; grid-template-columns:2.6rem 1fr; gap:1rem;
-  padding:.55rem 0; border-bottom:1px dashed hsl(var(--bd))}
-ol.steps li::before{content:"0" counter(s); font-family:var(--mono); font-size:13px; color:hsl(var(--mut))}
-.warn{border-left:2px solid var(--accent); padding:.2rem 0 .2rem 1.1rem; margin:0 0 1.4rem; max-width:40rem}
-.warn b{font-weight:700}
+ol.steps{counter-reset:s; list-style:none; padding:0; margin:0 0 3rem; max-width:38rem}
+ol.steps li{counter-increment:s; display:grid; grid-template-columns:3rem 1fr; gap:1.2rem;
+  padding:1.1rem 0; border-top:1px solid var(--line); color:var(--dim)}
+ol.steps li::before{content:"0" counter(s); font-family:var(--mono); font-size:11px;
+  letter-spacing:.1em; color:var(--dim2); padding-top:.45em}
+.warn{border-left:1px solid var(--fg); padding:.1rem 0 .1rem 1.6rem; margin:0 0 2rem; max-width:38rem}
+.warn p{color:var(--dim)}
+.warn p:first-child{color:var(--fg)}
 
-/* ── 못 하는 것: 무채색 ── */
-.limits{border-left:1px dashed hsl(var(--bd)); padding-left:1.2rem; max-width:44rem}
-.limits p{margin:0 0 .8rem}
-.limits p::before{content:"· "; color:hsl(var(--mut))}
+/* ── 못 하는 것 ── */
+.limits{max-width:44rem}
+.limits p{color:var(--dim); padding-left:1.6rem; position:relative}
+.limits p::before{content:""; position:absolute; left:0; top:.85em; width:7px; height:1px; background:var(--dim2)}
 
 /* ── 띠 ── */
-.band{background:hsl(var(--band))}
-.band .wrap{display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:end}
+.band .wrap{display:grid; grid-template-columns:1fr auto; gap:3rem; align-items:end}
+.band p{color:var(--dim)}
 
-/* ── 마무리·푸터 ── */
-.end{text-align:left}
-footer{border-top:1px solid hsl(var(--bd)); padding-block:2.4rem}
-footer .wrap{display:flex; gap:1.6rem 2.4rem; flex-wrap:wrap; align-items:center}
-footer .mark{width:16px; height:16px; color:hsl(var(--mut)); flex:0 0 auto}
-footer p{font-family:var(--mono); font-size:11.5px; color:hsl(var(--mut)); margin:0}
+/* ── 마무리 · 푸터 ── */
+.end{text-align:center}
+.end h2{max-width:none}
+.end .cta{justify-content:center}
+.end p{margin-inline:auto}
+footer{border-top:1px solid var(--line); padding-block:3.4rem}
+footer .wrap{display:flex; gap:1.2rem 2.6rem; flex-wrap:wrap; align-items:center}
+footer .logo{font-size:13px; color:var(--dim2)}
+footer p{font-family:var(--mono); font-size:11px; color:var(--dim2); margin:0; letter-spacing:.04em}
 
 /* ── 좁은 화면 ── */
 @media (max-width:900px){
-  .hero-grid{grid-template-columns:1fr; gap:2rem}
-  .hero .mark-big{width:84px; height:84px}
-  .items{grid-template-columns:1fr}
-  .band .wrap{grid-template-columns:1fr}
+  .items{grid-template-columns:1fr; gap:2.6rem}
+  .band .wrap{grid-template-columns:1fr; gap:1.6rem}
+  section{padding-block:5rem}
 }
 @media (max-width:620px){
-  section{padding-block:3.4rem}
-  .row{grid-template-columns:1fr; gap:.5rem}
-  .row .tag{order:-1}
-  .cmp{gap:1.4rem}
+  :root{--gut:20px}
+  .row{grid-template-columns:1fr; gap:.6rem}
+  .row .tag{order:-1; margin-bottom:.4rem}
+  .cmp{gap:2rem}
+  .hero{min-height:76vh}
 }
-@media (prefers-reduced-motion: reduce){
-  *{animation:none!important; transition:none!important}
-}
-
-/* 워드마크 — 괄호를 살린 소문자. 괄호는 한 겹 물러나 보이게 */
-.wordmark{font-weight:700; letter-spacing:-.01em; font-size:1.02rem}
+@media (prefers-reduced-motion: reduce){ *{animation:none!important; transition:none!important} }
