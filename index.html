@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://choisukjune.github.io/indiff-app/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/site.css?v=3d796ac3">
+<link rel="stylesheet" href="assets/site.css?v=e012d337">
 </head>
 <body>
 
@@ -18,7 +18,6 @@
   <div class="wrap">
     <span class="logo">(indiff)</span>
     <span class="sp"></span>
-    <a class="btn ghost sm" href="https://github.com/choisukjune/indiff-app/releases/latest/download/INDIFF-mac-arm64.dmg">Download</a>
   </div>
 </header>
 
@@ -31,16 +30,15 @@
       <h1>Every document.<br>One screen.<br>With Claude.</h1>
       <p class="lede">문서를 열어 두면 Claude Code가 같은 화면을 봅니다.<br>
          붙여 넣을 것 없이, 그 자리에서 묻고 고칩니다.</p>
-      <div class="cta">
-        <a class="btn" href="https://github.com/choisukjune/indiff-app/releases/latest/download/INDIFF-mac-arm64.dmg">Download for Mac</a>
-        <a class="btn ghost" href="#what">무엇을 하는지 보기</a>
-      </div>
       <div class="install">
         <span class="install-k">터미널로 설치</span>
         <code>curl -fsSL https://choisukjune.github.io/indiff-app/install.sh | sh</code>
         <button type="button" class="install-copy" data-copy="curl -fsSL https://choisukjune.github.io/indiff-app/install.sh | sh">복사</button>
       </div>
-      <p class="mono">macOS 12+ · Apple Silicon · 211MB · Free · <a href="https://github.com/choisukjune/indiff-app/releases">릴리스 노트</a></p>
+      <div class="cta">
+        <a class="btn ghost" href="#what">무엇을 하는지 보기</a>
+      </div>
+      <p class="mono">macOS 12+ · Apple Silicon · 211MB · Free</p>
       <p class="strip">.hwp &nbsp;·&nbsp; .hwpx &nbsp;·&nbsp; .docx &nbsp;·&nbsp; .pdf &nbsp;·&nbsp; .xlsx &nbsp;·&nbsp; .csv &nbsp;·&nbsp; .pptx &nbsp;·&nbsp; .md</p>
     </div>
 <figure class="shot-wide rise" data-shot="hero-full">
@@ -281,29 +279,49 @@
 </section>
 
 <section>
-  <div class="wrap">
-    <div class="sec-head rise">
+  <div class="wrap split">
+    <div class="split-head rise">
       <p class="label">Your files, unchanged</p>
       <h2>열어 봐도,<br>원본은 그대로입니다.</h2>
       <p class="lead">열었다 닫기만 해도 열 중 아홉이 다시 쓰였습니다.
          글자를 잃어서가 아니라, 모양이 바뀌어서.<br>
          지금은 손대지 않은 곳에 손대지 않습니다.</p>
+      <p class="mono">왕복해도 한 글자도 안 바뀐 문서 · 마크다운 792건 기준</p>
     </div>
-    <div class="stat rise" style="margin-inline:auto">
-      <div><div class="num gone">9.5%<small>통째로 다시 쓸 때</small></div></div>
-      <div><div class="num">87.2%<small>블록을 보존할 때</small></div></div>
+    <div class="waffles rise">
+      <div class="waffle-card gone">
+        <div class="waffle-top"><span class="num">9.5%</span><span class="k">통째로 다시 쓸 때</span></div>
+        <div class="waffle" data-n="792" data-on="75" aria-hidden="true"></div>
+      </div>
+      <div class="waffle-card">
+        <div class="waffle-top"><span class="num">87.2%</span><span class="k">블록을 보존할 때</span></div>
+        <div class="waffle" data-n="792" data-on="691" aria-hidden="true"></div>
+      </div>
+      <p class="note">AI가 쓴 문서(211건)는 97.6%. 그 문서들이 안 열리던 진짜 이유는 손실이 아니라 표 재조판이었습니다.</p>
     </div>
-    <p class="mono" style="max-width:46rem; margin-inline:auto">왕복해도 한 글자도 안 바뀐 문서 · 마크다운 792건 기준</p>
-    <p class="note" style="margin-inline:auto">AI가 쓴 문서(211건)는 97.6%. 그 문서들이 안 열리던 진짜 이유는 손실이 아니라 표 재조판이었습니다.</p>
   </div>
 </section>
 
 <section>
-  <div class="wrap">
-    <div class="sec-head rise">
+  <div class="wrap split">
+    <div class="split-head rise">
       <p class="label">Install</p>
       <h2>계정도, 로그인도<br>없습니다.</h2>
       <p class="lead">폴더 하나만 고르면 됩니다.<br>그 다음은 전부 이 컴퓨터 안에서.</p>
+    </div>
+    <div class="term rise" aria-label="터미널로 설치">
+      <div class="term-bar"><i></i><i></i><i></i><span>zsh</span>
+        <button type="button" class="install-copy" data-copy="curl -fsSL https://choisukjune.github.io/indiff-app/install.sh | sh">복사</button></div>
+      <div class="term-body">
+        <p class="t-cmd"><span class="t-ps">$</span> <code>curl -fsSL https://choisukjune.github.io/indiff-app/install.sh | sh</code></p>
+        <p class="t-out t-hd">(indiff) 설치</p>
+        <p class="t-out">받는 중…</p>
+        <p class="t-out">해시 확인 <b>✓</b></p>
+        <p class="t-out">/Applications 에 넣는 중…</p>
+        <p class="t-out">설치했습니다 — INDIFF 0.1.0</p>
+        <p class="t-out">앱을 엽니다. 처음엔 볼 폴더를 묻습니다.</p>
+        <p class="t-cmd t-end"><span class="t-ps">$</span> <span class="t-caret"></span></p>
+      </div>
     </div>
   </div>
 </section>
@@ -314,25 +332,27 @@
       <p class="label">Scope</p>
       <h2>지금의 범위</h2>
     </div>
-    <div class="limits">
-      <p>macOS 12 이상, Apple Silicon 전용입니다.</p>
-      <p>옛 한글 문서(3.x)와 암호 걸린 문서, 옛 엑셀 형식(.xls)은 못 엽니다.</p>
-      <p>서식 편집은 마크다운이 표현하는 범위까지입니다. 밑줄과 글자색, 수식이 든 문서는 원문 모드로 고칩니다.</p>
-      <p>터미널에서 띄우는 Claude Code는 승인을 건너뛰고 뜹니다. 내 컴퓨터의 파일을 바로 고칠 수 있습니다.</p>
+    <div class="spec rise">
+      <div><p class="k">Platform</p><p>macOS 12 이상, Apple Silicon 전용입니다.</p></div>
+      <div><p class="k">Formats</p><p>옛 한글 문서(3.x)와 암호 걸린 문서, 옛 엑셀 형식(.xls)은 못 엽니다.</p></div>
+      <div><p class="k">Editing</p><p>서식 편집은 마크다운이 표현하는 범위까지입니다. 밑줄과 글자색, 수식이 든 문서는 원문 모드로 고칩니다.</p></div>
+      <div><p class="k">Claude Code</p><p>터미널에서 띄우는 Claude Code는 승인을 건너뛰고 뜹니다. 내 컴퓨터의 파일을 바로 고칠 수 있습니다.</p></div>
     </div>
   </div>
 </section>
 
 <section class="band dark">
   <div class="wrap">
-    <div>
+    <div class="band-head rise">
       <p class="label">Under the hood</p>
       <p>디스크의 파일이 정본입니다. 색인은 지워도 다시 생기고요.<br>
          서버는 이 컴퓨터에만 붙습니다. 전부 이 안에 남습니다.</p>
     </div>
-    <div>
-      <p class="mono">검사 파일 70개 · 검사 1,300여 회</p>
-      <p class="mono">MIT 라이선스</p>
+    <div class="facts rise">
+      <div><b>127.0.0.1</b><span>서버가 붙는 곳</span></div>
+      <div><b>70</b><span>검사 파일</span></div>
+      <div><b>1,300+</b><span>검사</span></div>
+      <div><b>MIT</b><span>라이선스</span></div>
     </div>
   </div>
 </section>
@@ -340,9 +360,6 @@
 <section class="end dark">
   <div class="wrap">
     <h2>흩어진 문서를,<br>한 화면으로.</h2>
-    <div class="cta">
-      <a class="btn" href="https://github.com/choisukjune/indiff-app/releases/latest/download/INDIFF-mac-arm64.dmg">Download for Mac</a>
-    </div>
     <div class="install">
       <span class="install-k">터미널로 설치</span>
       <code>curl -fsSL https://choisukjune.github.io/indiff-app/install.sh | sh</code>
@@ -350,6 +367,7 @@
     </div>
     <p class="mono">macOS 12 이상 · Apple Silicon · 211MB · 무료</p>
   </div>
+  <p class="wordmark" aria-hidden="true">(indiff)</p>
 </section>
 
 <footer class="dark">
@@ -539,6 +557,62 @@
     el.style.transitionDelay = (Math.min(i, 3) * 60) + 'ms';
     io.observe(el);
   });
+})();
+</script>
+<script>
+/* 칸 그림과 터미널 — 보일 때 한 번만 돈다.
+
+   칸: data-n 개를 만들고 앞에서부터 data-on 개를 켠다. 흩뿌리지 않는다 — 넓이를 견주는
+   그림이라 한 덩이로 차야 9.5% 와 87.2% 가 한눈에 갈린다.
+   터미널: 줄은 HTML 에 이미 다 있다(글꼴 서브셋이 그 글자를 담아야 한다). 숨겨 두었다가
+   명령은 글자 단위로, 출력은 줄 단위로 드러낸다. 움직임을 줄이라는 설정이면 그냥 다 보인다. */
+(function () {
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io = window.IntersectionObserver;
+
+  [].forEach.call(document.querySelectorAll('.waffle'), function (w) {
+    var n = +w.getAttribute('data-n'), on = +w.getAttribute('data-on'), f = document.createDocumentFragment();
+    for (var i = 0; i < n; i++) f.appendChild(document.createElement('i'));
+    w.appendChild(f);
+    var cells = w.children;
+    function fill() {
+      if (still) { for (var i = 0; i < on; i++) cells[i].className = 'on'; return; }
+      var k = 0, step = Math.max(1, Math.ceil(on / 45));     // 0.75초 안팎에 다 찬다
+      (function tick() {
+        for (var j = 0; j < step && k < on; j++, k++) cells[k].className = 'on';
+        if (k < on) requestAnimationFrame(tick);
+      })();
+    }
+    if (still || !io) return fill();
+    var o = new io(function (es) { if (es[0].isIntersecting) { o.disconnect(); fill(); } }, { threshold: .35 });
+    o.observe(w);
+  });
+
+  var term = document.querySelector('.term');
+  if (!term || still || !io) return;
+  var lines = [].slice.call(term.querySelectorAll('.term-body p'));
+  var code = term.querySelector('.t-cmd code'), full = code.textContent;
+  term.classList.add('wait');
+  function play() {
+    lines[0].classList.add('shown');
+    code.textContent = '';
+    var i = 0;
+    (function type() {
+      code.textContent = full.slice(0, i += 2);
+      if (i < full.length) return setTimeout(type, 16);
+      code.textContent = full;
+      var k = 1;
+      (function next() {
+        if (k >= lines.length) return;
+        lines[k].classList.add('shown');
+        var slow = /받는 중/.test(lines[k].textContent);
+        k += 1;
+        setTimeout(next, slow ? 900 : 340);
+      })();
+    })();
+  }
+  var o = new io(function (es) { if (es[0].isIntersecting) { o.disconnect(); setTimeout(play, 250); } }, { threshold: .45 });
+  o.observe(term);
 })();
 </script>
 <script>

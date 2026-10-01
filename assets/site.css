@@ -39,7 +39,7 @@ body{
 }
 @font-face{
   font-family:'Pretendard Variable';
-  src:url('pretendard-subset.woff2?v=9e25e7bd') format('woff2-variations');
+  src:url('pretendard-subset.woff2?v=46e28f21') format('woff2-variations');
   font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
@@ -130,7 +130,8 @@ header.top.solid{
         font-size:clamp(2.2rem,5.6vw,3.8rem); line-height:1; letter-spacing:-.012em}
 .hero h1{font-size:clamp(2.4rem,6vw,4.4rem)}
 .hero .lede{font-size:1.12rem; margin-top:1.8rem; max-width:32rem}
-.hero .cta{justify-content:center}
+.hero .cta{justify-content:center; margin-top:1.3rem}
+.hero-mid .install{margin-top:3rem}
 /* 터미널로 설치 — 한 줄과 복사 단추. 줄이 넘치면 그 칸 안에서만 가로로 민다 */
 .install{display:flex; align-items:center; gap:.9rem; max-width:47rem; margin:0 auto 1.4rem;
   padding:.5rem .5rem .5rem 1.2rem; border:1px solid var(--line2); border-radius:999px; background:var(--card); text-align:left}
@@ -176,18 +177,42 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
   gap:2.6rem; align-items:center; padding:2.4rem}
 .item:has(figure:not(:empty)) figure{margin-top:0}
 
-/* ── 숫자 ── */
-.stat{
-  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.6rem;
-  margin:3rem 0 1.6rem; max-width:46rem;
-}
-.stat > div{border:1px solid var(--line); border-radius:var(--r); background:var(--card); padding:2rem 2.2rem}
-.num{font-size:clamp(2.2rem,5.2vw,3.2rem); font-weight:300; letter-spacing:-.04em; line-height:1}
-.num.gone{color:var(--dim2)}
-.num small{display:block; font-family:var(--mono); font-size:12px; font-weight:400;
-  letter-spacing:.12em; text-transform:uppercase; color:var(--dim2); margin-top:1.1em}
-.bar{height:4px; border-radius:999px; background:var(--line2); display:flex; margin:0 0 .9rem; max-width:46rem; overflow:hidden}
-.bar i{display:block; background:var(--fg)}
+/* ── 나란히 — 왼쪽 제목, 오른쪽 그림 ── */
+.split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:4.5rem; align-items:center}
+.split-head .lead{font-size:1.06rem; margin-top:1.6rem}
+.split-head .mono{margin-top:2.2rem}
+
+/* ── 원본 그대로 — 문서 792건을 칸 792개로. 수치가 넓이로 읽힌다 ── */
+.waffles{display:grid; gap:14px}
+.waffle-card{border:1px solid var(--line); border-radius:var(--r); background:var(--card); padding:1.6rem 1.8rem 1.8rem}
+.waffle-top{display:flex; align-items:baseline; justify-content:space-between; gap:1rem; margin-bottom:1.2rem}
+.waffle-top .num{font-size:clamp(2rem,4vw,2.8rem); font-weight:300; letter-spacing:-.04em; line-height:1}
+.waffle-top .k{font-family:var(--mono); font-size:12px; letter-spacing:.06em; color:var(--dim2)}
+.waffle{display:grid; grid-template-columns:repeat(44,minmax(0,1fr)); gap:2px}
+.waffle i{display:block; aspect-ratio:1; border-radius:1px; background:var(--line2)}
+.waffle i.on{background:var(--fg)}
+.gone .num{color:var(--dim2)}
+.gone .waffle i.on{background:var(--dim)}
+.waffles .note{margin-top:.4rem}
+
+/* ── 설치 — 스크립트가 실제로 찍는 줄을 그대로 보인다 ── */
+.term{border:1px solid var(--line2); border-radius:14px; background:#08080a; overflow:hidden;
+  box-shadow:0 40px 90px -40px rgba(255,255,255,.10)}
+.term-bar{display:flex; align-items:center; gap:7px; padding:.65rem .7rem .65rem 1rem; border-bottom:1px solid var(--line)}
+.term-bar i{width:10px; height:10px; border-radius:50%; background:var(--line2)}
+.term-bar span{flex:1; text-align:center; font-family:var(--mono); font-size:11px; color:var(--dim2)}
+.term-body{padding:1.3rem 1.5rem 1.6rem; font-family:var(--mono); font-size:13px; line-height:1.95; min-height:17.5rem}
+.term-body p{margin:0; max-width:none}
+.t-cmd{word-break:break-all}
+.t-cmd code{font-family:inherit; color:var(--fg)}
+.t-ps{color:var(--dim2)}
+.t-out{color:var(--dim); padding-left:1.1rem}
+.t-out b{font-weight:400; color:var(--fg)}
+.t-hd{color:var(--fg)}
+.t-caret{display:inline-block; width:.55em; height:1.05em; vertical-align:-.18em; background:var(--fg); animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.term.wait .term-body p{visibility:hidden}
+.term.wait .term-body p.shown{visibility:visible}
 
 /* ── 포맷 — 확장자만 카드로 ── */
 .exts{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px}
@@ -197,18 +222,28 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
 .ext.img{font-size:12px; line-height:1.9; letter-spacing:.06em; color:var(--dim); text-align:center}
 
 
-/* ── 범위 ── */
-.limits{max-width:46rem; margin-inline:auto}
-.limits p{padding-left:1.7rem; position:relative; max-width:none}
-.limits p::before{content:""; position:absolute; left:0; top:.85em; width:8px; height:1px; background:var(--dim2)}
+/* ── 범위 — 머리표 넷, 칸 사이는 선 하나 ── */
+.spec{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid var(--line)}
+.spec > div{padding:2.2rem 2.6rem 2.4rem 0; border-bottom:1px solid var(--line)}
+.spec > div:nth-child(even){padding:2.2rem 0 2.4rem 2.6rem; border-left:1px solid var(--line)}
+.spec .k{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim2); margin:0 0 1.1rem}
+.spec p{max-width:none; margin-bottom:0}
 
 /* ── 띠 · 마무리 · 푸터 ── */
 .band{background:var(--card)}
-.band .wrap{display:grid; grid-template-columns:1fr auto; gap:3rem; align-items:end}
+.facts{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); margin-top:3.6rem; border-top:1px solid var(--line2)}
+.facts div{padding:1.9rem 1.4rem 0 0}
+.facts div + div{padding-left:1.6rem; border-left:1px solid var(--line2)}
+.facts b{display:block; font-weight:300; font-size:clamp(1.5rem,3.2vw,2.5rem); letter-spacing:-.03em; line-height:1}
+.facts span{display:block; margin-top:.9rem; font-family:var(--mono); font-size:12px; letter-spacing:.06em; color:var(--dim2)}
 .band p:not(.label):not(.mono){color:var(--fg)}
-.end{text-align:center; padding-block:9rem}
+.end{text-align:center; padding-block:9rem 0; overflow:hidden}
+/* 맨 끝에 화면 폭만 한 로고 — 아래가 잘리게 걸쳐 둔다. 읽는 글이 아니라 무늬라 옅게 */
+.wordmark{margin:7rem 0 -.2em; max-width:none; font-family:var(--serif); font-weight:300; line-height:.8;
+  font-size:min(25vw,24rem); letter-spacing:-.05em; white-space:nowrap; text-align:center;
+  background:linear-gradient(180deg,#2a2a2f 0%,rgba(42,42,47,0) 92%); -webkit-background-clip:text; background-clip:text; color:transparent}
 .end h2{max-width:none}
-.end .cta{justify-content:center; margin-bottom:1.6rem}
+.end .install{margin-top:3.2rem}
 .end p{margin-inline:auto}
 footer{padding-block:3.4rem; background:var(--bg); color:var(--fg)}
 footer .wrap{display:flex; gap:1.2rem 2.6rem; flex-wrap:wrap; align-items:center}
@@ -224,7 +259,9 @@ footer p{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; l
 @media (max-width:900px){
   .items{grid-template-columns:1fr; gap:1.2rem}
   .item:has(figure:not(:empty)){grid-template-columns:1fr; gap:1.8rem}
-  .band .wrap{grid-template-columns:1fr; gap:1.6rem}
+  .split{grid-template-columns:1fr; gap:3rem}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:2rem}
+  .facts div:nth-child(3){padding-left:0; border-left:0}
   .exts{grid-template-columns:repeat(3,minmax(0,1fr))}
   .shot-pair{grid-template-columns:1fr}
   section{padding-block:5.5rem}
@@ -232,8 +269,12 @@ footer p{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; l
 }
 @media (max-width:620px){
   :root{--gut:20px}
-  .stat{grid-template-columns:1fr; gap:1rem}
   .install-k{display:none}
+  .spec{grid-template-columns:1fr}
+  .spec > div, .spec > div:nth-child(even){padding:1.8rem 0; border-left:0}
+  .waffle-card{padding:1.3rem 1.2rem 1.4rem}
+  .waffle{gap:1px}
+  .term-body{font-size:12px; padding:1.1rem 1.1rem 1.3rem}
   .exts{grid-template-columns:repeat(2,minmax(0,1fr))}
   .item{padding:1.8rem 1.6rem}
   .end{padding-block:6rem}
