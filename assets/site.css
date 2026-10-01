@@ -186,16 +186,6 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
   font-family:var(--mono); font-size:clamp(1.05rem,2vw,1.5rem); letter-spacing:.02em; color:var(--fg)}
 .ext.img{font-size:12px; line-height:1.9; letter-spacing:.06em; color:var(--dim); text-align:center}
 
-/* ── 설치 ── */
-ol.steps{counter-reset:s; list-style:none; padding:0; margin:0 auto 2.4rem; max-width:44rem;
-  border:1px solid var(--line); border-radius:var(--r); background:var(--card)}
-ol.steps li{counter-increment:s; display:grid; grid-template-columns:3rem 1fr; gap:1.2rem;
-  padding:1.5rem 2rem}
-ol.steps li + li{border-top:1px solid var(--line)}
-ol.steps li::before{content:"0" counter(s); font-family:var(--mono); font-size:12px;
-  letter-spacing:.1em; color:var(--dim2); padding-top:.45em}
-.warn{border-left:2px solid var(--fg); padding:.1rem 0 .1rem 1.6rem; margin:0 auto 2rem; max-width:44rem}
-.warn p{margin:0}
 
 /* ── 범위 ── */
 .limits{max-width:46rem; margin-inline:auto}
@@ -235,7 +225,6 @@ footer p{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; l
   .stat{grid-template-columns:1fr; gap:1rem}
   .exts{grid-template-columns:repeat(2,minmax(0,1fr))}
   .item{padding:1.8rem 1.6rem}
-  ol.steps li{grid-template-columns:2.4rem 1fr; padding:1.3rem 1.4rem}
   .end{padding-block:6rem}
 }
 @media (prefers-reduced-motion: reduce){
