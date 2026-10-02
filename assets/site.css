@@ -39,7 +39,7 @@ body{
 }
 @font-face{
   font-family:'Pretendard Variable';
-  src:url('pretendard-subset.woff2?v=56de53b1') format('woff2-variations');
+  src:url('pretendard-subset.woff2?v=8e506644') format('woff2-variations');
   font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
@@ -197,17 +197,33 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
 .split-head .mono{margin-top:2.2rem}
 
 /* ── 원본 그대로 — 문서 792건을 칸 792개로. 수치가 넓이로 읽힌다 ── */
-.waffles{display:grid; gap:14px}
-.waffle-card{border:1px solid var(--line); border-radius:var(--r); background:var(--card); padding:1.6rem 1.8rem 1.8rem}
-.waffle-top{display:flex; align-items:baseline; justify-content:space-between; gap:1rem; margin-bottom:1.2rem}
-.waffle-top .num{font-size:clamp(2rem,4vw,2.8rem); font-weight:300; letter-spacing:-.04em; line-height:1}
-.waffle-top .k{font-family:var(--mono); font-size:12px; letter-spacing:.06em; color:var(--dim2)}
-.waffle{display:grid; grid-template-columns:repeat(44,minmax(0,1fr)); gap:2px}
-.waffle i{display:block; aspect-ratio:1; border-radius:1px; background:var(--line2)}
-.waffle i.on{background:var(--fg)}
-.gone .num{color:var(--dim2)}
-.gone .waffle i.on{background:var(--dim)}
-.waffles .note{margin-top:.4rem}
+/* 원본 — 한 줄만 바뀐 문서. 바뀐 줄만 밝고, 나머지는 「그대로」가 붙어 가라앉는다 */
+.split-head .lead + .lead{margin-top:1rem}
+.keep-line{margin-top:2.2rem; padding-top:1.4rem; border-top:1px solid var(--line); color:var(--dim)}
+.keep{display:grid; gap:14px}
+.keep-card{border:1px solid var(--line); border-radius:var(--r); background:var(--card); padding:1.4rem 1.8rem 1.5rem}
+.keep-top, .keep-foot{font-family:var(--mono); font-size:12px; letter-spacing:.06em; color:var(--dim2)}
+.keep-top{display:flex; justify-content:space-between; gap:1rem; padding-bottom:1.1rem; border-bottom:1px solid var(--line)}
+.keep-state{letter-spacing:.14em}
+.keep-doc{padding:1.4rem 0 .6rem}
+.kd-h{font-size:1.2rem; margin:0 0 1rem; max-width:none}
+.kd-row{display:grid; grid-template-columns:5.5rem minmax(0,1fr) auto; gap:1rem; align-items:baseline;
+  padding:.72rem .9rem; margin-inline:-.9rem; border-radius:8px; color:var(--dim)}
+.kd-row + .kd-row{border-top:1px solid var(--line)}
+.kd-row i{font-style:normal; font-family:var(--mono); font-size:12px; color:var(--dim2); transition:opacity .5s}
+.kd-row s{color:var(--dim2); margin-right:.7rem; text-decoration-color:var(--dim2); transition:color .4s, text-decoration-color .4s}
+.kd-row b{transition:opacity .5s .25s}
+.kd-row.hit{background:#141417; color:var(--fg); box-shadow:inset 2px 0 0 var(--fg); transition:background .5s, box-shadow .5s}
+.kd-row.hit i{color:var(--fg)}
+.keep.wait .kd-row i{opacity:0}
+.keep.wait .kd-row s{color:var(--dim); text-decoration-color:transparent}
+.keep.wait .kd-row b{opacity:0}
+.keep.wait .kd-row.hit{background:transparent; box-shadow:inset 2px 0 0 transparent; color:var(--dim)}
+.keep-foot{margin:0; padding-top:1.1rem; border-top:1px solid var(--line); letter-spacing:.14em}
+.keep-proof{display:flex; align-items:center; gap:1.6rem; padding:.4rem .2rem}
+.keep-proof .num{margin:0; font-size:clamp(2rem,4vw,2.8rem); font-weight:300; letter-spacing:-.04em; line-height:1}
+.keep-proof .k{margin:0 0 .35rem}
+.keep-proof .mono{margin:0}
 
 /* ── 설치 — 스크립트가 실제로 찍는 줄을 그대로 보인다 ── */
 .term{border:1px solid var(--line2); border-radius:14px; background:#08080a; overflow:hidden;
@@ -279,8 +295,8 @@ footer p{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; l
   .install-k{display:none}
   .spec{grid-template-columns:1fr}
   .spec > div, .spec > div:nth-child(even){padding:1.8rem 0; border-left:0}
-  .waffle-card{padding:1.3rem 1.2rem 1.4rem}
-  .waffle{gap:1px}
+  .keep-card{padding:1.2rem 1.2rem 1.3rem}
+  .kd-row{grid-template-columns:4.2rem minmax(0,1fr) auto; gap:.6rem}
   .term-body{font-size:12px; padding:1.1rem 1.1rem 1.3rem}
   .exts{grid-template-columns:repeat(2,minmax(0,1fr))}
   .item{padding:1.8rem 1.6rem}

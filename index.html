@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://choisukjune.github.io/indiff-app/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/site.css?v=40df032f">
+<link rel="stylesheet" href="assets/site.css?v=ae9d038a">
 </head>
 <body>
 
@@ -282,22 +282,29 @@
     <div class="split-head rise">
       <p class="label">Your files, unchanged</p>
       <h2>열어 봤다고<br>문서가 바뀌면 안 되니까.</h2>
-      <p class="lead">편집기가 먼저 지킬 것은 기능이 아니라 원본입니다.<br>
-         예전엔 열었다 닫기만 해도 열 중 아홉이 다시 쓰였습니다.
-         글자를 잃어서가 아니라, 모양이 바뀌어서.<br>
-         지금은 손대지 않은 곳에 손대지 않습니다.</p>
-      <p class="mono">왕복해도 한 글자도 안 바뀐 문서 · 마크다운 792건 기준</p>
+      <p class="lead">문서는 읽으려고 여는 겁니다.<br>
+         열었다는 이유만으로 다시 쓰여서는 안 됩니다.</p>
+      <p class="lead">INDIFF는 손대지 않은 부분을 다시 쓰지 않습니다.<br>
+         <b>필요한 곳만 바꾸고, 나머지는 그대로.</b></p>
+      <p class="keep-line">한 줄을 바꿨다면, 한 줄만 바뀌어야 하니까.</p>
     </div>
-    <div class="waffles rise">
-      <div class="waffle-card gone">
-        <div class="waffle-top"><span class="num">9.5%</span><span class="k">통째로 다시 쓸 때</span></div>
-        <div class="waffle" data-n="792" data-on="75" aria-hidden="true"></div>
+    <div class="keep rise">
+      <div class="keep-card">
+        <div class="keep-top"><span>프로젝트 일정.md</span><span class="keep-state">BEFORE → AFTER</span></div>
+        <div class="keep-doc">
+          <p class="kd-h">프로젝트 일정</p>
+          <div class="kd-row"><span>개발</span><span>10월 12일</span><i>그대로</i></div>
+          <div class="kd-row hit"><span>디자인</span><span><s>10월 15일</s><b>10월 18일</b></span><i>바뀐 곳</i></div>
+          <div class="kd-row"><span>QA</span><span>10월 20일</span><i>그대로</i></div>
+          <div class="kd-row"><span>출시</span><span>10월 27일</span><i>그대로</i></div>
+        </div>
+        <p class="keep-foot">ONLY WHAT CHANGED</p>
       </div>
-      <div class="waffle-card">
-        <div class="waffle-top"><span class="num">87.2%</span><span class="k">블록을 보존할 때</span></div>
-        <div class="waffle" data-n="792" data-on="691" aria-hidden="true"></div>
+      <div class="keep-proof">
+        <p class="num">87.2%</p>
+        <div><p class="k">원본 블록 보존</p>
+          <p class="mono">마크다운 792건 기준<br>통째로 다시 쓰면 9.5%</p></div>
       </div>
-      <p class="note">AI가 쓴 문서(211건)는 97.6%. 그 문서들이 안 열리던 진짜 이유는 손실이 아니라 표 재조판이었습니다.</p>
     </div>
   </div>
 </section>
@@ -566,33 +573,27 @@
 })();
 </script>
 <script>
-/* 칸 그림과 터미널 — 보일 때 한 번만 돈다.
+/* 바뀐 곳과 터미널 — 보일 때 한 번만 돈다.
 
-   칸: data-n 개를 만들고 앞에서부터 data-on 개를 켠다. 흩뿌리지 않는다 — 넓이를 견주는
-   그림이라 한 덩이로 차야 9.5% 와 87.2% 가 한눈에 갈린다.
    터미널: 줄은 HTML 에 이미 다 있다(글꼴 서브셋이 그 글자를 담아야 한다). 숨겨 두었다가
    명령은 글자 단위로, 출력은 줄 단위로 드러낸다. 움직임을 줄이라는 설정이면 그냥 다 보인다. */
 (function () {
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var io = window.IntersectionObserver;
 
-  [].forEach.call(document.querySelectorAll('.waffle'), function (w) {
-    var n = +w.getAttribute('data-n'), on = +w.getAttribute('data-on'), f = document.createDocumentFragment();
-    for (var i = 0; i < n; i++) f.appendChild(document.createElement('i'));
-    w.appendChild(f);
-    var cells = w.children;
-    function fill() {
-      if (still) { for (var i = 0; i < on; i++) cells[i].className = 'on'; return; }
-      var k = 0, step = Math.max(1, Math.ceil(on / 45));     // 0.75초 안팎에 다 찬다
-      (function tick() {
-        for (var j = 0; j < step && k < on; j++, k++) cells[k].className = 'on';
-        if (k < on) requestAnimationFrame(tick);
-      })();
-    }
-    if (still || !io) return fill();
-    var o = new io(function (es) { if (es[0].isIntersecting) { o.disconnect(); fill(); } }, { threshold: .35 });
-    o.observe(w);
-  });
+  /* 바뀐 곳: 처음엔 옛 날짜만 보이다가(BEFORE), 보이면 새 날짜가 들어서고 나머지 줄에
+     「그대로」가 붙는다(AFTER). 기본은 끝난 모습 — 스크립트가 못 돌면 그냥 AFTER 다 */
+  var keep = document.querySelector('.keep');
+  if (keep && !still && io) {
+    var st = keep.querySelector('.keep-state');
+    keep.classList.add('wait'); st.textContent = 'BEFORE';
+    var ko = new io(function (es) {
+      if (!es[0].isIntersecting) return;
+      ko.disconnect();
+      setTimeout(function () { keep.classList.remove('wait'); st.textContent = 'AFTER'; }, 700);
+    }, { threshold: .5 });
+    ko.observe(keep);
+  }
 
   var term = document.querySelector('.term');
   if (!term || still || !io) return;
