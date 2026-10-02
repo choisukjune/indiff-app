@@ -134,12 +134,24 @@ header.top.solid{
 @keyframes aurora{to{transform:translate3d(3%,4%,0) scale(1.08)}}
 /* 배경이 화려해진 만큼 글자 뒤에 그늘을 깐다 — 글은 늘 무늬 위에 떠야 한다 */
 .hero-mid h1, .hero-mid .lede, .hero-mid .lockup{text-shadow:0 0 28px #000, 0 0 10px rgba(0,0,0,.85)}
-.hero-mid{text-align:center; max-width:48rem; margin-inline:auto}
+.hero-mid{text-align:center; margin-inline:auto}
 .hero-mid p{margin-inline:auto}
 /* 괄호가 제 앞뒤로 여백을 들고 있다 */
-.lockup{margin:0 0 2.2rem; font-family:var(--serif); font-weight:300;
-        font-size:clamp(2.2rem,5.6vw,3.8rem); line-height:1; letter-spacing:-.012em}
-.hero h1{font-size:clamp(2.4rem,6vw,4.4rem)}
+/* 히어로만 활자가 주인공이다 — 본문의 「굵기 하나(300)」 규칙에서 빠진다.
+   로고는 화면 폭만 하게, 자간을 바짝 당겨 한 덩이로 읽히게 한다 */
+.lockup{margin:0 0 .26em; font-weight:600; font-size:clamp(5.4rem,23vw,21rem);
+        line-height:.86; letter-spacing:-.07em; max-width:none; margin-inline:-.04em}
+.hero h1{font-weight:500; font-size:clamp(2.3rem,6.2vw,5.6rem); line-height:1.02; letter-spacing:-.055em}
+/* 머리 한 줄 — 왼쪽 이름과 오른쪽 판을 점선이 잇는다 */
+.intro{display:flex; align-items:center; gap:.8rem; width:min(100%,34rem); margin:0 auto 2.6rem;
+       font-size:15px; font-weight:400; letter-spacing:-.01em; line-height:1}
+.intro i{flex:1; height:3px; opacity:.7;
+         background:radial-gradient(circle,currentColor 1px,transparent 1.3px) 0 0/6px 3px repeat-x}
+/* 왼쪽 가장자리에 세로로 흐르는 확장자 — 읽는 글이 아니라 결이다 */
+.side{position:absolute; z-index:1; left:clamp(12px,3vw,48px); top:50svh; margin:0; max-width:none;
+      transform:translateY(-50%) rotate(180deg); writing-mode:vertical-rl; white-space:nowrap;
+      font-family:var(--mono); font-size:11px; letter-spacing:.12em; line-height:1; color:var(--dim2);
+      height:70svh; overflow:hidden}
 .hero .lede{font-size:1.12rem; margin-top:1.8rem; max-width:32rem}
 .hero .cta{justify-content:center; margin-top:1.3rem}
 .hero-mid .install{margin-top:3rem}
@@ -291,6 +303,8 @@ footer p{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; l
   .hero .shot-wide{margin-bottom:-3rem}
 }
 @media (max-width:620px){
+  .side{display:none}
+  .intro{font-size:13px; margin-bottom:2rem}
   :root{--gut:20px}
   .install-k{display:none}
   .spec{grid-template-columns:1fr}
