@@ -39,7 +39,7 @@ body{
 }
 @font-face{
   font-family:'Pretendard Variable';
-  src:url('pretendard-subset.woff2?v=3ac99b35') format('woff2-variations');
+  src:url('pretendard-subset.woff2?v=56de53b1') format('woff2-variations');
   font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
@@ -250,7 +250,9 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
   font-size:min(25vw,24rem); letter-spacing:-.05em; white-space:nowrap; text-align:center;
   background:linear-gradient(180deg,#2a2a2f 0%,rgba(42,42,47,0) 92%); -webkit-background-clip:text; background-clip:text; color:transparent}
 .end h2{max-width:none}
+.end .lead{font-size:1.06rem; margin-top:1.6rem; color:var(--dim)}
 .end .install{margin-top:3.2rem}
+.end .end-meta{margin-top:1.4rem}
 .end p{margin-inline:auto}
 footer{padding-block:3.4rem; background:var(--bg); color:var(--fg)}
 footer .wrap{display:flex; gap:1.2rem 2.6rem; flex-wrap:wrap; align-items:center}
