@@ -115,7 +115,7 @@ header.top.solid{
   filter:blur(30px); animation:aurora 26s ease-in-out infinite alternate}
 @keyframes aurora{to{transform:translate3d(3%,4%,0) scale(1.08)}}
 /* 배경이 화려해진 만큼 글자 뒤에 그늘을 깐다 — 글은 늘 무늬 위에 떠야 한다 */
-.hero-mid h1, .hero-mid .ko, .hero-mid .lockup{text-shadow:0 0 28px #000, 0 0 10px rgba(0,0,0,.85)}
+.hero-mid h1, .hero-mid .ko, .hero-mid .lockup, .install-how, .install-meta{text-shadow:0 0 28px #000, 0 0 10px rgba(0,0,0,.85)}
 .hero-mid{text-align:center; margin-inline:auto}
 .hero-mid p{margin-inline:auto}
 /* 괄호가 제 앞뒤로 여백을 들고 있다 */
@@ -144,7 +144,13 @@ header.top.solid{
   transition:background .18s, color .18s, box-shadow .18s, transform .12s}
 .install:hover{box-shadow:0 0 0 5px rgba(255,255,255,.14)}
 .install:active{transform:scale(.99)}
-.install-k{font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:#6e6e76; white-space:nowrap; transition:color .18s}
+/* 이름표는 흰 단추 위에서도 읽혀야 한다 — 옅은 회색(#6e6e76·11px)은 안 보였다. 명령과는 세로줄로 가른다 */
+.install-k{font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:.04em; color:#2a2a30; white-space:nowrap;
+  padding-right:.9rem; border-right:1px solid #d6d6db; transition:color .18s, border-color .18s}
+/* 단추 밑 한 줄 — 터미널을 안 써 본 사람에게 다음 동작 하나만 알려 준다 */
+.install-how{margin:1.2rem auto 0; font-size:.95rem; color:#c4c4c9; line-height:1.7; max-width:40rem}
+.install-how kbd{font-size:.8em}
+.install-meta{margin:.5rem auto 0; font-family:var(--mono); font-size:12px; letter-spacing:.04em; color:var(--dim2)}
 .install code{flex:1; min-width:0; overflow-x:auto; white-space:nowrap; scrollbar-width:none;
   font-family:var(--mono); font-size:13px; color:inherit}
 .install code::-webkit-scrollbar{display:none}
@@ -153,7 +159,7 @@ header.top.solid{
 .install-copy:hover, .install-copy.on{background:var(--fg); color:var(--bg); border-color:var(--fg)}
 .install .install-copy{background:#0a0a0b; color:#fff; border-color:#0a0a0b}
 .install.copied{background:#0a0a0b; color:#fff; box-shadow:none}
-.install.copied .install-k{color:var(--dim2)}
+.install.copied .install-k{color:var(--dim2); border-color:var(--line2)}
 .install.copied .install-copy{background:#fff; color:#0a0a0b; border-color:#fff}
 
 /* ── 그림 ── */
