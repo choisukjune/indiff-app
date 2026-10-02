@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://choisukjune.github.io/indiff-app/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/site.css?v=b7cf3921">
+<link rel="stylesheet" href="assets/site.css?v=6324c999">
 </head>
 <body>
 
@@ -411,7 +411,8 @@
     W = c.clientWidth; H = c.clientHeight; if (!W || !H) return false;
     c.width = Math.round(W*dpr); c.height = Math.round(H*dpr);
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
-    var S = Math.max(H*1.45, W*1.05);
+    var V = Math.min(H, window.innerHeight || H);
+    var S = Math.max(V*1.45, W*1.05);
     var f = Math.max(10, Math.min(16, S/66));
     g.font = f + 'px ui-monospace, SFMono-Regular, Menlo, monospace';
     g.textBaseline = 'middle';
@@ -428,11 +429,14 @@
     g.clearRect(0, 0, W, H);
 
     var wide = W >= 880;
-    var S  = Math.max(H*1.45, W*1.05);      /* 화면보다 크게 — 마크가 테두리 밖으로 넘친다 */
+    /* 캔버스는 히어로 끝까지 깔리지만, 마크의 크기와 자리는 **첫 화면**으로 잰다 —
+       캔버스 높이로 재면 그림이 길어지는 만큼 마크가 부풀어 첫 화면 밖으로 밀려난다 */
+    var V  = Math.min(H, window.innerHeight || H);
+    var S  = Math.max(V*1.45, W*1.05);      /* 화면보다 크게 — 마크가 테두리 밖으로 넘친다 */
     var sc = S/1024;
     /* 히어로가 가운데 정렬이라 마크도 가운데 둔다. 옆으로 비키면 글과 겹쳐 둘 다 안 읽힌다.
        대신 밝기를 눌러 **무늬**로 남긴다 — 글이 그 위에 떠야 한다. */
-    var ox = W*0.50, oy = H*0.42;
+    var ox = W*0.50, oy = V*0.42;
     var dim = wide ? 0.78 : 0.5;
 
     /* 둘레가 도는 각 — 한 바퀴 74초 */
