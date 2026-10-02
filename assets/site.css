@@ -138,9 +138,9 @@ header.top.solid{
 .hero-mid p{margin-inline:auto}
 /* 괄호가 제 앞뒤로 여백을 들고 있다 */
 /* 히어로만 활자가 주인공이다 — 본문의 「굵기 하나(300)」 규칙에서 빠진다.
-   로고는 화면 폭만 하게, 자간을 바짝 당겨 한 덩이로 읽히게 한다 */
-.lockup{margin:0 0 .26em; font-weight:600; font-size:clamp(5.4rem,23vw,21rem);
-        line-height:.86; letter-spacing:-.07em; max-width:none; margin-inline:-.04em}
+   로고는 제목과 같은 크기·굵기로 — 세 줄이 한 덩이로 읽힌다 */
+.lockup{margin:0; font-weight:500; font-size:clamp(2.3rem,6.2vw,5.6rem);
+        line-height:1.02; letter-spacing:-.055em; max-width:none}
 .hero h1{font-weight:500; font-size:clamp(2.3rem,6.2vw,5.6rem); line-height:1.02; letter-spacing:-.055em}
 /* 머리 한 줄 — 왼쪽 이름과 오른쪽 판을 점선이 잇는다 */
 .intro{display:flex; align-items:center; gap:.8rem; width:min(100%,34rem); margin:0 auto 2.6rem;
