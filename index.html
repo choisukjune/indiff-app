@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://choisukjune.github.io/indiff-app/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/site.css?v=0f4d3f6f">
+<link rel="stylesheet" href="assets/site.css?v=3c0a8ae0">
 </head>
 <body>
 
@@ -313,7 +313,15 @@
     <div class="split-head rise">
       <p class="label">Install</p>
       <h2>계정도, 로그인도<br>없습니다.</h2>
-      <p class="lead">폴더 하나만 고르면 됩니다.<br>그 다음은 전부 이 컴퓨터 안에서.</p>
+      <p class="lead">명령 한 줄이면 됩니다.<br>그 다음은 전부 이 컴퓨터 안에서.</p>
+      <ol class="steps">
+        <li><span class="n">1</span><div><p class="st">터미널을 엽니다</p>
+          <p><kbd>⌘</kbd> <kbd>Space</kbd> 를 누르고 「터미널」을 칩니다.</p></div></li>
+        <li><span class="n">2</span><div><p class="st">붙여 넣고 <kbd>Enter</kbd></p>
+          <p>이 페이지의 「복사」를 누르면 명령이 클립보드에 들어갑니다.</p></div></li>
+        <li><span class="n">3</span><div><p class="st">볼 폴더를 고릅니다</p>
+          <p>앱이 열리면 처음 한 번 묻습니다. 그 폴더의 문서가 왼쪽 트리에 섭니다.</p></div></li>
+      </ol>
     </div>
     <div class="term rise" aria-label="터미널로 설치">
       <div class="term-bar"><i></i><i></i><i></i><span>zsh</span>
@@ -325,10 +333,22 @@
         <p class="t-out">해시 확인 <b>✓</b></p>
         <p class="t-out">/Applications 에 넣는 중…</p>
         <p class="t-out">설치했습니다 — INDIFF 0.1.2</p>
+        <p class="t-out">Claude Code 확인 <b>✓</b></p>
         <p class="t-out">앱을 엽니다. 처음엔 볼 폴더를 묻습니다.</p>
         <p class="t-cmd t-end"><span class="t-ps">$</span> <span class="t-caret"></span></p>
       </div>
     </div>
+  </div>
+  <div class="wrap does rise">
+    <p class="label">What the command does</p>
+    <div class="spec">
+      <div><p class="k">받고, 맞춰 봅니다</p><p>최신 판을 받아 해시를 대조한 뒤에만 넣습니다. 맞지 않으면 아무것도 넣지 않고 멈춥니다.</p></div>
+      <div><p class="k">암호를 묻지 않습니다</p><p>응용 프로그램 폴더에 넣고, 쓸 수 없으면 내 계정의 응용 프로그램 폴더로 갑니다. 관리자 권한(sudo)은 쓰지 않습니다.</p></div>
+      <div><p class="k">경고 없이 열립니다</p><p>아직 Apple 공증 전이라, 브라우저로 받으면 「Apple이 확인할 수 없습니다」 창에 막힙니다. 이 명령은 격리 표시를 떼고 넣어 바로 열립니다.</p></div>
+      <div><p class="k">Claude Code 는 물어봅니다</p><p>없으면 알려 주고, 원할 때만 공식 설치기를 돌립니다. 없어도 열기·고치기·찾기·노트·내보내기는 모두 됩니다.</p></div>
+    </div>
+    <p class="does-note">새 판이 나오면 앱이 알려 줍니다. 두 번 누르면 바꿔 끼우고 다시 켭니다.
+       스크립트는 <a href="install.sh">install.sh</a> 에서 전부 읽어 볼 수 있습니다.</p>
   </div>
 </section>
 

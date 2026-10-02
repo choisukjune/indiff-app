@@ -39,7 +39,7 @@ body{
 }
 @font-face{
   font-family:'Pretendard Variable';
-  src:url('pretendard-subset.woff2?v=4aa27f14') format('woff2-variations');
+  src:url('pretendard-subset.woff2?v=ce526193') format('woff2-variations');
   font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
@@ -225,6 +225,19 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
 .keep-proof .mono{margin:0}
 
 /* ── 설치 — 스크립트가 실제로 찍는 줄을 그대로 보인다 ── */
+/* 설치 — 세 걸음. 번호는 원 안에, 걸음 이름은 본문보다 한 단 밝게 */
+.steps{list-style:none; margin:2.4rem 0 0; padding:0; display:grid; gap:1.3rem}
+.steps li{display:grid; grid-template-columns:2rem minmax(0,1fr); gap:1rem; align-items:start}
+.steps .n{display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; border-radius:50%;
+  border:1px solid var(--line2); font-family:var(--mono); font-size:12px; color:var(--fg)}
+.steps p{margin:0; color:var(--dim); font-size:.95rem; line-height:1.65}
+.steps .st{color:var(--fg); font-size:1.02rem; margin-bottom:.15rem}
+/* 이 명령이 하는 일 — 세 걸음 밑에 넓게. 범위 표(.spec)와 같은 격자를 쓴다 */
+.does{margin-top:5.5rem}
+.does .spec .k{font-family:inherit; text-transform:none; letter-spacing:-.01em; font-size:1.02rem; color:var(--fg); margin-bottom:.55rem}
+.does .spec p:not(.k){color:var(--dim); font-size:.95rem; line-height:1.7}
+.does-note{margin:1.8rem 0 0; color:var(--dim); font-size:.95rem; max-width:none}
+.does-note a{color:var(--fg); text-underline-offset:3px}
 .term{border:1px solid var(--line2); border-radius:14px; background:#08080a; overflow:hidden;
   box-shadow:0 40px 90px -40px rgba(255,255,255,.10)}
 .term-bar{display:flex; align-items:center; gap:7px; padding:.65rem .7rem .65rem 1rem; border-bottom:1px solid var(--line)}
