@@ -39,7 +39,7 @@ body{
 }
 @font-face{
   font-family:'Pretendard Variable';
-  src:url('pretendard-subset.woff2?v=8e506644') format('woff2-variations');
+  src:url('pretendard-subset.woff2?v=4aa27f14') format('woff2-variations');
   font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
@@ -133,15 +133,16 @@ header.top.solid{
   filter:blur(30px); animation:aurora 26s ease-in-out infinite alternate}
 @keyframes aurora{to{transform:translate3d(3%,4%,0) scale(1.08)}}
 /* 배경이 화려해진 만큼 글자 뒤에 그늘을 깐다 — 글은 늘 무늬 위에 떠야 한다 */
-.hero-mid h1, .hero-mid .lede, .hero-mid .lockup{text-shadow:0 0 28px #000, 0 0 10px rgba(0,0,0,.85)}
+.hero-mid h1, .hero-mid .ko, .hero-mid .lockup{text-shadow:0 0 28px #000, 0 0 10px rgba(0,0,0,.85)}
 .hero-mid{text-align:center; margin-inline:auto}
 .hero-mid p{margin-inline:auto}
 /* 괄호가 제 앞뒤로 여백을 들고 있다 */
 /* 히어로만 활자가 주인공이다 — 본문의 「굵기 하나(300)」 규칙에서 빠진다.
-   로고는 제목과 같은 크기·굵기로 — 세 줄이 한 덩이로 읽힌다 */
-.lockup{margin:0; font-weight:500; font-size:clamp(2.3rem,6.2vw,5.6rem);
-        line-height:1.02; letter-spacing:-.055em; max-width:none}
-.hero h1{font-weight:500; font-size:clamp(2.3rem,6.2vw,5.6rem); line-height:1.02; letter-spacing:-.055em}
+   로고와 영어 제목이 같은 크기·굵기로 한 덩이가 된다 */
+.lockup, .hero h1{margin:0; max-width:none; font-weight:500; font-size:clamp(3rem,9.4vw,8.6rem);
+        line-height:.92; letter-spacing:-.06em}
+/* 한국어는 그 밑에 작게 — 활자 덩이의 자막 */
+.hero .ko{margin:2.2rem auto 0; font-size:clamp(1.15rem,2.2vw,1.7rem); font-weight:400; letter-spacing:-.03em; line-height:1.4}
 /* 머리 한 줄 — 왼쪽 이름과 오른쪽 판을 점선이 잇는다 */
 .intro{display:flex; align-items:center; gap:.8rem; width:min(100%,34rem); margin:0 auto 2.6rem;
        font-size:15px; font-weight:400; letter-spacing:-.01em; line-height:1}
@@ -152,7 +153,6 @@ header.top.solid{
       transform:translateY(-50%) rotate(180deg); writing-mode:vertical-rl; white-space:nowrap;
       font-family:var(--mono); font-size:11px; letter-spacing:.12em; line-height:1; color:var(--dim2);
       height:70svh; overflow:hidden}
-.hero .lede{font-size:1.12rem; margin-top:1.8rem; max-width:32rem}
 .hero .cta{justify-content:center; margin-top:1.3rem}
 .hero-mid .install{margin-top:3rem}
 /* 터미널로 설치 — 흰 바탕 단추 한 줄. 어디를 눌러도 복사되고, 복사되면 검은 바탕에 흰 선만 남아
