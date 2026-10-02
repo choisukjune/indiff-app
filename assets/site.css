@@ -123,7 +123,7 @@ header.top.solid{
 /* 괄호가 제 앞뒤로 여백을 들고 있다 */
 /* 히어로만 활자가 주인공이다 — 본문의 「굵기 하나(300)」 규칙에서 빠진다.
    로고와 영어 제목이 같은 크기·굵기로 한 덩이가 된다 */
-.lockup, .hero h1{margin:0; max-width:none; font-weight:500; font-size:clamp(3rem,9.4vw,8.6rem);
+.lockup, .hero h1{margin:0; max-width:none; font-weight:500; font-size:clamp(2.7rem,8.4vw,7.6rem);
         line-height:.84; letter-spacing:-.06em}
 /* 한국어는 그 밑에 작게 — 활자 덩이의 자막 */
 .hero .ko{margin:2.2rem auto 0; font-size:clamp(1.15rem,2.2vw,1.7rem); font-weight:400; letter-spacing:-.03em; line-height:1.4}
