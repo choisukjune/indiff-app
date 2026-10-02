@@ -85,22 +85,6 @@ kbd{font-family:var(--mono); font-size:.84em; line-height:1; padding:.22em .5em 
   color:var(--dim);
 }
 .badge::before{content:""; width:5px; height:5px; border-radius:50%; background:var(--fg); opacity:.75}
-
-/* ── 단추 ── */
-.btn{
-  display:inline-flex; align-items:center; gap:.5em; padding:.95em 1.9em;
-  border:1px solid var(--fg); border-radius:999px;
-  background:var(--fg); color:var(--bg);
-  font:inherit; font-size:.95rem; font-weight:400; text-decoration:none; cursor:pointer;
-  transition:transform .14s ease, opacity .14s ease, background .14s, color .14s;
-}
-.btn:hover{transform:translateY(-1px); opacity:.88}
-.btn.ghost{background:transparent; color:var(--fg)}
-.btn.ghost:hover{background:var(--fg); color:var(--bg); opacity:1}
-.btn.sm{padding:.6em 1.25em; font-size:.85rem}
-.btn[aria-disabled="true"]{background:transparent; border-color:var(--dim2); color:var(--dim); cursor:default}
-.btn[aria-disabled="true"]:hover{transform:none; opacity:1; background:transparent; color:var(--dim)}
-.cta{display:flex; align-items:center; gap:1rem; flex-wrap:wrap; margin:3rem 0 1.4rem}
 :focus-visible{outline:2px solid currentColor; outline-offset:3px}
 
 /* ── 상단 바: 따라오고, 본문에 들어서면 밝아진다 ── */
@@ -153,7 +137,6 @@ header.top.solid{
       transform:translateY(-50%) rotate(180deg); writing-mode:vertical-rl; white-space:nowrap;
       font-family:var(--mono); font-size:11px; letter-spacing:.12em; line-height:1; color:var(--dim2);
       height:70svh; overflow:hidden}
-.hero .cta{justify-content:center; margin-top:1.3rem}
 .hero-mid .install{margin-top:3rem}
 /* 터미널로 설치 — 흰 바탕 단추 한 줄. 어디를 눌러도 복사되고, 복사되면 검은 바탕에 흰 선만 남아
    「눌렸다」가 보인다. 줄이 넘치면 그 칸 안에서만 가로로 민다 */
