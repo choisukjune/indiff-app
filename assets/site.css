@@ -39,7 +39,7 @@ body{
 }
 @font-face{
   font-family:'Pretendard Variable';
-  src:url('pretendard-subset.woff2?v=2f39c11d') format('woff2-variations');
+  src:url('pretendard-subset.woff2?v=7131edac') format('woff2-variations');
   font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}
@@ -115,7 +115,7 @@ header.top.solid{
   filter:blur(30px); animation:aurora 26s ease-in-out infinite alternate}
 @keyframes aurora{to{transform:translate3d(3%,4%,0) scale(1.08)}}
 /* 배경이 화려해진 만큼 글자 뒤에 그늘을 깐다 — 글은 늘 무늬 위에 떠야 한다 */
-.hero-mid h1, .hero-mid .ko, .hero-mid .lockup, .install-how, .install-meta{text-shadow:0 0 28px #000, 0 0 10px rgba(0,0,0,.85)}
+.hero-mid h1, .hero-mid .ko, .hero-mid .lockup, .intro, .install-how, .install-meta{text-shadow:0 0 28px #000, 0 0 10px rgba(0,0,0,.85)}
 .hero-mid{text-align:center; margin-inline:auto}
 .hero-mid p{margin-inline:auto}
 /* 괄호가 제 앞뒤로 여백을 들고 있다 */
@@ -127,7 +127,8 @@ header.top.solid{
 .hero .ko{margin:2.2rem auto 0; font-size:clamp(1.15rem,2.2vw,1.7rem); font-weight:400; letter-spacing:-.03em; line-height:1.4}
 /* 머리 한 줄 — 왼쪽 이름과 오른쪽 판을 점선이 잇는다 */
 .intro{display:flex; align-items:center; gap:.8rem; width:min(100%,34rem); margin:0 auto 2.6rem;
-       font-size:15px; font-weight:400; letter-spacing:-.01em; line-height:1}
+       font-size:13px; font-weight:400; color:var(--dim); letter-spacing:-.01em; line-height:1}
+.intro em{font-style:italic; opacity:.7}
 .intro i{flex:1; height:3px; opacity:.7;
          background:radial-gradient(circle,currentColor 1px,transparent 1.3px) 0 0/6px 3px repeat-x}
 /* 왼쪽 가장자리에 세로로 흐르는 확장자 — 읽는 글이 아니라 결이다 */
@@ -307,7 +308,7 @@ footer p{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; l
 }
 @media (max-width:620px){
   .side{display:none}
-  .intro{font-size:13px; margin-bottom:2rem}
+  .intro{font-size:12px; margin-bottom:2rem}
   :root{--gut:20px}
   .install-k{display:none}
   .spec{grid-template-columns:1fr}
