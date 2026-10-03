@@ -181,13 +181,16 @@ figure img{display:block; width:100%; height:auto; border:1px solid var(--line2)
   box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
 }
 .item:hover{border-color:var(--line2); transform:translateY(-2px)}
-.item .no{font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--dim2); display:block; margin-bottom:1.3rem}
-.item p{margin:.9rem 0 1rem; max-width:none}
-.item .why{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; letter-spacing:.03em}
+.item .no{font-family:var(--mono); font-size:13px; letter-spacing:.14em; color:var(--dim2); display:block; margin-bottom:1.6rem}
+/* 카드의 주인은 제목이다 — 본문보다 두 배 남짓 크게, 히어로처럼 자간을 당긴다 */
+.item h3{font-size:clamp(1.7rem,2.8vw,2.4rem); font-weight:400; letter-spacing:-.04em; line-height:1.15}
+.item p{margin:1.2rem 0 1.4rem; max-width:none; font-size:1.06rem; line-height:1.75}
+/* 덧붙임 한 줄 — 모노로 두면 한글이 시스템 글꼴로 떨어져 글자가 띄엄띄엄 선다. 본문 글꼴로, 선 하나 위에 */
+.item .why{font-size:.9rem; color:var(--dim2); margin:0; padding-top:1rem; border-top:1px solid var(--line); line-height:1.5}
 /* 그림이 붙은 카드는 두 칸을 다 쓴다 — 창 하나를 반 칸에 욱여넣으면 안쪽 글자가 안 읽힌다 */
 .item:has(figure:not(:empty)){grid-column:1 / -1}
-.item:has(figure:not(:empty)){display:grid; grid-template-columns:minmax(0,22rem) minmax(0,1fr);
-  gap:2.6rem; align-items:center; padding:2.4rem}
+.item:has(figure:not(:empty)){display:grid; grid-template-columns:minmax(0,25rem) minmax(0,1fr);
+  gap:3rem; align-items:center; padding:2.8rem}
 .item:has(figure:not(:empty)) figure{margin-top:0}
 
 /* ── 나란히 — 왼쪽 제목, 오른쪽 그림 ── */
