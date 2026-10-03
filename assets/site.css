@@ -128,8 +128,6 @@ header.top.solid{
 /* 머리 한 줄 — 왼쪽 이름과 오른쪽 판을 점선이 잇는다 */
 .intro{display:flex; align-items:center; gap:.8rem; width:min(100%,34rem); margin:0 auto 2.6rem;
        font-size:13px; font-weight:400; color:var(--dim); letter-spacing:-.01em; line-height:1}
-/* 이름 뒤의 원래 단어 — (indiff) 는 흰색, 나머지는 비쳐 보이게만 */
-.word .rest{color:rgba(255,255,255,.3)}
 .intro em{font-style:italic; opacity:.7}
 .intro i{flex:1; height:3px; opacity:.7;
          background:radial-gradient(circle,currentColor 1px,transparent 1.3px) 0 0/6px 3px repeat-x}
