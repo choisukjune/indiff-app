@@ -108,14 +108,22 @@ header.top.solid{
        mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%)}
 .hero .wrap{position:relative; z-index:1}
 /* 오로라 — 마크 뒤에 옅은 빛 두 덩이. 아주 느리게 자리를 바꾼다 */
-.hero::before{content:""; position:absolute; inset:-10% -10% auto; height:110vh; z-index:0; pointer-events:none;
-  background:radial-gradient(38% 32% at 30% 30%, rgba(255,79,163,.20), transparent 70%),
-             radial-gradient(36% 30% at 72% 36%, rgba(52,214,255,.16), transparent 70%),
-             radial-gradient(30% 26% at 50% 62%, rgba(139,108,255,.14), transparent 70%);
-  filter:blur(30px); animation:aurora 26s ease-in-out infinite alternate}
+/* 빛 — 짙은 남색 위에 코발트가 번지고, 위쪽에 하늘빛 한 줄기, 오른쪽 위에 흰 빛 한 덩이.
+   가장자리와 아래는 검정으로 가라앉혀 다음 섹션(검정)과 이음매가 없게 한다 */
+.hero::before{content:""; position:absolute; inset:-8% -8% auto; height:125vh; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(22% 20% at 80% 22%, rgba(236,244,255,.85), transparent 72%),
+    radial-gradient(26% 30% at 56% 14%, rgba(86,182,245,.75), transparent 70%),
+    radial-gradient(30% 34% at 30% 22%, rgba(40,96,230,.55), transparent 72%),
+    radial-gradient(60% 52% at 52% 50%, rgba(36,92,222,.95), transparent 78%),
+    radial-gradient(90% 70% at 50% 45%, #163fae, transparent 85%),
+    linear-gradient(180deg, #0a1a4a 0%, #0b1f5c 55%, #000 100%);
+  -webkit-mask-image:radial-gradient(120% 95% at 50% 40%, #000 55%, transparent 100%);
+  mask-image:radial-gradient(120% 95% at 50% 40%, #000 55%, transparent 100%);
+  filter:blur(36px); animation:aurora 26s ease-in-out infinite alternate}
 @keyframes aurora{to{transform:translate3d(3%,4%,0) scale(1.08)}}
 /* 배경이 화려해진 만큼 글자 뒤에 그늘을 깐다 — 글은 늘 무늬 위에 떠야 한다 */
-.hero-mid h1, .hero-mid .ko, .hero-mid .lockup, .hero-mid .word, .intro, .install-how, .install-meta{text-shadow:0 0 28px #000, 0 0 10px rgba(0,0,0,.85)}
+.hero-mid h1, .hero-mid .ko, .hero-mid .lockup, .hero-mid .word, .intro, .install-how, .install-meta{text-shadow:0 0 28px rgba(5,14,48,.75), 0 0 10px rgba(5,14,48,.55)}
 .hero-mid{text-align:center; margin-inline:auto}
 .hero-mid p{margin-inline:auto}
 /* 괄호가 제 앞뒤로 여백을 들고 있다 */
@@ -127,7 +135,7 @@ header.top.solid{
 .hero .ko{margin:2.2rem auto 0; font-size:clamp(1.15rem,2.2vw,1.7rem); font-weight:400; letter-spacing:-.03em; line-height:1.4}
 /* 머리 한 줄 — 왼쪽 이름과 오른쪽 판을 점선이 잇는다 */
 .intro{display:flex; align-items:center; gap:.8rem; width:min(100%,34rem); margin:0 auto 2.6rem;
-       font-size:13px; font-weight:400; color:var(--dim); letter-spacing:-.01em; line-height:1}
+       font-size:13px; font-weight:400; color:rgba(255,255,255,.78); letter-spacing:-.01em; line-height:1}
 .intro em{font-style:italic; opacity:.7}
 .intro i{flex:1; height:3px; opacity:.7;
          background:radial-gradient(circle,currentColor 1px,transparent 1.3px) 0 0/6px 3px repeat-x}
@@ -151,7 +159,7 @@ header.top.solid{
 /* 단추 밑 한 줄 — 터미널을 안 써 본 사람에게 다음 동작 하나만 알려 준다 */
 .install-how{margin:1.2rem auto 0; font-size:.95rem; color:#c4c4c9; line-height:1.7; max-width:40rem}
 .install-how kbd{font-size:.8em}
-.install-meta{margin:.5rem auto 0; font-family:var(--mono); font-size:12px; letter-spacing:.04em; color:var(--dim2)}
+.install-meta{margin:.5rem auto 0; font-family:var(--mono); font-size:12px; letter-spacing:.04em; color:rgba(255,255,255,.62)}
 .install code{flex:1; min-width:0; overflow-x:auto; white-space:nowrap; scrollbar-width:none;
   font-family:var(--mono); font-size:13px; color:inherit}
 .install code::-webkit-scrollbar{display:none}

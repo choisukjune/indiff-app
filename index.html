@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://choisukjune.github.io/indiff-app/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/site.css?v=d339feb8">
+<link rel="stylesheet" href="assets/site.css?v=8c1fefae">
 </head>
 <body>
 
@@ -459,9 +459,9 @@
   });
   var CORE = 7;                       /* 가운데 큰 사각 — 이것만 안 돈다 */
   var RAMP = '.:-=+*#%@';
-  /* 색 — 핑크 · 보라 · 시안을 한 바퀴로 잇고 NB 칸으로 나눈다. 칸마다 한 번에 칠한다(글자마다
+  /* 색 — 코발트 · 하늘 · 흰빛을 한 바퀴로 잇고 NB 칸으로 나눈다. 칸마다 한 번에 칠한다(글자마다
      fillStyle 을 바꾸면 18fps 를 못 지킨다). 뒤쪽 NB 칸은 같은 색에 흰빛을 섞은 판 */
-  var NB = 12, STOPS = [[255,79,163],[139,108,255],[52,214,255]], COL = [];
+  var NB = 12, STOPS = [[150,190,255],[214,234,255],[110,200,255]], COL = [];
   for (var w2 = 0; w2 < 2; w2++) for (var c0 = 0; c0 < NB; c0++) {
     var x0 = c0/NB*STOPS.length, i0 = Math.floor(x0), fr = x0 - i0;
     var A = STOPS[i0 % STOPS.length], B = STOPS[(i0+1) % STOPS.length], rgb = [];
@@ -554,7 +554,7 @@
         }
         var idx = (b*RAMP.length)|0; if (idx > RAMP.length-1) idx = RAMP.length-1;
         if (idx < 0) continue;
-        /* 색은 자리와 시각으로 고른다 — 대각선으로 핑크→보라→시안이 천천히 흘러간다 */
+        /* 색은 자리와 시각으로 고른다 — 대각선으로 코발트→흰빛→하늘이 천천히 흘러간다 */
         var u = (px*0.55 + py)/1500 - drift; u -= Math.floor(u);
         lv[idx*NB + ((u*NB)|0)].push(sx, sy);
       }
