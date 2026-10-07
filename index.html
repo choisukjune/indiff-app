@@ -437,95 +437,139 @@
 </footer>
 
 <script>
-/* 배경 — 붉은 입자장. 앱 시작 화면의 배경(server.js 의 ember)을 그대로 옮겼다.
-   붉게 빛나는 입자가 구름처럼 흐르는 우주. 세 겹이다:
-     ① 바탕: 오른쪽 아래가 뜨겁고 왼쪽 위로 갈수록 검붉게 식는 빛. 뜨거운 자리는 천천히 숨 쉰다
-     ② 큰 흐린 빛망울 — 초점 밖의 입자. 조금씩 흔들리며 밝아졌다 어두워진다
-     ③ 잔 반짝이 — 왼쪽 위에서 오른쪽 아래로 흐르는 띠에 몰려 있고, 가까운 것일수록 크고 빠르다
-   캔버스는 히어로 끝까지 깔리지만, 뜨거운 자리와 가운데 누름은 **첫 화면**으로 잰다 —
-   캔버스 높이로 재면 뜨거운 자리가 그림 아래로 내려가 첫 화면이 식는다. */
+/* 배경 — 붉은 입자장(아스키). 앱 시작 화면의 배경(server.js 의 ember)을 그대로 옮겼다.
+   붉게 빛나는 입자가 구름처럼 흐르는 우주를 **문자로** 그린다. 칸마다 밝기를 더해
+   문자(. · : + * o % # @)와 색(검붉음 → 붉음 → 분홍 → 흰빛)을 고르고, 어두운 곳은 드문드문 ·
+   밝은 곳은 촘촘하게 흩뿌린다:
+     ① 오른쪽 아래의 뜨거운 빛 — 천천히 숨 쉰다. 왼쪽 위로 갈수록 식는다
+     ② 큰 흐린 빛망울 — 가장자리만 무른 원반, 조금씩 흔들리며 밝아졌다 어두워진다
+     ③ 잔 반짝이 — 왼쪽 위에서 오른쪽 아래로 흐르는 띠, 가까운 것일수록 밝고 빠르다
+   '-' '=' 는 넓게 깔리면 주사선으로 읽혀 뺐다(앱에서 실측).
+   캔버스는 히어로 끝까지 깔리지만, 뜨거운 자리 · 빛망울 · 가운데 누름은 **첫 화면**으로 잰다. */
 (function(){
   var c = document.getElementById('field'); if (!c || !c.getContext) return;
   var g = c.getContext('2d');
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var RAMP = '.·:+*o%#@';
+  var COL = ['rgb(120,14,30)','rgb(150,18,36)','rgb(185,24,44)','rgb(215,34,54)','rgb(238,52,70)',
+             'rgb(250,84,98)','rgb(255,128,140)','rgb(255,182,190)','rgb(255,232,234)'];
 
-  var seed = 20261007;                       // 정해진 난수 — 다시 열어도 같은 하늘
+  var seed = 20261007;                       // 정해진 난수 — 앱과 같은 하늘
   function R(){ seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
   var DOTS = [], BOKEH = [], i;
   for (i = 0; i < 3200; i++) DOTS.push({ u:R(), off:((R()+R()+R())/3 - 0.5)*1.6, z:Math.pow(R(),1.8), ph:R()*6.283, tw:0.6 + R()*1.8 });
   for (i = 0; i < 46; i++) BOKEH.push({ x:R(), y:Math.pow(R(),1.3), r:0.02 + R()*0.06, a:0.10 + R()*0.22, ph:R()*6.283, sp:0.15 + R()*0.35 });
 
-  /* 빛 한 알을 한 번 그려 두고 찍는다 — 점마다 기울기를 새로 만들면 프레임마다 수백 개다 */
-  function sprite(size, stops){
-    var k = document.createElement('canvas'); k.width = k.height = size;
-    var x = k.getContext('2d'), h = size/2, gr = x.createRadialGradient(h, h, 0, h, h, h);
-    stops.forEach(function(s){ gr.addColorStop(s[0], s[1]); });
-    x.fillStyle = gr; x.fillRect(0, 0, size, size); return k;
-  }
-  var DOT = sprite(64, [[0,'rgba(255,236,238,1)'],[0.22,'rgba(255,72,92,0.55)'],[1,'rgba(255,20,40,0)']]);
-  var BOK = sprite(128, [[0,'rgba(255,58,72,0.55)'],[0.72,'rgba(255,58,72,0.55)'],[1,'rgba(255,30,50,0)']]);
-
-  var W = 0, H = 0, V = 0, dpr = 1, run = true;
+  var W = 0, H = 0, V = 0, dpr = 1, cw = 0, ch = 0, C = 0, Rw = 0, buf = null, grain = null, run = true;
   function metrics(){
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = c.clientWidth; H = c.clientHeight; if (!W || !H) return false;
     V = Math.min(H, window.innerHeight || H);
     c.width = Math.round(W*dpr); c.height = Math.round(H*dpr);
+    var f = Math.max(10, Math.min(14, Math.max(W, V)/120));
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.font = f + 'px ui-monospace, SFMono-Regular, Menlo, monospace';
+    g.textBaseline = 'middle';
+    cw = g.measureText('M').width; ch = Math.round(cw/0.55);
+    C = Math.ceil(W/cw) + 1; Rw = Math.ceil(H/ch) + 1;
+    buf = new Float32Array(C*Rw); grain = new Float32Array(C*Rw);   // 칸마다 정해진 결 — 깜빡이지 않게
+    for (var q = 0; q < grain.length; q++) { var h = Math.sin(q*127.1)*43758.5453; grain[q] = h - Math.floor(h); }
     return true;
   }
 
   function draw(t){
     if (!W && !metrics()) return;
-    g.setTransform(dpr, 0, 0, dpr, 0, 0);
-    g.globalCompositeOperation = 'source-over'; g.globalAlpha = 1;
-    // ① 바탕 — 첫 화면 안에서 검붉음 → 붉음, 그 아래는 검붉게 이어 둔다
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.globalAlpha = 1;
     var base = g.createLinearGradient(0, 0, W, V);
-    base.addColorStop(0, '#120003'); base.addColorStop(0.45, '#3a0309'); base.addColorStop(1, '#7a0a14');
+    base.addColorStop(0, '#0b0002'); base.addColorStop(0.55, '#1c0105'); base.addColorStop(1, '#3a040b');
     g.fillStyle = base; g.fillRect(0, 0, W, H);
-    var pulse = 0.85 + 0.15*Math.sin(t*0.6);
-    var hx = W*0.9, hy = V*0.95, hot = g.createRadialGradient(hx, hy, 0, hx, hy, Math.max(W, V)*0.6);
-    hot.addColorStop(0, 'rgba(255,196,196,' + (0.85*pulse).toFixed(3) + ')');
-    hot.addColorStop(0.18, 'rgba(255,60,72,0.55)');
-    hot.addColorStop(0.5, 'rgba(160,10,26,0.25)');
-    hot.addColorStop(1, 'rgba(0,0,0,0)');
-    g.fillStyle = hot; g.fillRect(0, 0, W, H);
-    // ② 빛망울
+    // ① 바탕 빛 — 오른쪽 아래가 뜨겁다. 문자 밑에 빛을 옅게 깔아 번지게
+    var pulse = 0.85 + 0.15*Math.sin(t*0.6), HR = Math.max(W, V)*0.62, hx = W*0.9, hy = V*0.95;
+    var gl = g.createRadialGradient(hx, hy, 0, hx, hy, HR);
+    gl.addColorStop(0, 'rgba(255,70,84,' + (0.32*pulse).toFixed(3) + ')');
+    gl.addColorStop(0.45, 'rgba(150,12,28,0.14)'); gl.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = gl; g.fillRect(0, 0, W, H);
+    var j, x, y;
+    for (j = 0; j < Rw; j++) {
+      y = j*ch + ch/2;
+      for (i = 0; i < C; i++) {
+        x = i*cw + cw/2;
+        var dg = Math.min(1, (x/W + y/V)*0.5);
+        var dh = Math.sqrt((x-hx)*(x-hx) + (y-hy)*(y-hy))/HR;
+        buf[j*C + i] = 0.03 + dg*0.10 + (dh < 1 ? (1-dh)*(1-dh)*0.6*pulse : 0);
+      }
+    }
+    // ② 빛망울 — 원반이 덮는 칸에만 더한다
     var S = Math.max(W, V), small = W < 700 ? 0.8 : 1;
-    g.globalCompositeOperation = 'lighter';
     for (var b = 0; b < BOKEH.length; b++) {
       var o = BOKEH[b], r = o.r*S*small;
-      var x = (o.x + Math.sin(t*o.sp*0.3 + o.ph)*0.01)*W;
-      var y = (o.y + Math.cos(t*o.sp*0.25 + o.ph)*0.012)*V;
-      g.globalAlpha = o.a*(0.7 + 0.3*Math.sin(t*o.sp + o.ph));
-      g.drawImage(BOK, x - r, y - r, r*2, r*2);
+      var bx = (o.x + Math.sin(t*o.sp*0.3 + o.ph)*0.01)*W, by = (o.y + Math.cos(t*o.sp*0.25 + o.ph)*0.012)*V;
+      var amp = o.a*(0.7 + 0.3*Math.sin(t*o.sp + o.ph))*1.25;
+      var i0 = Math.max(0, Math.floor((bx-r)/cw)), i1 = Math.min(C-1, Math.ceil((bx+r)/cw));
+      var j0 = Math.max(0, Math.floor((by-r)/ch)), j1 = Math.min(Rw-1, Math.ceil((by+r)/ch));
+      for (var jj = j0; jj <= j1; jj++) {
+        var yy = jj*ch + ch/2 - by;
+        for (var ii = i0; ii <= i1; ii++) {
+          var xx = ii*cw + cw/2 - bx, dd = Math.sqrt(xx*xx + yy*yy)/r;
+          if (dd < 1) buf[jj*C + ii] += amp*0.8*(dd < 0.72 ? 1 : (1-dd)/0.28);
+        }
+      }
     }
-    // ③ 잔 반짝이 — 히어로 끝까지 흐르는 띠. 앱 패널(약 1000×700)보다 넓은 만큼 알을 늘리고 키운다 —
-    //    같은 수를 넓은 화면에 뿌리면 듬성해져 반짝이가 안 보인다
+    // ③ 잔 반짝이 — 히어로 끝까지 흐르는 띠. 앱 패널보다 넓은 만큼 알을 늘린다
     var L = Math.sqrt(W*W + H*H), nx = -H/L, ny = W/L;
-    var area = (W*H)/(1000*700), nd = Math.min(DOTS.length, Math.round(1400*Math.max(1, area)));
-    var grow = Math.min(1.6, Math.max(1, Math.sqrt(W/1000)));
+    var nd = Math.min(DOTS.length, Math.round(1400*Math.max(1, (W*H)/(1000*700))));
     for (var d = 0; d < nd; d++) {
       var p = DOTS[d];
       var u = p.u + t*(0.002 + p.z*0.012); u -= Math.floor(u);
-      var px = u*W*1.15 - W*0.075 + nx*p.off*L*0.55;
-      var py = u*H*1.15 - H*0.075 + ny*p.off*L*0.55;
-      if (px < -20 || py < -20 || px > W + 20 || py > H + 20) continue;
-      var rr = (0.4 + p.z*2.6)*small*3*grow;
-      g.globalAlpha = (0.25 + 0.75*p.z)*(0.55 + 0.45*Math.sin(t*p.tw + p.ph));
-      g.drawImage(DOT, px - rr, py - rr, rr*2, rr*2);
+      var px = u*W*1.15 - W*0.075 + nx*p.off*L*0.55, py = u*H*1.15 - H*0.075 + ny*p.off*L*0.55;
+      var ci = Math.floor(px/cw), cj = Math.floor(py/ch);
+      if (ci < 0 || cj < 0 || ci >= C || cj >= Rw) continue;
+      var v = (0.35 + 0.75*p.z)*(0.55 + 0.45*Math.sin(t*p.tw + p.ph));
+      buf[cj*C + ci] += v;
+      if (p.z > 0.55) {
+        var hv = v*0.35;
+        if (ci > 0) buf[cj*C + ci - 1] += hv;
+        if (ci < C-1) buf[cj*C + ci + 1] += hv;
+        if (cj > 0) buf[(cj-1)*C + ci] += hv;
+        if (cj < Rw-1) buf[(cj+1)*C + ci] += hv;
+      }
     }
-    // 가운데 누름 — 제목과 설치 줄이 입자에 묻히지 않게
-    g.globalCompositeOperation = 'source-over'; g.globalAlpha = 1;
-    var cx = W*0.5, cy = V*0.42, dim = g.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W*0.42, V*0.5));
-    dim.addColorStop(0, 'rgba(8,0,2,0.62)'); dim.addColorStop(0.6, 'rgba(8,0,2,0.35)'); dim.addColorStop(1, 'rgba(8,0,2,0)');
-    g.fillStyle = dim; g.fillRect(0, 0, W, H);
+    // 칸마다 문자 · 색을 고른다. 가운데는 눌러 제목과 설치 줄이 묻히지 않게
+    var cx = W*0.5, cy = V*0.42, DR = Math.max(W*0.42, V*0.5);
+    var lv = []; for (var z = 0; z < RAMP.length; z++) lv.push([]);
+    var faint = [];
+    for (j = 0; j < Rw; j++) {
+      y = j*ch + ch/2;
+      for (i = 0; i < C; i++) {
+        x = i*cw + cw/2;
+        var q2 = j*C + i, val = buf[q2];
+        var dc = Math.sqrt((x-cx)*(x-cx) + (y-cy)*(y-cy))/DR;
+        if (dc < 1) val *= 0.35 + 0.65*dc;
+        if (val < 0.09 || (val < 0.6 && grain[q2] >= val*1.5)) {      // 흩뿌리기 — 밝을수록 찍힐 확률이 높다
+          if (grain[q2] < 0.16) faint.push(x, y);                     // 빈 칸에도 옅은 결 — 아스키 화면이 비면 고장 같다
+          continue;
+        }
+        var idx = Math.floor(Math.min(val, 1.05)/1.05*RAMP.length);
+        if (idx > RAMP.length-1) idx = RAMP.length-1;
+        lv[idx].push(x, y);
+      }
+    }
+    g.fillStyle = COL[0]; g.globalAlpha = 0.22;
+    for (var f1 = 0; f1 < faint.length; f1 += 2) g.fillText('.', faint[f1], faint[f1+1]);
+    for (var L2 = 0; L2 < RAMP.length; L2++) {
+      var pts = lv[L2]; if (!pts.length) continue;
+      g.globalAlpha = 0.45 + 0.55*(L2+1)/RAMP.length; g.fillStyle = COL[L2];
+      var chr = RAMP.charAt(L2);
+      for (var n = 0; n < pts.length; n += 2) g.fillText(chr, pts[n], pts[n+1]);
+    }
+    g.globalAlpha = 1;
   }
 
   var t0 = 0, last = -1;
   function loop(ms){
     if (!run) return;
     if (!t0) t0 = ms;
-    if (ms - last >= 40) { last = ms; draw((ms - t0)/1000); }   // 25fps — 앱과 같은 박자
+    if (ms - last >= 55) { last = ms; draw((ms - t0)/1000); }   // 18fps — 앱과 같은 박자, 아스키는 조금 끊겨야 아스키다
     requestAnimationFrame(loop);
   }
   if (metrics()) { if (still) draw(0); else requestAnimationFrame(loop); }
