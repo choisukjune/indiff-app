@@ -437,7 +437,7 @@
 </footer>
 
 <script>
-/* 배경 — 붉은 입자장(아스키). 앱 시작 화면의 배경(server.js 의 ember)을 그대로 옮겼다.
+/* 배경 — 입자장(아스키). 앱 시작 화면의 배경(server.js 의 ember)을 옮기고, 색은 형광 분홍으로 바꿨다.
    붉게 빛나는 입자가 구름처럼 흐르는 우주를 **문자로** 그린다. 칸마다 밝기를 더해
    문자(. · : + * o % # @)와 색(검붉음 → 붉음 → 분홍 → 흰빛)을 고르고, 어두운 곳은 드문드문 ·
    밝은 곳은 촘촘하게 흩뿌린다:
@@ -451,8 +451,9 @@
   var g = c.getContext('2d');
   var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var RAMP = '.·:+*o%#@';
-  var COL = ['rgb(120,14,30)','rgb(150,18,36)','rgb(185,24,44)','rgb(215,34,54)','rgb(238,52,70)',
-             'rgb(250,84,98)','rgb(255,128,140)','rgb(255,182,190)','rgb(255,232,234)'];
+  /* 형광 분홍 — 어두운 단계는 짙은 자홍, 밝을수록 네온 분홍 → 연분홍 → 흰빛 */
+  var COL = ['rgb(150,0,85)','rgb(200,0,115)','rgb(240,0,140)','rgb(255,10,150)','rgb(255,25,160)',
+             'rgb(255,40,170)','rgb(255,60,180)','rgb(255,100,198)','rgb(255,200,236)'];
 
   var seed = 20261007;                       // 정해진 난수 — 앱과 같은 하늘
   function R(){ seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
@@ -481,13 +482,13 @@
     if (!W && !metrics()) return;
     g.setTransform(dpr, 0, 0, dpr, 0, 0); g.globalAlpha = 1;
     var base = g.createLinearGradient(0, 0, W, V);
-    base.addColorStop(0, '#0b0002'); base.addColorStop(0.55, '#1c0105'); base.addColorStop(1, '#3a040b');
+    base.addColorStop(0, '#0b0008'); base.addColorStop(0.55, '#200118'); base.addColorStop(1, '#4a0236');
     g.fillStyle = base; g.fillRect(0, 0, W, H);
     // ① 바탕 빛 — 오른쪽 아래가 뜨겁다. 문자 밑에 빛을 옅게 깔아 번지게
     var pulse = 0.85 + 0.15*Math.sin(t*0.6), HR = Math.max(W, V)*0.62, hx = W*0.9, hy = V*0.95;
     var gl = g.createRadialGradient(hx, hy, 0, hx, hy, HR);
-    gl.addColorStop(0, 'rgba(255,70,84,' + (0.32*pulse).toFixed(3) + ')');
-    gl.addColorStop(0.45, 'rgba(150,12,28,0.14)'); gl.addColorStop(1, 'rgba(0,0,0,0)');
+    gl.addColorStop(0, 'rgba(255,20,150,' + (0.55*pulse).toFixed(3) + ')');
+    gl.addColorStop(0.45, 'rgba(190,0,110,0.22)'); gl.addColorStop(1, 'rgba(0,0,0,0)');
     g.fillStyle = gl; g.fillRect(0, 0, W, H);
     var j, x, y;
     for (j = 0; j < Rw; j++) {
