@@ -108,15 +108,8 @@ header.top.solid{
        mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%)}
 .hero .wrap{position:relative; z-index:1}
 /* 오로라 — 마크 뒤에 옅은 빛 두 덩이. 아주 느리게 자리를 바꾼다 */
-/* 빛 — 바탕은 검정 그대로, 그 위로 코발트·하늘빛 덩어리 몇 개가 새어 나온다.
-   화면 전체를 칠하지 않는다 — 어둠이 남아 있어야 「무심한」 온도가 지켜진다 */
-.hero::before{content:""; position:absolute; inset:-10% -10% auto; height:115vh; z-index:0; pointer-events:none;
-  background:
-    radial-gradient(13% 11% at 79% 24%, rgba(220,236,255,.50), transparent 72%),
-    radial-gradient(22% 19% at 66% 20%, rgba(80,176,245,.62), transparent 70%),
-    radial-gradient(28% 25% at 30% 30%, rgba(37,99,235,.78), transparent 72%),
-    radial-gradient(34% 26% at 54% 62%, rgba(29,64,190,.55), transparent 74%);
-  filter:blur(34px); animation:aurora 26s ease-in-out infinite alternate}
+/* 빛은 캔버스(붉은 입자장)가 다 그린다 — 덧칠하던 오로라는 걷었다 */
+.hero::before{content:none}
 @keyframes aurora{to{transform:translate3d(3%,4%,0) scale(1.08)}}
 /* 배경이 화려해진 만큼 글자 뒤에 그늘을 깐다 — 글은 늘 무늬 위에 떠야 한다 */
 .hero-mid h1, .hero-mid .ko, .hero-mid .lockup, .hero-mid .word, .intro, .install-how, .install-meta{text-shadow:0 0 28px #000, 0 0 10px rgba(0,0,0,.85)}
