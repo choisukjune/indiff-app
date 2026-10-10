@@ -39,7 +39,7 @@ body{
 }
 @font-face{
   font-family:'Pretendard Variable';
-  src:url('pretendard-subset.woff2?v=f8b962db') format('woff2-variations');
+  src:url('pretendard-subset.woff2?v=f23a0d15') format('woff2-variations');
   font-weight:300 800; font-style:normal; font-display:swap;
 }
 .wrap{width:min(100%,var(--col)); margin-inline:auto; padding-inline:var(--gut)}

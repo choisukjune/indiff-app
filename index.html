@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://choisukjune.github.io/indiff-app/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/site.css?v=d81d854b">
+<link rel="stylesheet" href="assets/site.css?v=2f635de0">
 </head>
 <body>
 
@@ -23,7 +23,7 @@
 
 <section class="hero dark">
   <canvas id="field" aria-hidden="true"></canvas>
-  <p class="side" aria-hidden="true">.hwp .hwpx .docx .pdf .xlsx .csv .pptx .md .html .png .jpg .svg .hwp .hwpx .docx .pdf .xlsx .csv .pptx .md .html .png .jpg .svg .hwp .hwpx .docx .pdf .xlsx .csv .pptx .md .html .png .jpg .svg</p>
+  <p class="side" aria-hidden="true">.hwp .hwpx .docx .pdf .xlsx .csv .pptx .md .drawio .json .yaml .html .png .jpg .svg .hwp .hwpx .docx .pdf .xlsx .csv .pptx .md .html .png .jpg .svg .hwp .hwpx .docx .pdf .xlsx .csv .pptx .md .html .png .jpg .svg</p>
   <div class="wrap">
     <div class="hero-mid">
       <p class="intro"><span>in·dif·fer·ent <em>adj.</em></span><i aria-hidden="true"></i><span>무심한 — 마음을 쓰지 않는</span></p>
@@ -64,11 +64,75 @@
     </div>
     <figure class="shot-wide rise" data-shot="workflow">
 <picture>
-  <source type="image/avif" srcset="assets/shots/workflow.avif?v=65130bce 1x, assets/shots/workflow@2x.avif?v=6bef68df 2x">
-  <source type="image/webp" srcset="assets/shots/workflow.webp?v=5b1d99b8 1x, assets/shots/workflow@2x.webp?v=f2ca637d 2x">
-  <img src="assets/shots/workflow.webp?v=5b1d99b8" width="1200" height="717" alt="워크플로우 편집 화면. 왼쪽에 트리거·Claude·파일 읽기·폴더·파일 쓰기·HTTP·셸·조건·기다리기 노드 목록, 캔버스에는 「매주 금요일 17:00」 트리거에서 회의록·산출물 폴더 두 갈래가 「진척 정리」 Claude 노드로 모이고, 「일정 위험?」 조건에서 예는 위험 알림, 아니오는 주간 보고서 파일 쓰기로 갈라진다." loading="lazy" decoding="async">
+  <source type="image/avif" srcset="assets/shots/workflow.avif?v=eca16963 1x, assets/shots/workflow@2x.avif?v=8bfc14e7 2x">
+  <source type="image/webp" srcset="assets/shots/workflow.webp?v=d8bf5d10 1x, assets/shots/workflow@2x.webp?v=2c21ca12 2x">
+  <img src="assets/shots/workflow.webp?v=d8bf5d10" width="1200" height="717" alt="워크플로우 편집 화면. 왼쪽에 트리거·Claude·파일 읽기·폴더·파일 쓰기·HTTP·셸·조건·기다리기 노드 목록, 캔버스에는 「매주 금요일 17:00」 트리거에서 회의록·산출물 폴더 두 갈래가 「진척 정리」 Claude 노드로 모이고, 「일정 위험?」 조건에서 예는 위험 알림, 아니오는 주간 보고서 파일 쓰기로 갈라진다." loading="lazy" decoding="async">
 </picture>
 </figure>
+  </div>
+</section>
+
+<section id="make">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <p class="label">Draw, present, chart</p>
+      <h2>문서 옆에서<br>그리고, 발표합니다.</h2>
+      <p class="lead">도면도, 발표도, 차트도 결국 파일입니다.<br>그래서 문서와 같은 자리에서 열고, 같은 방식으로 고칩니다.</p>
+    </div>
+    <div class="items">
+
+      <div class="item rise">
+        <div class="body">
+          <div class="no">01</div>
+          <h3>다이어그램</h3>
+          <p>draw.io가 탭 안에서 열립니다.<br>
+             직접 옮겨 그리거나, 아래 줄에 한 문장 적어 Claude에게 맡기세요.</p>
+          <p class="why">문서에 넣으면 그림, 다시 열면 도면</p>
+        </div>
+        <figure data-shot="diagram">
+<picture>
+  <source type="image/avif" srcset="assets/shots/diagram.avif?v=01d33def 1x, assets/shots/diagram@2x.avif?v=c2174985 2x">
+  <source type="image/webp" srcset="assets/shots/diagram.webp?v=e8649061 1x, assets/shots/diagram@2x.webp?v=8c927073 2x">
+  <img src="assets/shots/diagram.webp?v=e8649061" width="1200" height="750" alt="draw.io 편집기를 띄운 탭. 시민에서 가람누리 포털, 검색 API, 색인 서버로 이어지고 첨부문서 수집기와 문서 저장소가 색인 서버에 붙은 구성도. 아래 Claude 입력 줄에 「민원 신청 앞에 본인인증 단계를 하나 넣어줘」가 적혀 있다." loading="lazy" decoding="async">
+</picture>
+</figure>
+      </div>
+
+      <div class="item rise">
+        <div class="body">
+          <div class="no">02</div>
+          <h3>발표</h3>
+          <p>쓰던 마크다운이 그대로 슬라이드가 됩니다.<br>
+             원고를 고치면 발표도 따라 바뀝니다.</p>
+          <p class="why">있는 문서로 발표 초안 — Claude가 만듭니다</p>
+        </div>
+        <figure data-shot="slides">
+<picture>
+  <source type="image/avif" srcset="assets/shots/slides.avif?v=f031409d 1x, assets/shots/slides@2x.avif?v=14fad0d7 2x">
+  <source type="image/webp" srcset="assets/shots/slides.webp?v=1029a96f 1x, assets/shots/slides@2x.webp?v=85f3657a 2x">
+  <img src="assets/shots/slides.webp?v=1029a96f" width="1200" height="717" alt="둘로 나눈 화면. 왼쪽은 착수보고 마크다운 원고, 오른쪽은 같은 문서를 슬라이드로 띄운 발표 탭의 첫 장 「가람시 통합포털 고도화」. 아래에 쪽 넘기기와 모아 보기·전체 화면·PDF 단추." loading="lazy" decoding="async">
+</picture>
+</figure>
+      </div>
+
+      <div class="item rise">
+        <div class="body">
+          <div class="no">03</div>
+          <h3>차트</h3>
+          <p>표를 고르고, 모양을 고르면 끝입니다.<br>
+             표의 숫자가 바뀌면 문서 속 차트도 바뀝니다.</p>
+          <p class="why">csv · xlsx 로 막대 · 선 · 영역 · 원 · 점</p>
+        </div>
+        <figure data-shot="chart">
+<picture>
+  <source type="image/avif" srcset="assets/shots/chart.avif?v=6d030868 1x, assets/shots/chart@2x.avif?v=07995562 2x">
+  <source type="image/webp" srcset="assets/shots/chart.webp?v=718ccc55 1x, assets/shots/chart@2x.webp?v=ffd73f43 2x">
+  <img src="assets/shots/chart.webp?v=718ccc55" width="1200" height="712" alt="차트 편집 화면. 왼쪽에서 표(접속통계.csv)·종류(막대)·가로축(월)·값(모바일, PC)·쌓기를 고르고, 오른쪽에 1월부터 6월까지 모바일과 PC 방문을 쌓은 막대 차트가 그려져 있다." loading="lazy" decoding="async">
+</picture>
+</figure>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -366,7 +430,7 @@
     <div class="sec-head rise">
       <p class="label">Formats</p>
       <h2>웬만한 건<br>그냥 열립니다.</h2>
-      <p class="lead">받은 파일이 무엇이든, 여기서 열립니다.</p>
+      <p class="lead">받은 파일이 무엇이든, 여기서 열립니다.<br>설정 파일과 메모는 그 자리에서 고칩니다.</p>
     </div>
 
     <div class="exts rise">
@@ -379,7 +443,12 @@
       <div class="ext">.pptx</div>
       <div class="ext">.md</div>
       <div class="ext">.html</div>
+      <div class="ext">.drawio</div>
+      <div class="ext">.json</div>
+      <div class="ext">.yaml</div>
+      <div class="ext">.txt</div>
       <div class="ext img">.png .jpg .gif<br>.webp .svg<br>.heic .bmp</div>
+      <div class="ext img">.py .js .ts<br>.css .sql<br>.sh .xml</div>
     </div>
     <figure data-shot="hwp"></figure>
     <figure data-shot="pdf"></figure>
@@ -431,6 +500,7 @@
       <div><p class="k">Editing</p><p>서식 편집은 마크다운이 표현하는 범위까지입니다. 밑줄과 글자색, 수식이 든 문서는 원문 모드로 고칩니다.</p></div>
       <div><p class="k">Claude Code</p><p>터미널에서 띄우는 Claude Code는 승인을 건너뛰고 뜹니다. 내 컴퓨터의 파일을 바로 고칠 수 있습니다.</p></div>
       <div><p class="k">Workflows</p><p>예약과 파일 감시는 앱이 켜져 있을 때 돌아갑니다. 되돌아가는 화살표는 아직 없고, 한 흐름은 노드 12개까지입니다.</p></div>
+      <div><p class="k">Diagram</p><p>draw.io 편집기는 앱 안에 들어 있습니다. 도면을 열고 고치는 동안 밖으로 나가는 요청이 없습니다.</p></div>
       <div><p class="k">indi</p><p>「뚜껑 닫아도 계속」은 처음 한 번 관리자 암호를 받습니다. 잠을 막는 명령 하나만 허락해 둡니다.</p></div>
       <div><p class="k">Browser</p><p>브라우저 조작은 로그인된 계정으로 움직입니다. 조작만 메뉴(File → Allow Browser Control)에서 끌 수 있습니다.</p></div>
     </div>
