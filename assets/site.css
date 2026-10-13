@@ -163,7 +163,7 @@ header.top.solid{
 /* ── 그림 ── */
 figure{margin:0}
 figure:empty{display:none}
-figure img{display:block; width:100%; height:auto; border:1px solid var(--line2);
+figure img, figure video{display:block; width:100%; height:auto; border:1px solid var(--line2);
            border-radius:var(--r); background:var(--card)}
 .shot-wide{margin-top:4.5rem; position:relative; z-index:1}
 .hero .shot-wide{margin-bottom:-6rem}

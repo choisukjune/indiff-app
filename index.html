@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://choisukjune.github.io/indiff-app/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/site.css?v=b0feab09">
+<link rel="stylesheet" href="assets/site.css?v=dff55540">
 </head>
 <body>
 
@@ -40,12 +40,13 @@
          터미널은 <kbd>⌘</kbd> <kbd>Space</kbd> 를 누르고 「터미널」을 치면 열립니다.</p>
       <p class="install-meta">v0.4.0 · macOS 12+ · Apple Silicon · 계정 없음</p>
     </div>
-<figure class="shot-wide rise" data-shot="hero-full">
-<picture>
-  <source type="image/avif" srcset="assets/shots/hero-full.avif?v=1b0292a9 1x, assets/shots/hero-full@2x.avif?v=d7fc23bc 2x">
-  <source type="image/webp" srcset="assets/shots/hero-full.webp?v=341c3704 1x, assets/shots/hero-full@2x.webp?v=79abaf9f 2x">
-  <img src="assets/shots/hero-full.webp?v=341c3704" width="1200" height="750" alt="INDIFF 한 창을 셋으로 나눈 화면. 왼쪽 위는 통합검색 구성도 다이어그램을 그리는 중이고 아래에 Claude 로 고치기 칸, 왼쪽 아래는 경쟁 포털 비교표 문서, 오른쪽은 기획팀장 · 리서처 · 카피라이터 · 디자이너가 앉은 팀 방에서 실행과 팀장 점검이 오간다. 창 오른쪽 가장자리에는 맡긴 일마다 indi 구슬 셋." fetchpriority="high">
-</picture>
+<figure class="shot-wide rise hero-video">
+  <video autoplay muted loop playsinline preload="auto" width="1920" height="1140"
+         poster="assets/shots/hero-team-poster.webp?v=9f338d09"
+         aria-label="팀 방에 「다음 주 제안서 1장을 같이 준비하자」를 던지자 기획팀장이 방향을 정해 리서처 · 카피라이터 · 디자이너에게 일을 나누고, 디자이너가 한마디 보탠 뒤 셋이 동시에 일한다. 카피라이터가 @리서처 에게 묻고 리서처가 답하고, 만든 파일이 칩으로 남는다. 마지막에 팀장이 점검해 결과와 다음에 할 만한 일 단추 둘을 내놓는다.">
+    <source src="assets/shots/hero-team.webm?v=6c52f76d" type="video/webm">
+    <source src="assets/shots/hero-team.mp4?v=a78f85ff" type="video/mp4">
+  </video>
 </figure>
   </div>
 </section>
@@ -862,6 +863,16 @@
       } else fallback(text);
     });
   });
+})();
+</script>
+<script>
+/* 히어로 영상 — 움직임을 줄이라는 설정이면 돌리지 않고 포스터(끝난 장면)만 둔다. 안 보이면 멈춘다 */
+(function () {
+  var v = document.querySelector('.hero-video video'); if (!v) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); v.preload = 'none'; return; }
+  if (window.IntersectionObserver) new IntersectionObserver(function (e) {
+    if (e[0].isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause();
+  }, { threshold: .15 }).observe(v);
 })();
 </script>
 </body>
