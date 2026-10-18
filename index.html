@@ -581,7 +581,8 @@
      프롬프트에서 커서가 깜빡이며 쉰다 → 명령을 사람 손처럼 친다(글자 사이 40~140ms · 가끔 멈칫) →
      Enter → 출력 몇 줄(가끔 로딩 바 · 스피너) → 다시 프롬프트. 명령 2~4개 뒤 다른 칸으로.
    여러 칸이 동시에 움직이면 가짜로 보였다(앱에서 실측) — 그래서 일하는 칸은 하나다.
-   무채색 · 흐리게, 가운데(제목 · 설치 줄)는 눌러 글이 묻히지 않게. 위에 모니터 덮개(.field-crt) 한 겹.
+   무채색, 가운데(제목 · 설치 줄)는 눌러 글이 묻히지 않게. 위에 모니터 덮개(.field-crt) 한 겹.
+   앱보다 두 배 남짓 진하다 — 사이트는 큰 글 · 그늘이 얹혀 앱 농도로는 배경이 안 보였다(사용자).
    캔버스는 히어로 끝까지 깔리지만, 맨 아래 줄 · 가운데 누름은 **첫 화면**으로 잰다. */
 (function(){
   var el = document.getElementById('field'); if (!el || !el.getContext) return;
@@ -630,7 +631,7 @@
   var W = 0, H = 0, V = 0, dpr = 1, T = null;
   function center(x, y){
     var dx = (x - W*.5)/(W*.42), dy = (y - V*.45)/(V*.42), d = Math.sqrt(dx*dx + dy*dy);
-    return d < 1 ? .25 + .75*d*d : 1;
+    return d < 1 ? .3 + .7*d*d : 1;
   }
   function fit(){
     var w = el.clientWidth, h = el.clientHeight;
@@ -700,11 +701,11 @@
         else if (T.cur && T.cur.kind !== 'line') curLine = render(T.cur);
       }
       if (isLive && curLine) {
-        g.globalAlpha = .36*center(x + 200, yB); g.fillStyle = '#e6e6ea'; g.fillText(curLine, x, yB);
+        g.globalAlpha = .75*center(x + 200, yB); g.fillStyle = '#f0f0f3'; g.fillText(curLine, x, yB);
         // 커서 — 칠 때는 켜진 채로 따라가고, 쉴 때만 깜빡인다. 로딩 바 · 스피너 동안은 없다
         var typing = T.st === 'type';
         if ((T.st === 'idle' || T.st === 'enter' || typing) && (typing || blinkOn || reduce)) {
-          g.globalAlpha = .6*center(x + 200, yB); g.fillStyle = '#f2f2f5';
+          g.globalAlpha = .9*center(x + 200, yB); g.fillStyle = '#f2f2f5';
           g.fillRect(x + g.measureText(curLine).width + 1, yB - 7, 7, 14);
         }
       }
@@ -712,8 +713,8 @@
       for (var k = 0; k < hist.length; k++) {
         var y = y0 - k*LH;
         if (y < -LH) break;
-        var fade = Math.min(1, y/(V*.3));
-        g.globalAlpha = Math.max(0, .2*fade*center(x + 200, y)); g.fillStyle = '#c8c8ce';
+        var fade = Math.min(1, .25 + y/(V*.3));
+        g.globalAlpha = Math.max(0, .42*fade*center(x + 200, y)); g.fillStyle = '#d4d4da';
         g.fillText(hist[hist.length - 1 - k], x, y);
       }
     }
