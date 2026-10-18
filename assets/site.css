@@ -106,9 +106,13 @@ header.top.solid{
        /* 히어로 끝까지 — 그림 둘레와 그 아래로 결이 이어진다. 끝자락만 녹여 다음 섹션에 이음매가 안 남게 */
        -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%);
        mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%)}
+/* 모니터 덮개 — 3px 마다 주사선 한 줄 · 가장자리 어둡게(앱의 .pane-crt). 정지 그림이라 매 프레임 비용이 없다 */
+.field-crt{position:absolute; inset:0; z-index:0; pointer-events:none;
+       background:repeating-linear-gradient(to bottom,rgba(0,0,0,.38) 0,rgba(0,0,0,.38) 1px,transparent 1px,transparent 3px),
+                  radial-gradient(ellipse at 50% 40%,transparent 45%,rgba(0,0,0,.55) 100%)}
 .hero .wrap{position:relative; z-index:1}
 /* 오로라 — 마크 뒤에 옅은 빛 두 덩이. 아주 느리게 자리를 바꾼다 */
-/* 빛은 캔버스(붉은 입자장)가 다 그린다 — 덧칠하던 오로라는 걷었다 */
+/* 빛은 캔버스가 다 그린다 — 덧칠하던 오로라는 걷었다 */
 .hero::before{content:none}
 @keyframes aurora{to{transform:translate3d(3%,4%,0) scale(1.08)}}
 /* 배경이 화려해진 만큼 글자 뒤에 그늘을 깐다 — 글은 늘 무늬 위에 떠야 한다 */

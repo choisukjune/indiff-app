@@ -23,6 +23,7 @@
 
 <section class="hero dark">
   <canvas id="field" aria-hidden="true"></canvas>
+  <div class="field-crt" aria-hidden="true"></div>
   <p class="side" aria-hidden="true">.hwp .hwpx .docx .pdf .xlsx .csv .pptx .md .drawio .json .yaml .html .png .jpg .svg .hwp .hwpx .docx .pdf .xlsx .csv .pptx .md .html .png .jpg .svg .hwp .hwpx .docx .pdf .xlsx .csv .pptx .md .html .png .jpg .svg</p>
   <div class="wrap">
     <div class="hero-mid">
@@ -575,153 +576,167 @@
 </footer>
 
 <script>
-/* 배경 — 입자장(아스키). 앱 시작 화면의 배경(server.js 의 ember)을 옮기고, 색은 형광 분홍으로 바꿨다.
-   붉게 빛나는 입자가 구름처럼 흐르는 우주를 **문자로** 그린다. 칸마다 밝기를 더해
-   문자(. · : + * o % # @)와 색(검붉음 → 붉음 → 분홍 → 흰빛)을 고르고, 어두운 곳은 드문드문 ·
-   밝은 곳은 촘촘하게 흩뿌린다:
-     ① 오른쪽 아래의 뜨거운 빛 — 천천히 숨 쉰다. 왼쪽 위로 갈수록 식는다
-     ② 큰 흐린 빛망울 — 가장자리만 무른 원반, 조금씩 흔들리며 밝아졌다 어두워진다
-     ③ 잔 반짝이 — 왼쪽 위에서 오른쪽 아래로 흐르는 띠, 가까운 것일수록 밝고 빠르다
-   '-' '=' 는 넓게 깔리면 주사선으로 읽혀 뺐다(앱에서 실측).
-   캔버스는 히어로 끝까지 깔리지만, 뜨거운 자리 · 빛망울 · 가운데 누름은 **첫 화면**으로 잰다. */
+/* 배경 — 터미널. 앱 시작 화면의 배경(server.js 의 termBg)을 옮겼다.
+   흐린 터미널 기록이 칸(세션)마다 쌓여 있고, **한 번에 한 칸만** 실제 커맨드라인처럼 일한다:
+     프롬프트에서 커서가 깜빡이며 쉰다 → 명령을 사람 손처럼 친다(글자 사이 40~140ms · 가끔 멈칫) →
+     Enter → 출력 몇 줄(가끔 로딩 바 · 스피너) → 다시 프롬프트. 명령 2~4개 뒤 다른 칸으로.
+   여러 칸이 동시에 움직이면 가짜로 보였다(앱에서 실측) — 그래서 일하는 칸은 하나다.
+   무채색 · 흐리게, 가운데(제목 · 설치 줄)는 눌러 글이 묻히지 않게. 위에 모니터 덮개(.field-crt) 한 겹.
+   캔버스는 히어로 끝까지 깔리지만, 맨 아래 줄 · 가운데 누름은 **첫 화면**으로 잰다. */
 (function(){
-  var c = document.getElementById('field'); if (!c || !c.getContext) return;
-  var g = c.getContext('2d');
-  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var RAMP = '.·:+*o%#@';
-  /* 형광 분홍 — 어두운 단계는 짙은 자홍, 밝을수록 네온 분홍 → 연분홍 → 흰빛 */
-  var COL = ['rgb(150,0,85)','rgb(200,0,115)','rgb(240,0,140)','rgb(255,10,150)','rgb(255,25,160)',
-             'rgb(255,40,170)','rgb(255,60,180)','rgb(255,100,198)','rgb(255,200,236)'];
-
-  var seed = 20261007;                       // 정해진 난수 — 앱과 같은 하늘
-  function R(){ seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
-  var DOTS = [], BOKEH = [], i;
-  for (i = 0; i < 3200; i++) DOTS.push({ u:R(), off:((R()+R()+R())/3 - 0.5)*1.6, z:Math.pow(R(),1.8), ph:R()*6.283, tw:0.6 + R()*1.8 });
-  for (i = 0; i < 46; i++) BOKEH.push({ x:R(), y:Math.pow(R(),1.3), r:0.02 + R()*0.06, a:0.10 + R()*0.22, ph:R()*6.283, sp:0.15 + R()*0.35 });
-
-  var W = 0, H = 0, V = 0, dpr = 1, cw = 0, ch = 0, C = 0, Rw = 0, buf = null, grain = null, run = true;
-  function metrics(){
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = c.clientWidth; H = c.clientHeight; if (!W || !H) return false;
-    V = Math.min(H, window.innerHeight || H);
-    c.width = Math.round(W*dpr); c.height = Math.round(H*dpr);
-    var f = Math.max(10, Math.min(14, Math.max(W, V)/120));
-    g.setTransform(dpr, 0, 0, dpr, 0, 0);
-    g.font = f + 'px ui-monospace, SFMono-Regular, Menlo, monospace';
-    g.textBaseline = 'middle';
-    cw = g.measureText('M').width; ch = Math.round(cw/0.55);
-    C = Math.ceil(W/cw) + 1; Rw = Math.ceil(H/ch) + 1;
-    buf = new Float32Array(C*Rw); grain = new Float32Array(C*Rw);   // 칸마다 정해진 결 — 깜빡이지 않게
-    for (var q = 0; q < grain.length; q++) { var h = Math.sin(q*127.1)*43758.5453; grain[q] = h - Math.floor(h); }
+  var el = document.getElementById('field'); if (!el || !el.getContext) return;
+  var g = el.getContext('2d');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var WORDS = ['open','read','write','grep','diff','save','index','sync','render','parse','merge','build','scan','fetch'];
+  var PATHS = ['docs/','notes/','reports/','workflows/','drafts/','assets/','src/','notes/2026/'];
+  var EXT = ['.md','.hwpx','.xlsx','.pdf','.docx','.yaml','.json'];
+  var TASKS = ['indexing','reading','rendering','syncing','parsing','scanning'];
+  var BLOCK = '█', SHADE = '░', DOT = '·';
+  var SPIN = ['⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏'];
+  var LH = 18, COLW = 520;
+  function rnd(a){ return a[Math.floor(Math.random()*a.length)]; }
+  function p2(n){ return String(n).padStart(2,'0'); }
+  function stamp(){ var d = new Date(); return p2(d.getHours()) + ':' + p2(d.getMinutes()) + ':' + p2(d.getSeconds()); }
+  function oldStamp(){ return p2(8 + Math.floor(Math.random()*14)) + ':' + p2(Math.floor(Math.random()*60)) + ':' + p2(Math.floor(Math.random()*60)); }
+  function fileName(){ return rnd(PATHS) + Math.random().toString(36).slice(2,8) + rnd(EXT); }
+  function oldLine(){
+    var r = Math.random();
+    if (r < .5) return oldStamp() + '  ' + rnd(WORDS).padEnd(7) + fileName();
+    if (r < .75) return oldStamp() + '  ok   ' + Math.floor(Math.random()*900 + 10) + ' lines ' + DOT + ' ' + (Math.random()*3).toFixed(2) + 's';
+    if (r < .9) return oldStamp() + '  ' + new Array(Math.floor(Math.random()*30 + 8)).join(DOT);
+    return '';
+  }
+  function render(j){
+    if (j.kind === 'bar') {
+      var n = 18, f = Math.round(j.pct/100*n);
+      return j.done ? j.label.padEnd(26) + ' done'
+        : j.label.padEnd(26) + ' [' + new Array(f + 1).join(BLOCK) + new Array(n - f + 1).join(SHADE) + '] ' + String(Math.floor(j.pct)).padStart(3) + '%';
+    }
+    if (j.kind === 'spin') return (j.done ? 'ok ' : SPIN[Math.floor(performance.now()/80) % SPIN.length] + '  ') + j.label;
+    return j.text || '';
+  }
+  function outputsFor(){
+    var out = [], r = Math.random();
+    if (r < .15) out.push({ kind:'bar', label:rnd(TASKS) + ' ' + rnd(PATHS), pct:0, sp:18 + Math.random()*30 });
+    else if (r < .25) out.push({ kind:'spin', label:'waiting for ' + rnd(['index','disk','claude']), left:.8 + Math.random()*1.6 });
+    var n = 1 + Math.floor(Math.random()*3);
+    for (var k = 0; k < n; k++) {
+      out.push({ kind:'line', text: Math.random() < .6
+        ? stamp() + '  ok  ' + Math.floor(Math.random()*900 + 10) + ' lines  ' + (Math.random()*3).toFixed(2) + 's'
+        : '  ' + fileName() });
+    }
+    return out;
+  }
+  var W = 0, H = 0, V = 0, dpr = 1, T = null;
+  function center(x, y){
+    var dx = (x - W*.5)/(W*.42), dy = (y - V*.45)/(V*.42), d = Math.sqrt(dx*dx + dy*dy);
+    return d < 1 ? .25 + .75*d*d : 1;
+  }
+  function fit(){
+    var w = el.clientWidth, h = el.clientHeight;
+    if (!w || !h) return false;
+    var r = Math.min(window.devicePixelRatio || 1, 2);
+    if (w === W && h === H && r === dpr && T) return true;
+    W = w; H = h; dpr = r; V = Math.min(H, window.innerHeight || H);
+    el.width = Math.round(W*dpr); el.height = Math.round(H*dpr);
+    var cols = Math.max(1, Math.ceil((W - 24)/COLW)), rows = Math.ceil(H/LH);
+    if (!T || T.cols.length !== cols) {
+      T = { cols:[], off:[], act:Math.floor(Math.random()*cols), left:2 + Math.floor(Math.random()*3),
+            st:'idle', wait:.6, cmd:'', typed:0, next:0, out:[], cur:null };
+      for (var c = 0; c < cols; c++) { var hst = []; for (var i = 0; i < rows; i++) hst.push(oldLine()); T.cols.push(hst); T.off.push(0); }
+    }
     return true;
   }
-
-  function draw(t){
-    if (!W && !metrics()) return;
-    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.globalAlpha = 1;
-    var base = g.createLinearGradient(0, 0, W, V);
-    base.addColorStop(0, '#0b0008'); base.addColorStop(0.55, '#200118'); base.addColorStop(1, '#4a0236');
-    g.fillStyle = base; g.fillRect(0, 0, W, H);
-    // ① 바탕 빛 — 오른쪽 아래가 뜨겁다. 문자 밑에 빛을 옅게 깔아 번지게
-    var pulse = 0.85 + 0.15*Math.sin(t*0.6), HR = Math.max(W, V)*0.62, hx = W*0.9, hy = V*0.95;
-    var gl = g.createRadialGradient(hx, hy, 0, hx, hy, HR);
-    gl.addColorStop(0, 'rgba(255,20,150,' + (0.55*pulse).toFixed(3) + ')');
-    gl.addColorStop(0.45, 'rgba(190,0,110,0.22)'); gl.addColorStop(1, 'rgba(0,0,0,0)');
-    g.fillStyle = gl; g.fillRect(0, 0, W, H);
-    var j, x, y;
-    for (j = 0; j < Rw; j++) {
-      y = j*ch + ch/2;
-      for (i = 0; i < C; i++) {
-        x = i*cw + cw/2;
-        var dg = Math.min(1, (x/W + y/V)*0.5);
-        var dh = Math.sqrt((x-hx)*(x-hx) + (y-hy)*(y-hy))/HR;
-        buf[j*C + i] = 0.03 + dg*0.10 + (dh < 1 ? (1-dh)*(1-dh)*0.6*pulse : 0);
+  function push(c, s){ T.cols[c].push(s); if (T.cols[c].length > 300) T.cols[c].shift(); T.off[c] = LH; }
+  function step(dt){
+    var a = T.act, cols = T.cols.length;
+    if (T.st === 'idle') { T.wait -= dt; if (T.wait <= 0) { T.st = 'type'; T.cmd = rnd(WORDS) + ' ' + fileName(); T.typed = 0; T.next = .05; } }
+    else if (T.st === 'type') {
+      T.next -= dt;
+      if (T.next <= 0) {
+        T.typed++;
+        T.next = Math.random() < .07 ? .3 + Math.random()*.4 : .04 + Math.random()*.1;
+        if (T.typed >= T.cmd.length) { T.st = 'enter'; T.wait = .25 + Math.random()*.35; }
+      }
+    } else if (T.st === 'enter') {
+      T.wait -= dt;
+      if (T.wait <= 0) { push(a, '$ ' + T.cmd); T.out = outputsFor(); T.st = 'out'; T.wait = .08; }
+    } else if (T.st === 'out') {
+      if (!T.cur) {
+        T.wait -= dt;
+        if (T.wait <= 0) {
+          T.cur = T.out.shift() || null;
+          if (!T.cur) {
+            T.st = 'idle'; T.wait = .8 + Math.random()*1.8; T.cmd = ''; T.left--;
+            if (T.left <= 0) {
+              T.act = (a + 1 + Math.floor(Math.random()*Math.max(1, cols - 1))) % cols;
+              T.left = 2 + Math.floor(Math.random()*3); T.wait = 1 + Math.random()*1.5;
+            }
+          }
+        }
+      } else if (T.cur.kind === 'line') { push(a, T.cur.text); T.cur = null; T.wait = .05 + Math.random()*.12; }
+      else if (T.cur.kind === 'bar') {
+        T.cur.pct = Math.min(100, T.cur.pct + T.cur.sp*dt*(.3 + Math.random()*1.2));
+        if (T.cur.pct >= 100) { T.cur.done = true; push(a, render(T.cur)); T.cur = null; T.wait = .15; }
+      } else if (T.cur.kind === 'spin') {
+        T.cur.left -= dt;
+        if (T.cur.left <= 0) { T.cur.done = true; push(a, render(T.cur)); T.cur = null; T.wait = .1; }
       }
     }
-    // ② 빛망울 — 원반이 덮는 칸에만 더한다
-    var S = Math.max(W, V), small = W < 700 ? 0.8 : 1;
-    for (var b = 0; b < BOKEH.length; b++) {
-      var o = BOKEH[b], r = o.r*S*small;
-      var bx = (o.x + Math.sin(t*o.sp*0.3 + o.ph)*0.01)*W, by = (o.y + Math.cos(t*o.sp*0.25 + o.ph)*0.012)*V;
-      var amp = o.a*(0.7 + 0.3*Math.sin(t*o.sp + o.ph))*1.25;
-      var i0 = Math.max(0, Math.floor((bx-r)/cw)), i1 = Math.min(C-1, Math.ceil((bx+r)/cw));
-      var j0 = Math.max(0, Math.floor((by-r)/ch)), j1 = Math.min(Rw-1, Math.ceil((by+r)/ch));
-      for (var jj = j0; jj <= j1; jj++) {
-        var yy = jj*ch + ch/2 - by;
-        for (var ii = i0; ii <= i1; ii++) {
-          var xx = ii*cw + cw/2 - bx, dd = Math.sqrt(xx*xx + yy*yy)/r;
-          if (dd < 1) buf[jj*C + ii] += amp*0.8*(dd < 0.72 ? 1 : (1-dd)/0.28);
+  }
+  function draw(t, dt){
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.globalAlpha = 1; g.fillStyle = '#0a0a0b'; g.fillRect(0, 0, W, H);
+    g.font = '12px ui-monospace, SFMono-Regular, Menlo, monospace';
+    g.textBaseline = 'middle'; g.textAlign = 'left';
+    var blinkOn = Math.floor(t*1.9) % 2 === 0;
+    var bottom = Math.min(H*.78, Math.max(V - 28, H*.5));     // 맨 아래 줄 — 첫 화면 안, 히어로 끝의 녹는 자리보다 위
+    for (var c = 0; c < T.cols.length; c++) {
+      T.off[c] = Math.max(0, T.off[c] - dt*LH*7);               // 새 줄이 생기면 한 칸 부드럽게 밀린다
+      var x = 24 + c*COLW, yB = bottom + T.off[c];
+      var isLive = c === T.act, curLine = '';
+      if (isLive) {
+        if (T.st === 'idle' || T.st === 'type' || T.st === 'enter') curLine = '$ ' + T.cmd.slice(0, T.st === 'idle' ? 0 : T.typed);
+        else if (T.cur && T.cur.kind !== 'line') curLine = render(T.cur);
+      }
+      if (isLive && curLine) {
+        g.globalAlpha = .36*center(x + 200, yB); g.fillStyle = '#e6e6ea'; g.fillText(curLine, x, yB);
+        // 커서 — 칠 때는 켜진 채로 따라가고, 쉴 때만 깜빡인다. 로딩 바 · 스피너 동안은 없다
+        var typing = T.st === 'type';
+        if ((T.st === 'idle' || T.st === 'enter' || typing) && (typing || blinkOn || reduce)) {
+          g.globalAlpha = .6*center(x + 200, yB); g.fillStyle = '#f2f2f5';
+          g.fillRect(x + g.measureText(curLine).width + 1, yB - 7, 7, 14);
         }
       }
-    }
-    // ③ 잔 반짝이 — 히어로 끝까지 흐르는 띠. 앱 패널보다 넓은 만큼 알을 늘린다
-    var L = Math.sqrt(W*W + H*H), nx = -H/L, ny = W/L;
-    var nd = Math.min(DOTS.length, Math.round(1400*Math.max(1, (W*H)/(1000*700))));
-    for (var d = 0; d < nd; d++) {
-      var p = DOTS[d];
-      var u = p.u + t*(0.002 + p.z*0.012); u -= Math.floor(u);
-      var px = u*W*1.15 - W*0.075 + nx*p.off*L*0.55, py = u*H*1.15 - H*0.075 + ny*p.off*L*0.55;
-      var ci = Math.floor(px/cw), cj = Math.floor(py/ch);
-      if (ci < 0 || cj < 0 || ci >= C || cj >= Rw) continue;
-      var v = (0.35 + 0.75*p.z)*(0.55 + 0.45*Math.sin(t*p.tw + p.ph));
-      buf[cj*C + ci] += v;
-      if (p.z > 0.55) {
-        var hv = v*0.35;
-        if (ci > 0) buf[cj*C + ci - 1] += hv;
-        if (ci < C-1) buf[cj*C + ci + 1] += hv;
-        if (cj > 0) buf[(cj-1)*C + ci] += hv;
-        if (cj < Rw-1) buf[(cj+1)*C + ci] += hv;
+      var hist = T.cols[c], y0 = isLive && curLine ? yB - LH : yB;
+      for (var k = 0; k < hist.length; k++) {
+        var y = y0 - k*LH;
+        if (y < -LH) break;
+        var fade = Math.min(1, y/(V*.3));
+        g.globalAlpha = Math.max(0, .2*fade*center(x + 200, y)); g.fillStyle = '#c8c8ce';
+        g.fillText(hist[hist.length - 1 - k], x, y);
       }
-    }
-    // 칸마다 문자 · 색을 고른다. 가운데는 눌러 제목과 설치 줄이 묻히지 않게
-    var cx = W*0.5, cy = V*0.42, DR = Math.max(W*0.42, V*0.5);
-    var lv = []; for (var z = 0; z < RAMP.length; z++) lv.push([]);
-    var faint = [];
-    for (j = 0; j < Rw; j++) {
-      y = j*ch + ch/2;
-      for (i = 0; i < C; i++) {
-        x = i*cw + cw/2;
-        var q2 = j*C + i, val = buf[q2];
-        var dc = Math.sqrt((x-cx)*(x-cx) + (y-cy)*(y-cy))/DR;
-        if (dc < 1) val *= 0.35 + 0.65*dc;
-        if (val < 0.09 || (val < 0.6 && grain[q2] >= val*1.5)) {      // 흩뿌리기 — 밝을수록 찍힐 확률이 높다
-          if (grain[q2] < 0.16) faint.push(x, y);                     // 빈 칸에도 옅은 결 — 아스키 화면이 비면 고장 같다
-          continue;
-        }
-        var idx = Math.floor(Math.min(val, 1.05)/1.05*RAMP.length);
-        if (idx > RAMP.length-1) idx = RAMP.length-1;
-        lv[idx].push(x, y);
-      }
-    }
-    g.fillStyle = COL[0]; g.globalAlpha = 0.22;
-    for (var f1 = 0; f1 < faint.length; f1 += 2) g.fillText('.', faint[f1], faint[f1+1]);
-    for (var L2 = 0; L2 < RAMP.length; L2++) {
-      var pts = lv[L2]; if (!pts.length) continue;
-      g.globalAlpha = 0.45 + 0.55*(L2+1)/RAMP.length; g.fillStyle = COL[L2];
-      var chr = RAMP.charAt(L2);
-      for (var n = 0; n < pts.length; n += 2) g.fillText(chr, pts[n], pts[n+1]);
     }
     g.globalAlpha = 1;
   }
-
-  var t0 = 0, last = -1;
-  function loop(ms){
-    if (!run) return;
-    if (!t0) t0 = ms;
-    if (ms - last >= 55) { last = ms; draw((ms - t0)/1000); }   // 18fps — 앱과 같은 박자, 아스키는 조금 끊겨야 아스키다
-    requestAnimationFrame(loop);
+  var raf = 0, last = 0, run = true;
+  function frame(ms){
+    raf = 0;
+    if (!run || document.hidden) return;
+    if (ms - last >= 33) {
+      var dt = last ? Math.min(.1, (ms - last)/1000) : .033;
+      last = ms;
+      if (fit()) { if (!reduce) step(dt); draw(ms/1000, dt); }
+      if (reduce) return;                                     // 움직임을 줄이면 한 장만
+    }
+    raf = requestAnimationFrame(frame);
   }
-  if (metrics()) { if (still) draw(0); else requestAnimationFrame(loop); }
-
-  var rt; addEventListener('resize', function(){
-    clearTimeout(rt); rt = setTimeout(function(){ if (metrics()) draw(still ? 0 : (performance.now() - t0)/1000); }, 160);
-  });
-  if (!still && window.IntersectionObserver) {          /* 안 보이면 안 돈다 */
-    new IntersectionObserver(function(e){
-      var on = e[0].isIntersecting;
-      if (on && !run) { run = true; last = -1; requestAnimationFrame(loop); }
-      run = on;
-    }, { threshold: 0 }).observe(c);
+  function wake(){ if (!raf && run && !document.hidden) { last = 0; raf = requestAnimationFrame(frame); } }
+  wake();
+  var rt; addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ W = 0; wake(); if (reduce && fit()) draw(0, 0); }, 160); });
+  document.addEventListener('visibilitychange', wake);
+  if (window.IntersectionObserver) {                          /* 안 보이면 안 돈다 */
+    new IntersectionObserver(function(e){ run = e[0].isIntersecting; wake(); }, { threshold: 0 }).observe(el);
   }
 })();
 </script>
