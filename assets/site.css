@@ -21,7 +21,7 @@
   --shadow:none;
   --col:1180px;
   --gut:28px;
-  --r:16px;
+  --r:8px;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Times New Roman',Georgia,serif;
 }
@@ -66,16 +66,24 @@ kbd{font-family:var(--mono); font-size:.84em; line-height:1; padding:.22em .5em 
 
 .logo{display:inline-block; font-family:var(--serif); font-size:1.26em; line-height:1;
       letter-spacing:.005em; color:var(--fg); text-decoration:none}
-.label{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
-       color:var(--dim2); margin:0 0 1.4rem}
+.label{font-family:var(--serif); font-size:15px; font-style:italic; letter-spacing:.01em; text-transform:lowercase;
+       line-height:1.3; color:var(--dim); margin:0 0 1.4rem}
+/* 이름표는 로고와 같은 말투 — 소문자 괄호. 대문자 모노 눈썹은 어느 랜딩에나 있는 옷이었다 */
+.label::before{content:"("} .label::after{content:")"}
 .mono{font-family:var(--mono); font-size:12px; letter-spacing:.02em; color:var(--dim2)}
 .dim{color:var(--dim)}
 .note{font-family:var(--mono); font-size:12px; color:var(--dim2); margin-top:2rem; letter-spacing:.04em; max-width:46rem}
 
-/* 섹션 머리 — 가운데로 모은다. 제품 랜딩의 호흡이고, 아래 격자가 넓어 보인다 */
-.sec-head{text-align:center; max-width:44rem; margin:0 auto 4.5rem}
-.sec-head p{margin-inline:auto}
+/* 섹션 머리 — 문서의 여백 난처럼. 왼쪽 좁은 칸(3)에 이름표, 오른쪽 넓은 칸(9)에 제목과 설명.
+   예전엔 모든 머리를 가운데로 모았다 — 여덟 번 같은 모양이 되풀이되어 찍어 낸 랜딩으로 읽혔다.
+   아래 세 줄(.trio)과 기능 줄(.item)도 같은 세로선(--spine)에 맞춘다 */
+:root{--spine:calc(25% + 1.5rem)}
+.sec-head{display:grid; grid-template-columns:minmax(0,3fr) minmax(0,9fr); column-gap:2rem;
+  text-align:left; margin:0 0 4.5rem}
+.sec-head > *{grid-column:2}
+.sec-head .label{grid-column:1; grid-row:1 / span 2; margin:0; padding-top:.7rem}
 .sec-head .lead{font-size:1.06rem; margin-top:1.6rem}
+h2{text-wrap:balance}
 
 /* ── 알약 배지 ── */
 .badge{
@@ -176,31 +184,28 @@ figure img, figure video{display:block; width:100%; height:auto; border:1px soli
 .item figure{margin-top:1.8rem}
 
 /* ── 핵심 기능(indi · 브라우저) — 세 줄을 가로로, 위에 선 하나씩 ── */
-.trio{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2rem; margin-top:3.4rem}
+.trio{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2rem; margin-top:3.4rem; margin-left:var(--spine)}
 .trio > div{border-top:1px solid var(--line2); padding-top:1.3rem}
 .trio .k{margin:0 0 .5rem; font-size:1.06rem; color:var(--fg); max-width:none}
 .trio p:not(.k){margin:0; color:var(--dim); font-size:.95rem; line-height:1.7; max-width:none}
 #indi .shot-wide, #browser .shot-wide{margin-top:3.6rem}
 
-/* ── 기능 카드 ── */
-.items{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.6rem}
-.item{
-  border:1px solid var(--line); border-radius:var(--r); background:var(--card);
-  padding:2.2rem 2.2rem 2.4rem; transition:border-color .18s, transform .18s;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
-}
-.item:hover{border-color:var(--line2); transform:translateY(-2px)}
-.item .no{font-family:var(--mono); font-size:13px; letter-spacing:.14em; color:var(--dim2); display:block; margin-bottom:1.6rem}
-/* 카드의 주인은 제목이다 — 본문보다 두 배 남짓 크게, 히어로처럼 자간을 당긴다 */
-.item h3{font-size:clamp(1.7rem,2.8vw,2.4rem); font-weight:400; letter-spacing:-.04em; line-height:1.15}
-.item p{margin:1.2rem 0 1.4rem; max-width:none; font-size:1.06rem; line-height:1.75}
+/* ── 기능 줄 ──
+   둥근 상자 + 01~07 번호였다. 번호는 순서가 없는 목록에 붙은 장식이라 걷고, 상자 대신 위에 선 하나.
+   그림이 붙은 줄은 글이 여백 난(3), 그림이 본문 난(9) — 섹션 머리와 같은 세로선이다 */
+.items{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:2rem}
+.item{border-top:1px solid var(--line2); padding:2.6rem 0 3rem}
+.item h3{font-size:clamp(1.5rem,2.2vw,1.9rem); font-weight:400; letter-spacing:-.035em; line-height:1.2}
+.item p{margin:1rem 0 1.3rem; max-width:none; font-size:1rem; line-height:1.75; color:var(--dim)}
 /* 덧붙임 한 줄 — 모노로 두면 한글이 시스템 글꼴로 떨어져 글자가 띄엄띄엄 선다. 본문 글꼴로, 선 하나 위에 */
 .item .why{font-size:.9rem; color:var(--dim2); margin:0; padding-top:1rem; border-top:1px solid var(--line); line-height:1.5}
 /* 그림이 붙은 카드는 두 칸을 다 쓴다 — 창 하나를 반 칸에 욱여넣으면 안쪽 글자가 안 읽힌다 */
 .item:has(figure:not(:empty)){grid-column:1 / -1}
-.item:has(figure:not(:empty)){display:grid; grid-template-columns:minmax(0,25rem) minmax(0,1fr);
-  gap:3rem; align-items:center; padding:2.8rem}
+.item:has(figure:not(:empty)){display:grid; grid-template-columns:minmax(0,3fr) minmax(0,9fr);
+  column-gap:2rem; align-items:start}
 .item:has(figure:not(:empty)) figure{margin-top:0}
+/* 여백 난은 좁다 — 넓은 카드에 맞춰 넣은 <br> 이 「…입니 / 다.」처럼 글자 하나를 떨군다. 난 안에서는 흘려 쓴다 */
+.item:has(figure:not(:empty)) p br{display:none}
 
 /* ── 나란히 — 왼쪽 제목, 오른쪽 그림 ── */
 .split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:4.5rem; align-items:center}
@@ -232,7 +237,7 @@ figure img, figure video{display:block; width:100%; height:auto; border:1px soli
 .keep.wait .kd-row.hit{background:transparent; box-shadow:inset 2px 0 0 transparent; color:var(--dim)}
 .keep-foot{margin:0; padding-top:1.1rem; border-top:1px solid var(--line); letter-spacing:.14em}
 .keep-proof{display:flex; align-items:center; gap:1.6rem; padding:.4rem .2rem}
-.keep-proof .num{margin:0; font-size:clamp(2rem,4vw,2.8rem); font-weight:300; letter-spacing:-.04em; line-height:1}
+.keep-proof .num{font-variant-numeric:tabular-nums; margin:0; font-size:clamp(2rem,4vw,2.8rem); font-weight:300; letter-spacing:-.04em; line-height:1}
 .keep-proof .k{margin:0 0 .35rem}
 .keep-proof .mono{margin:0}
 
@@ -250,7 +255,7 @@ figure img, figure video{display:block; width:100%; height:auto; border:1px soli
 .does .spec p:not(.k){color:var(--dim); font-size:.95rem; line-height:1.7}
 .does-note{margin:1.8rem 0 0; color:var(--dim); font-size:.95rem; max-width:none}
 .does-note a{color:var(--fg); text-underline-offset:3px}
-.term{border:1px solid var(--line2); border-radius:14px; background:#08080a; overflow:hidden;
+.term{border:1px solid var(--line2); border-radius:var(--r); background:#08080a; overflow:hidden;
   box-shadow:0 40px 90px -40px rgba(255,255,255,.10)}
 .term-bar{display:flex; align-items:center; gap:7px; padding:.65rem .7rem .65rem 1rem; border-bottom:1px solid var(--line)}
 .term-bar i{width:10px; height:10px; border-radius:50%; background:var(--line2)}
@@ -269,9 +274,10 @@ figure img, figure video{display:block; width:100%; height:auto; border:1px soli
 .term.wait .term-body p.shown{visibility:visible}
 
 /* ── 포맷 — 확장자만 카드로 ── */
-.exts{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px}
-.ext{aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;
-  border:1px solid var(--line); border-radius:var(--r); background:var(--card);
+/* 확장자 — 칸끼리 선을 나눠 쓰는 표. 둥근 타일 열 개는 단추처럼 보였다 */
+.exts{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); border-top:1px solid var(--line); border-left:1px solid var(--line)}
+.ext{aspect-ratio:3/2; display:flex; align-items:center; justify-content:center;
+  border-right:1px solid var(--line); border-bottom:1px solid var(--line);
   font-family:var(--mono); font-size:clamp(1.05rem,2vw,1.5rem); letter-spacing:.02em; color:var(--fg)}
 .ext.img{font-size:12px; line-height:1.9; letter-spacing:.06em; color:var(--dim); text-align:center}
 
@@ -307,7 +313,10 @@ footer p{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; l
 /* ── 좁은 화면 ── */
 @media (max-width:900px){
   .items{grid-template-columns:1fr; gap:1.2rem}
-  .trio{grid-template-columns:1fr; gap:1.4rem}
+  .trio{grid-template-columns:1fr; gap:1.4rem; margin-left:0}
+  .sec-head{grid-template-columns:1fr}
+  .sec-head > *, .sec-head .label{grid-column:1; grid-row:auto}
+  .sec-head .label{margin-bottom:1.2rem; padding-top:0}
   .item:has(figure:not(:empty)){grid-template-columns:1fr; gap:1.8rem}
   .split{grid-template-columns:1fr; gap:3rem}
   .exts{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -326,7 +335,6 @@ footer p{font-family:var(--mono); font-size:12px; color:var(--dim2); margin:0; l
   .kd-row{grid-template-columns:4.2rem minmax(0,1fr) auto; gap:.6rem}
   .term-body{font-size:12px; padding:1.1rem 1.1rem 1.3rem}
   .exts{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .item{padding:1.8rem 1.6rem}
   .end{padding-block:6rem}
 }
 @media (prefers-reduced-motion: reduce){
