@@ -60,7 +60,7 @@ ditto "$MNT/INDIFF.app" "$APP"
 xattr -dr com.apple.quarantine "$APP" 2>/dev/null || true
 
 ver=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Contents/Info.plist" 2>/dev/null || echo '')
-say "설치했습니다 — INDIFF ${ver} · $APP"
+say "설치했습니다: INDIFF ${ver} · $APP"
 
 # Claude Code — 없으면 알려 주고, 원할 때만 공식 설치기를 돌린다(묻지 않고 깔지 않는다).
 # 로그인 셸로 찾는다: 앱이 찾는 방식과 같아야 「여기선 있다는데 앱은 모른다」가 안 생긴다.
@@ -75,7 +75,7 @@ else
   ans=""
   # 파이프로 들어온 스크립트라 표준입력은 이 파일이다 — 답은 터미널에서 직접 받는다
   if [ "${INDIFF_NO_PROMPT:-}" != "1" ] && ( : < /dev/tty ) 2>/dev/null; then
-    printf '  지금 설치할까요? 공식 설치기(%s)를 실행합니다 [y/N] ' "$CC_URL"
+    printf '  지금 설치할까요? 공식 설치 프로그램(%s)을 실행합니다 [y/N] ' "$CC_URL"
     read -r ans < /dev/tty || ans=""
   fi
   case "$ans" in
@@ -87,7 +87,7 @@ else
       fi ;;
     *)
       say "나중에 설치하려면: curl -fsSL $CC_URL | bash"
-      say "깔고 나면 앱을 다시 켤 필요 없이, 창으로 돌아올 때 켜집니다." ;;
+      say "설치한 뒤 앱을 다시 켤 필요는 없습니다. 앱 창으로 돌아오면 AI 기능이 켜집니다." ;;
   esac
   printf '\n'
 fi
