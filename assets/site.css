@@ -13,8 +13,8 @@
 :root{
   --bg:#000;
   --fg:#fff;
-  --dim:#a3a3a8;        /* 보조 글 — 검정 위 7.4:1 */
-  --dim2:#87878e;       /* 메타 — 검정 위 5.5:1. 6a6a70(3.7:1)은 노트북 화면에서 안 보였다 */
+  --dim:#bdbdc3;        /* 보조 글 — 검정 위 10:1. a3a3a8 은 가는 글자(300)와 겹쳐 흐렸다 */
+  --dim2:#9d9da4;       /* 메타 — 검정 위 7.3:1. 87878e 도 작은 글에선 흐렸다 */
   --line:#1f1f22;
   --line2:#2e2e33;
   --card:#0c0c0e;       /* 카드 — 검정에서 한 칸만 뜬다 */
@@ -33,7 +33,7 @@ body{
   margin:0;
   font-family:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Noto Sans KR',
     -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  font-size:16px; line-height:1.78; font-weight:300;
+  font-size:16px; line-height:1.78; font-weight:360;
   color:var(--fg); background:var(--bg);
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
@@ -51,7 +51,7 @@ section + section{border-top:1px solid var(--line)}
 
 /* ── 글자 ──
    **굵기를 하나로 쓴다.** 제목도 본문도 가늘게(300), 강조는 면과 크기로 만든다. */
-h1,h2,h3{margin:0; font-weight:300; letter-spacing:-.033em; line-height:1.1}
+h1,h2,h3{margin:0; font-weight:340; letter-spacing:-.033em; line-height:1.1}
 h1{font-size:clamp(2.6rem,7vw,5rem)}
 h2{font-size:clamp(2rem,4.4vw,3.2rem)}
 h3{font-size:1.12rem; font-weight:400; letter-spacing:-.012em; line-height:1.45}
@@ -66,7 +66,7 @@ kbd{font-family:var(--mono); font-size:.84em; line-height:1; padding:.22em .5em 
 
 .logo{display:inline-block; font-family:var(--serif); font-size:1.26em; line-height:1;
       letter-spacing:.005em; color:var(--fg); text-decoration:none}
-.label{font-family:var(--serif); font-size:15px; font-style:italic; letter-spacing:.01em; text-transform:lowercase;
+.label{font-family:var(--serif); font-size:16px; font-style:italic; letter-spacing:.01em; text-transform:lowercase;
        line-height:1.3; color:var(--dim); margin:0 0 1.4rem}
 /* 이름표는 로고와 같은 말투 — 소문자 괄호. 대문자 모노 눈썹은 어느 랜딩에나 있는 옷이었다 */
 .label::before{content:"("} .label::after{content:")"}
@@ -187,7 +187,7 @@ figure img, figure video{display:block; width:100%; height:auto; border:1px soli
 .trio{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2rem; margin-top:3.4rem; margin-left:var(--spine)}
 .trio > div{border-top:1px solid var(--line2); padding-top:1.3rem}
 .trio .k{margin:0 0 .5rem; font-size:1.06rem; color:var(--fg); max-width:none}
-.trio p:not(.k){margin:0; color:var(--dim); font-size:.95rem; line-height:1.7; max-width:none}
+.trio p:not(.k){margin:0; color:var(--dim); font-size:1rem; line-height:1.7; max-width:none}
 #indi .shot-wide, #browser .shot-wide{margin-top:3.6rem}
 
 /* ── 기능 줄 ──
@@ -196,9 +196,9 @@ figure img, figure video{display:block; width:100%; height:auto; border:1px soli
 .items{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:2rem}
 .item{border-top:1px solid var(--line2); padding:2.6rem 0 3rem}
 .item h3{font-size:clamp(1.5rem,2.2vw,1.9rem); font-weight:400; letter-spacing:-.035em; line-height:1.2}
-.item p{margin:1rem 0 1.3rem; max-width:none; font-size:1rem; line-height:1.75; color:var(--dim)}
+.item p{margin:1rem 0 1.3rem; max-width:none; font-size:1.04rem; line-height:1.75}
 /* 덧붙임 한 줄 — 모노로 두면 한글이 시스템 글꼴로 떨어져 글자가 띄엄띄엄 선다. 본문 글꼴로, 선 하나 위에 */
-.item .why{font-size:.9rem; color:var(--dim2); margin:0; padding-top:1rem; border-top:1px solid var(--line); line-height:1.5}
+.item .why{font-size:.94rem; color:var(--dim); margin:0; padding-top:1rem; border-top:1px solid var(--line); line-height:1.5}
 /* 그림이 붙은 카드는 두 칸을 다 쓴다 — 창 하나를 반 칸에 욱여넣으면 안쪽 글자가 안 읽힌다 */
 .item:has(figure:not(:empty)){grid-column:1 / -1}
 .item:has(figure:not(:empty)){display:grid; grid-template-columns:minmax(0,3fr) minmax(0,9fr);
