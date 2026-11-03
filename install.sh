@@ -7,11 +7,21 @@
 #
 # 하는 일: 최신 릴리스 DMG 받기 → 해시 대조 → 응용 프로그램 폴더에 넣기 → Claude Code 확인 → 열기.
 # 시험용 손잡이: INDIFF_INSTALL_DIR(넣을 폴더) · INDIFF_NO_OPEN=1(다 넣고 열지 않기)
-#                INDIFF_NO_PROMPT=1(Claude Code 설치를 묻지 않기)
+#                INDIFF_NO_PROMPT=1(Claude Code 설치를 묻지 않기) · INDIFF_FULL=1(코드 덮기를 쓰지 않는다)
+#
+# 코드만 바뀐 판은 DMG 를 안 만다(v0.16.2~):
+#   앱 290MB 중 판마다 바뀌는 건 코드 1.5MB 뿐이다. 그래서 릴리스에 INDIFF-base.tag 를 두고
+#   「바탕(Electron · 편집기 · 꾸러미)이 같은 마지막 판」을 가리킨다. 그 판의 DMG 를 받아 깔고,
+#   최신 판의 코드 꾸러미를 덮은 뒤 다시 서명한다. 번들 안을 건드리면 봉인이 깨지지만
+#   codesign --force --deep -s - 로 살아난다(앱 안 업데이트와 같은 길 — desktop/update-fetch.js).
+#   tag 가 없거나 어디든 걸리면 예전처럼 최신 DMG 하나만 받는다.
 set -eu
 
 REL="https://github.com/choisukjune/indiff-releases/releases/latest/download"
+RELBASE="https://github.com/choisukjune/indiff-releases/releases/download"
 DMG="INDIFF-mac-arm64.dmg"
+CODE="INDIFF-code.tar.gz"
+TAGF="INDIFF-base.tag"
 DEST="${INDIFF_INSTALL_DIR:-/Applications}"
 
 say() { printf '  %s\n' "$*"; }
@@ -42,14 +52,40 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 printf '\n  (indiff) 설치\n\n'
+
+# 바탕 DMG 가 최신 판에 없고 앞 판에 있나 — 있으면 그것을 받고 코드만 덮는다
+DMGURL="$REL/$DMG"
+OVERLAY=""
+if [ "${INDIFF_FULL:-}" != "1" ]; then
+  btag=$(curl -fsSL "$REL/$TAGF" 2>/dev/null | tr -d ' \n\r' || true)
+  case "$btag" in
+    v[0-9]*)
+      # 최신 판에 DMG 가 있으면 그냥 그것을 쓴다(바탕이 바뀐 판이다)
+      if curl -fsI "$REL/$DMG" >/dev/null 2>&1; then :; else
+        DMGURL="$RELBASE/$btag/$DMG"
+        OVERLAY=1
+        say "바탕 $btag + 최신 코드로 설치합니다"
+      fi ;;
+  esac
+fi
+
 say "받는 중…"
-curl -fL --progress-bar -o "$TMP/$DMG" "$REL/$DMG" || die "DMG 를 받지 못했습니다."
-curl -fsSL -o "$TMP/$DMG.sha256" "$REL/$DMG.sha256" || die "해시 파일을 받지 못했습니다."
+curl -fL --progress-bar -o "$TMP/$DMG" "$DMGURL" || die "DMG 를 받지 못했습니다."
+curl -fsSL -o "$TMP/$DMG.sha256" "$DMGURL.sha256" || die "해시 파일을 받지 못했습니다."
 
 want=$(cut -d' ' -f1 < "$TMP/$DMG.sha256")
 got=$(shasum -a 256 "$TMP/$DMG" | cut -d' ' -f1)
 [ "$want" = "$got" ] || die "받은 파일의 해시가 맞지 않습니다. 다시 시도해 주세요."
 say "해시 확인 ✓"
+
+if [ -n "$OVERLAY" ]; then
+  curl -fL --progress-bar -o "$TMP/$CODE" "$REL/$CODE" || die "코드 꾸러미를 받지 못했습니다."
+  curl -fsSL -o "$TMP/$CODE.sha256" "$REL/$CODE.sha256" || die "코드 해시 파일을 받지 못했습니다."
+  want=$(cut -d' ' -f1 < "$TMP/$CODE.sha256")
+  got=$(shasum -a 256 "$TMP/$CODE" | cut -d' ' -f1)
+  [ "$want" = "$got" ] || die "코드 꾸러미의 해시가 맞지 않습니다. 다시 시도해 주세요."
+  say "코드 해시 확인 ✓"
+fi
 
 MNT=$(hdiutil attach -nobrowse -readonly -noautoopen "$TMP/$DMG" | awk -F'\t' '/\/Volumes\// {print $NF; exit}')
 [ -n "$MNT" ] && [ -d "$MNT/INDIFF.app" ] || die "DMG 를 열지 못했습니다."
@@ -58,6 +94,26 @@ say "$DEST 에 넣는 중…"
 rm -rf "$APP"
 ditto "$MNT/INDIFF.app" "$APP"
 xattr -dr com.apple.quarantine "$APP" 2>/dev/null || true
+
+if [ -n "$OVERLAY" ]; then
+  # 코드만 갈아 끼운다 — vendor · node_modules · Electron 은 바탕 DMG 그대로다
+  say "최신 코드를 덮는 중…"
+  appdir="$APP/Contents/Resources/app"
+  [ -f "$appdir/server.js" ] || die "앱 안 코드 자리를 찾지 못했습니다."
+  tar -xzf "$TMP/$CODE" -C "$appdir" || die "코드 꾸러미를 풀지 못했습니다."
+  # 판 번호는 package.json 에서 읽어 Info.plist 에도 적는다(Finder · 판 확인 명령이 보는 곳)
+  newver=$(/usr/bin/sed -n 's/.*"version"[[:space:]]*:[[:space:]]*"\([0-9][^"]*\)".*/\1/p' "$appdir/package.json" | head -n1)
+  if [ -n "$newver" ]; then
+    for k in CFBundleShortVersionString CFBundleVersion; do
+      /usr/libexec/PlistBuddy -c "Set :$k $newver" "$APP/Contents/Info.plist" >/dev/null 2>&1 || true
+    done
+  fi
+  # 봉인이 깨졌다 — 다시 서명한다. 실패하면 앱이 안 열리므로 여기서 멈춘다
+  say "다시 서명하는 중…"
+  codesign --force --deep -s - "$APP" >/dev/null 2>&1 || die "다시 서명하지 못했습니다. INDIFF_FULL=1 을 붙여 다시 시도해 주세요."
+  codesign --verify --deep --strict "$APP" >/dev/null 2>&1 || die "서명 검증에 실패했습니다. INDIFF_FULL=1 을 붙여 다시 시도해 주세요."
+  say "서명 확인 ✓"
+fi
 
 ver=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Contents/Info.plist" 2>/dev/null || echo '')
 say "설치했습니다: INDIFF ${ver} · $APP"
