@@ -60,8 +60,9 @@ if [ "${INDIFF_FULL:-}" != "1" ]; then
   btag=$(curl -fsSL "$REL/$TAGF" 2>/dev/null | tr -d ' \n\r' || true)
   case "$btag" in
     v[0-9]*)
-      # 최신 판에 DMG 가 있으면 그냥 그것을 쓴다(바탕이 바뀐 판이다)
-      if curl -fsI "$REL/$DMG" >/dev/null 2>&1; then :; else
+      # 최신 판에 DMG 가 있으면 그냥 그것을 쓴다(바탕이 바뀐 판이다).
+      # -L 이 꼭 있어야 한다 — latest/download 는 없는 파일에도 302 를 먼저 주고, -L 없이는 그것을 「있다」로 읽는다
+      if curl -fsIL "$REL/$DMG" >/dev/null 2>&1; then :; else
         DMGURL="$RELBASE/$btag/$DMG"
         OVERLAY=1
         say "바탕 $btag + 최신 코드로 설치합니다"
